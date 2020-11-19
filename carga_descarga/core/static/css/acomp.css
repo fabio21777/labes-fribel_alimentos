@@ -1,0 +1,28 @@
+body{
+    background: url(fundo.jpg) no-repeat center top fixed;/*rgb(41, 160, 120);*/
+
+}
+div.pand1{
+    padding-top: 80px; 
+    padding-left: 60px;
+}
+#link_filtro{
+    padding-right: 10px;
+}
+button.bt1{
+    color: white; 
+    background-color: #004b97;
+    padding: 10px 30px;
+}
+#table{
+    padding-top: 30px;
+}
+#tr-color{
+    background-color: #89b348 ;
+}
+button.bt-table{
+    color: white;
+    background-color: #004b97;
+    padding: 10px 30px;
+
+}
