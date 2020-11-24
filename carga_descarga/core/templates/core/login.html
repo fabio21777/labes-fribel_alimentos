@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<div class="container principal" id="principal">
+    <form id= "formulario" class="form-group" enctype="multipart/form-data" action="submit", method="POST"> {% csrf_token%}
+        <div id="usuario">
+            <input  class="form-control" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'USUARIO'" placeholder="USUARIO" >
+        </div>
+        <div id="senha" >
+            <input  class="form-control" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'SENHA'" placeholder="SENHA" >
+        </div>
+        <div class="col-md-6 offset-md-1 botao" >
+            <button type="button" class="btn bt1" >ENTRAR</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
