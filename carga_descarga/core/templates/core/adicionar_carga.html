@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Adicionar carga {% endblock %}
+
+{% block content %}
+<div class="container" id="principal">
+    <form id= "formulario" class="form-group" enctype="multipart/form-data" action="submit", method="POST"> {% csrf_token%}
+            <div class="row">
+                <H3 class="addcargah3indus">Industria :</H3>
+                <input id="industria"  class="form-control addcarga" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Industria'" placeholder="Industria" >
+            </div>
+            <div class="row">
+                <H3 class="addcargah3nf">Nota Fiscal :</H3>
+                <input id="industria"  class="form-control addcarga" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nota Fiscal'" placeholder="Nota Fiscal" >
+            </div>
+        <div class="col-md-6 offset-md-1 botao" >
+            <button type="button" class="btn bt1" >ENTRAR</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

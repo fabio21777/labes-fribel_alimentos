@@ -20,5 +20,6 @@ from core import views
 urlpatterns = [
     path('login/', views.login),
     path('acomp/', views.acomp),
+    path('adicionarCarga/',views.addCarga),
     path('admin/', admin.site.urls),
 ]

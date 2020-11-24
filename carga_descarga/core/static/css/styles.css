@@ -1,6 +1,7 @@
 /*acomp styles*/
+
 body{
-    background: url(fundo.jpg) no-repeat center top fixed;/*rgb(41, 160, 120);*/
+    background: url("/static/imagens/fundo.jpg") no-repeat center top fixed;/*rgb(41, 160, 120);*/
 
 }
 div.pand1{
@@ -30,7 +31,7 @@ button.bt-table{
 
 /*login styles*/
 body{
-    background: url(fundo.jpg) no-repeat center top fixed;/*rgb(41, 160, 120);*/
+    background: url("/static/imagens/fundo.jpg") no-repeat center top fixed;/*rgb(41, 160, 120);*/
 
 }
 
@@ -45,6 +46,18 @@ div.principal{
     padding-top: 10px;
 }
 div.botao{
-    padding-top: 20px; 
-    padding-left: 60px;
+    padding-top: 30px; 
+    padding-left: 90px;
+}
+/* addcarga style*/
+input.addcarga{
+    scroll-padding-left: 300px;
+    width: 450px;
+    padding-left: 30px;
+}
+h3.addcargah3nf{
+    padding-right: 40px;
+}
+h3.addcargah3indus{
+    padding-right: 67px;
 }
