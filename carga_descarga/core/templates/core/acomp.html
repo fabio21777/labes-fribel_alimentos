@@ -17,36 +17,25 @@
       <thead>
         <tr id="tr-color">
           <th scope="col">#</th>
-          <th scope="col">Numero NF</th>
-          <th scope="col">Industria</th>
-          <th scope="col">Dia Da Descarga</th>
+          <th scope="col">Número NF</th>
+          <th scope="col">Indústria</th>
+          <th scope="col">Dia da Descarga</th>
           <th scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row"><button type="button" class="btn bt-table ">Editar</button></th>
-            <td>x</td>
-            <td>x</td>
-            <td>xxxxxxxxx</td>
-            <td>x</td>
-          </tr>
+        <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
+        {% for carga in cargas %}
           <tr>
-            <th scope="row"><button type="button" class="btn bt-table">Editar</button></th>
-            <td>x</td>
-            <td>x</td>
-            <td>xxxxxxxxx</td>
-            <td>x</td>
+            <th scope="row"><button type="button" class="btn bt-table ">Editar</button></th>
+            <td>{{carga.numero_nf}}</td>
+            <td>{{carga.industria}}</td>
+            <td>{{carga.dia_descarga}}</td>
+            <td>{{carga.status}}</td>
           </tr>
-          <tr>
-            <th scope="row"><button type="button" class="btn bt-table" >Editar</button></th>
-            <td>x</td>
-            <td>x</td>
-            <td>xxxxxxxxx</td>
-            <td>x</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
+</div>
 {% endblock %}
