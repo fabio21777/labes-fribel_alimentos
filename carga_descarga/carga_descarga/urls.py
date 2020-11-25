@@ -18,9 +18,6 @@ from django.urls import path, include
 from core import views
 
 urlpatterns = [
-    #path('login/', views.login),
-    #path('acomp/', views.acomp),
-    #path('adicionarCarga/',views.addCarga),
     path('', include('core.urls')),
     path('admin/', admin.site.urls),
 ]

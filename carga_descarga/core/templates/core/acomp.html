@@ -7,6 +7,10 @@
   <div class="row pand1">
     <a href="" id="link_filtro"><button type="button" class="btn bt1 " >FILTRO</button></a>
     <a href=""><button type="button" class="btn bt1" >ORDENAR POR</button></a>
+    <!--Laço if controla o acesso a função de cadastrar novas cargas-->
+    {% if usuario == "centro-dist" %}
+      <a href=""><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
+    {% endif %}
   </div>
   <div id="table">
     <table class="table table-hover">
