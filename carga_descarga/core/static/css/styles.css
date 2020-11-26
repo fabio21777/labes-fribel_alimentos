@@ -51,13 +51,42 @@ div.botao{
 }
 /* addcarga style*/
 input.addcarga{
-    scroll-padding-left: 300px;
-    width: 450px;
+    width: 200px;
     padding-left: 30px;
 }
+h1{
+    color: #89b348;
+}
+h3{
+    color: #004b97;
+}
 h3.addcargah3nf{
-    padding-right: 40px;
+    padding-right: 62px;
 }
 h3.addcargah3indus{
-    padding-right: 67px;
+    padding-right: 90px;
+}
+h3.addcargah3prev{
+    padding-right: 102px;
+}
+#titulo{
+    padding-bottom: 60px;
+    padding-left: 190px;
+}
+div.pand{
+    padding-top: 20px;
+}
+h3.addcargah3obs{
+    padding-right: 58px;
+}
+textarea.addcarga{
+
+    width: 450px;
+}
+#principal{
+    padding-left: 150px;
+
+}
+div.btadd{
+    padding-left: 370px;
 }
