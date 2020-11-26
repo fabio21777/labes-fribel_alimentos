@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Carga(models.Model):
     STATUS = (
@@ -9,6 +10,7 @@ class Carga(models.Model):
     numero_nf = models.CharField('Numero NF', max_length=20)
     industria = models.CharField('Industria', max_length=20)
     dia_descarga  = models.DateField('Dia da descarga')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField('Status', max_length=15, choices=STATUS)
 
     #Sempre que um registro for criado essa variável determina a data no BD
