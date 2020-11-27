@@ -13,8 +13,12 @@
                 <input id="NF"  class="form-control addcarga" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nota Fiscal'" placeholder="Nota Fiscal" >
             </div>
             <div class="row pand">
-                <h3 class="tipEnt">Tipo de Entrada</h3>
-                <input id="tipEntrada"  class="form-control addcarga" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tipo de Entrada'" placeholder="Tipo de Entrada" >
+                <h3 class="tipEnt">Tipo de Entrada:</h3>
+                <select class="form-control tipoEntrada" >
+                    <option>              </option>
+                    <option>Entrada Normal</option>
+                    <option>Entrada Bonificada</option>
+                </select> 
                 <H3 class="addcargah3prev">Previsão:</H3>
                 <input id="previsão"  class="form-control addcarga" type="date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Previsão'" placeholder="Previsão" >
             </div>
@@ -22,9 +26,10 @@
                 <h3 class="prod">Produto:</h3>
                 <input id="Produto"  class="form-control addcarga" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Produto'" placeholder="Produto" >
                 <H3 class="QTD">QTD:</H3>
-                <input id="QTD"  class="form-control addcarga" style="width: 100px;" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'QTD'" placeholder="QTD" >
-                <H3 class="uni" style="padding-right: 30px; padding-left: 30px;">Un:</H3>
+                <input id="QTD"  class="form-control addcarga QTD" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'QTD'" placeholder="QTD" >
+                <H3 class="uni">UN:</H3>
                 <select class="form-control un" >
+                    <option>  </option>
                     <option>KG</option>
                     <option>CX</option>
                     <option>PCTS</option>
@@ -33,18 +38,18 @@
                 </select> 
             </div>
             <div class="row pand">
-                <H3  id="obs" class="addcargah3obs">Observação:</H3>
-                <textarea class="form-control addcarga" id="obs" rows="3"></textarea>
-            </div>
-            <div class="row pand">
                 <h3 class="promov">Movimentação:</h3>
                 <select class="form-control select" >
+                    <option>            </option>
                     <option>Carga batida</option>
                     <option>Carga paletizada</option>
                   </select>               
             </div>
 
-            
+            <div class="row pand">
+                <H3  id="obs" class="addcargah3obs">Observação:</H3>
+                <textarea class="form-control addcarga" id="obs" rows="3"></textarea>
+            </div>
         <div class="btadd botao" >
             <button type="button" class="btn bt1" >ENTRAR</button>
         </div>

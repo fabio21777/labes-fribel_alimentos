@@ -60,7 +60,6 @@ div.botao{
 /* addcarga style*/
 input.addcarga{
     width: 260px;
-    padding-left: 30px;
 }
 h1{
     color: #89b348;
@@ -101,7 +100,7 @@ div.btadd{
     padding-left: 370px;
 }
 h3.tipEnt{
-    padding-right: 30PX;
+    padding-right: 20PX;
 }
 h3.prod{
     padding-right: 120px;
@@ -118,4 +117,14 @@ select.select{
 }
 select.un{
     width: 100px;
+}
+select.tipoEntrada{
+    width: 260px;
+}
+input.QTD{
+    width: 100px;
+}
+h3.uni{
+    padding-right: 30px;
+    padding-left: 30px;
 }
