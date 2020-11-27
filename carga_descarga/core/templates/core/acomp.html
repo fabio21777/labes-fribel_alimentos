@@ -4,8 +4,17 @@
 
 {% block content %}
 <div class="conteiner">
+  
   <div class="row pand1">
-    <a href="" id="link_filtro"><button type="button" class="btn bt1 " >FILTRO</button></a>
+    
+      <span>Filtrar por:</span>
+      <select name="filter" id="filter" class="form-control">
+        <option value="">Nenhum filtro selecionado</option>
+        <option value="liberado">Cargas liberadas</option>
+        <option value="aguardando">Cargas em espera</option>
+      </select>
+    
+    <!--<a href="" id="link_filtro"><button type="button" class="btn bt1 " >FILTRO</button></a>-->
     <a href=""><button type="button" class="btn bt1" >ORDENAR POR</button></a>
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
     {% if usuario == "centro-dist" %}
