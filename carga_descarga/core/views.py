@@ -6,7 +6,7 @@ def acomp(request, usuario):
     filter = request.GET.get('filter')
 
     if filter:
-        cargas = Carga.objects.filter(done=filter, user=request.user) 
+        cargas = Carga.objects.filter(status=filter, user=request.user) 
     else: 
         cargas = Carga.objects.all().order_by('-created_at').filter(user=request.user)
 

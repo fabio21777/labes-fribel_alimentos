@@ -1,10 +1,14 @@
 $(document).ready(function(){
-    var baseUrl = 'http://localhost:8000/';
+    var controle = 0;
     var filter = $('#filter');
 
+    if(controle>0){
+        var baseUrl = window.location.href;
+    }
+
     (filter).change(function() {
+        controle = controle + 1;
         var filter = $(this).val();
-        console.log(filter);
-        //window.location.href = baseUrl + '?filter=' + filter;
+        window.location.href = baseUrl + '?filter=' + filter;
     });
 });
