@@ -2,7 +2,7 @@ $(document).ready(function(){
     var controle = 0;
     var filter = $('#filter');
 
-    if(controle>0){
+    if(controle=0){
         var baseUrl = window.location.href;
     }
 
