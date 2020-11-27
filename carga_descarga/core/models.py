@@ -7,8 +7,8 @@ class Carga(models.Model):
         ('aguardando', 'Aguardando')
     )
 
-    numero_nf = models.CharField('Numero NF', max_length=20)
-    industria = models.CharField('Industria', max_length=20)
+    numero_nf = models.CharField('Numero NF', max_length=40)
+    industria = models.CharField('Industria', max_length=40)
     dia_descarga  = models.DateField('Dia da descarga')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField('Status', max_length=15, choices=STATUS)
