@@ -51,7 +51,7 @@ div.botao{
 }
 /* addcarga style*/
 input.addcarga{
-    width: 200px;
+    width: 260px;
     padding-left: 30px;
 }
 h1{
@@ -61,13 +61,15 @@ h3{
     color: #004b97;
 }
 h3.addcargah3nf{
-    padding-right: 62px;
+    padding-right: 40px;
+    padding-left: 30px;
 }
 h3.addcargah3indus{
-    padding-right: 90px;
+    padding-right: 103px;
 }
 h3.addcargah3prev{
-    padding-right: 102px;
+    padding-right: 80px;
+    padding-left: 30px;
 }
 #titulo{
     padding-bottom: 60px;
@@ -77,7 +79,7 @@ div.pand{
     padding-top: 20px;
 }
 h3.addcargah3obs{
-    padding-right: 58px;
+    padding-right: 75px;
 }
 textarea.addcarga{
 
@@ -89,4 +91,20 @@ textarea.addcarga{
 }
 div.btadd{
     padding-left: 370px;
+}
+h3.tipEnt{
+    padding-right: 30PX;
+}
+h3.prod{
+    padding-right: 120px;
+}
+h3.QTD{
+    padding-left: 30px;
+    padding-right: 130px;
+}
+h3.promov{
+    padding-right: 35px;
+}
+select.select{
+    width: 450px;
 }
