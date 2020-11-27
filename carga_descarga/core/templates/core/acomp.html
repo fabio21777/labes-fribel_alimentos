@@ -4,12 +4,21 @@
 
 {% block content %}
 <div class="conteiner">
+  
   <div class="row pand1">
-    <a href="" id="link_filtro"><button type="button" class="btn bt1 " >FILTRO</button></a>
+    
+      <span>Filtrar por:</span>
+      <select name="filter" id="filter" class="form-control">
+        <option value="">Nenhum filtro selecionado</option>
+        <option value="liberado">Cargas liberadas</option>
+        <option value="aguardando">Cargas em espera</option>
+      </select>
+    
+    <!--<a href="" id="link_filtro"><button type="button" class="btn bt1 " >FILTRO</button></a>-->
     <a href=""><button type="button" class="btn bt1" >ORDENAR POR</button></a>
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
     {% if usuario == "centro-dist" %}
-      <a href=""><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
+      <a href="adicionarCarga/"><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
     {% endif %}
   </div>
   <div id="table">
@@ -21,10 +30,17 @@
           <th scope="col">Indústria</th>
           <th scope="col">Dia da Descarga</th>
           <th scope="col">Status</th>
-          <th scope="col">Usuario</th>
+          <th scope="col">Usuário</th>
         </tr>
       </thead>
       <tbody>
+        <!--
+        <script>
+          let lista = [];
+          lista = cargas;
+
+          alert(lista);
+        </script>-->
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
         {% for carga in cargas %}
           <tr>
@@ -33,8 +49,12 @@
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
+            <td>{{carga.user}}</td>
           </tr>
         {% endfor %}
+        <!--<script>
+          alert(lista[0]);
+        </script>-->
       </tbody>
     </table>
   </div>

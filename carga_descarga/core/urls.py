@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     path('acompanhamento/<str:usuario>', views.acomp, name='acompanhamento'),
-    path('adicionarCarga/', views.addCarga, name='adicionar-carga'),
+    path('acompanhamento/adicionarCarga/', views.addCarga, name='adicionar-carga'),
     path('', views.login, name='login'), #Tela home
 ]
