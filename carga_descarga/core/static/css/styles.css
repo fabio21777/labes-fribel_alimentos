@@ -100,11 +100,14 @@ h3.prod{
 }
 h3.QTD{
     padding-left: 30px;
-    padding-right: 130px;
+    padding-right: 30px;
 }
 h3.promov{
     padding-right: 35px;
 }
 select.select{
     width: 450px;
+}
+select.un{
+    width: 100px;
 }
