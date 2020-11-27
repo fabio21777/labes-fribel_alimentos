@@ -26,7 +26,9 @@
       </thead>
       <tbody>
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
+        {% lista_cargas = [] %}
         {% for carga in cargas %}
+          lista_cargas.append(carga.dia_descarga)
           <tr>
             <th scope="row"><button type="button" class="btn bt-table ">Editar</button></th>
             <td>{{carga.numero_nf}}</td>
