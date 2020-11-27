@@ -25,18 +25,27 @@
         </tr>
       </thead>
       <tbody>
+        <!--
+        <script>
+          let lista = [];
+          lista = cargas;
+
+          alert(lista);
+        </script>-->
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
-        {% lista_cargas = [] %}
         {% for carga in cargas %}
-          lista_cargas.append(carga.dia_descarga)
           <tr>
             <th scope="row"><button type="button" class="btn bt-table ">Editar</button></th>
             <td>{{carga.numero_nf}}</td>
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
+            <td>{{carga.user}}</td>
           </tr>
         {% endfor %}
+        <script>
+          alert(lista[0]);
+        </script>
       </tbody>
     </table>
   </div>
