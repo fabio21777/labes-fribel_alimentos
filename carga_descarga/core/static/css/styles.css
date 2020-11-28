@@ -37,6 +37,14 @@ button.bt-table{
     margin-right: 10px;
 }
 
+/* ordenador */
+#ordenador {
+    display: inline-block;
+    width: 235px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 /*login styles*/
 body{
     background: url("/static/imagens/fundo.jpg") no-repeat center top fixed;/*rgb(41, 160, 120);*/
