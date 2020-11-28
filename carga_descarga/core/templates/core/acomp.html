@@ -6,16 +6,21 @@
 <div class="conteiner">
   
   <div class="row pand1">
-    
-      <span>Filtrar por:</span>
-      <select name="filter" id="filter" class="form-control">
-        <option value="">Nenhum filtro selecionado</option>
-        <option value="liberado">Cargas liberadas</option>
-        <option value="aguardando">Cargas em espera</option>
-      </select>
-    
-    <!--<a href="" id="link_filtro"><button type="button" class="btn bt1 " >FILTRO</button></a>-->
-    <a href=""><button type="button" class="btn bt1" >ORDENAR POR</button></a>
+    <span>Filtrar por:</span>
+    <select name="filter" id="filter" class="form-control">
+      <option value="" selected disabled>Nenhum filtro selecionado</option>
+      <option value="liberado">Cargas liberadas</option>
+      <option value="aguardando">Cargas em espera</option>
+    </select>
+    <span>Ordenar por:</span>
+    <select name="ordenador" id="ordenador" class="form-control">
+      <option value="" selected disabled>Data de criação</option>
+      <option value="dia_descarga">Dia da descarga</option>
+      <option value="numero_nf">Número NF</option>
+      <option value="industria">Indústria</option>
+      <option value="status">Status</option>
+    </select>
+    <!--<a href=""><button type="button" class="btn bt1" >ORDENAR POR</button></a>-->
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
     {% if usuario == "centro-dist" %}
       <a href="adicionarCarga/"><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
