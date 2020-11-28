@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    var controle = 0;
     var filter = $('#filter');
     var ordenador = $('#ordenador');
     var listaFilter = document.getElementById("filter");
@@ -10,7 +9,6 @@ $(document).ready(function(){
     baseUrl = Url[0];
 
     (filter).change(function() {
-        //controle = controle + 1;
         var filter = $(this).val();
         window.location.href = baseUrl + '?filter=' + filter;
     });
