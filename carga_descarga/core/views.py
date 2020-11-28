@@ -4,9 +4,12 @@ from .models import Carga
 
 def acomp(request, usuario):
     filter = request.GET.get('filter')
+    ordenador = request.GET.get('ordenador')
 
     if filter:
         cargas = Carga.objects.filter(status=filter, user=request.user) 
+    elif ordenador:
+        cargas = Carga.objects.all().order_by(ordenador).filter(user=request.user)
     else: 
         cargas = Carga.objects.all().order_by('-created_at').filter(user=request.user)
 
