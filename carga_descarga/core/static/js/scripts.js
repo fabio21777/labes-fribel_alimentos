@@ -4,13 +4,13 @@ $(document).ready(function(){
     var ordenador = $('#ordenador');
     var listaFilter = document.getElementById("filter");
     var listaOrdenador = document.getElementById("ordenador");
-    
-    if(controle=0){
-        var baseUrl = window.location.href;
-    }
+    var baseUrl = window.location.href;
+
+    Url = baseUrl.split('?');
+    baseUrl = Url[0];
 
     (filter).change(function() {
-        controle = controle + 1;
+        //controle = controle + 1;
         var filter = $(this).val();
         window.location.href = baseUrl + '?filter=' + filter;
     });
