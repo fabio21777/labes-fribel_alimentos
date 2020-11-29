@@ -12,6 +12,15 @@ class Carga(models.Model):
     dia_descarga  = models.DateField('Dia da descarga')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField('Status', max_length=15, choices=STATUS)
+    tipo_entrada=models.CharField(max_length=40,blank=True)
+    Produto=models.CharField(max_length=40,blank=True)
+    QTD=models.CharField(max_length=40,blank=True)
+    UN=models.CharField(max_length=40,blank=True)
+    movimentacao=models.CharField(max_length=40,blank=True)
+    frete=models.CharField(max_length=40,blank=True)
+    observacao=models.CharField(max_length=200,blank=True)
+
+
 
     #Sempre que um registro for criado essa variável determina a data no BD
     created_at = models.DateTimeField(auto_now_add=True)

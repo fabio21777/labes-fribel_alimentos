@@ -1,0 +1,5 @@
+
+*.pyc
+*.pyc
+*.sqlite3
+carga_descarga/core/migrations/0003_auto_20201129_0233.py
