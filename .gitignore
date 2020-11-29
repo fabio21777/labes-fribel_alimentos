@@ -2,4 +2,6 @@
 *.pyc
 *.pyc
 *.sqlite3
-carga_descarga/core/migrations/0003_auto_20201129_0233.py
+carga_descarga/core/migrations
+carga_descarga/carga_descarga/__pycache__
+carga_descarga/core/__pycache__
