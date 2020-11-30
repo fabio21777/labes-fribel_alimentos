@@ -18,7 +18,7 @@ def acomp(request, usuario):
 
     #context_dict['cargas']=json.dumps(cargas)
 
-    return render(request,'core/acomp.html', {'usuario': usuario, 'cargas': cargas})
+    return render(request,'core/acomp.html', {'usuario': usuario, 'cargas': cargas, 'tamanho': len(cargas)})
 
 def addCarga(request):
     return render(request,'core/adicionar_carga.html')

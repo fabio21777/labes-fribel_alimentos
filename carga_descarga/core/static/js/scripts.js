@@ -25,11 +25,23 @@ function validar_add_carga(){
     document.getElementById("formulario").submit();
 }
 
-function checar_conflito_cargas(lista_cargas, qtde){
-    //context_dict['lista_cargas']=json.dumps(lista_cargas);
-    console.log(lista_cargas);
-    console.log("numero nf 1a carga: " + lista_cargas[0].numero_nf);
-    //for(i=0; i<qtde; i++){
-        //console.log(lista_cargas[i]);
-    //}
+function checar_conflito_cargas(lista_cargas, qtde_cargas){
+    var conflito = 0;
+    let lista_dia_descarga = [];
+    var counts = {};
+
+    for(i=0; i<qtde_cargas; i++){
+        lista_dia_descarga.push(lista_cargas[i].dia_descarga);
+    }
+
+    for(i=0; i<lista_dia_descarga.length; i++){
+        var num = lista_dia_descarga[i];
+        counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }
+
+    for(i=0; i<qtde_cargas; i++){
+        if(counts[lista_cargas[i].dia_descarga] > 1){
+            alert("Existe conflito de dia de descarga!");
+        }
+    }
 }
