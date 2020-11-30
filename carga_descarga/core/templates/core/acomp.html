@@ -39,12 +39,40 @@
         </tr>
       </thead>
       <tbody>
-        <!--<script>
-          let lista = [];
-          lista = cargas;
+        <script>
+            /*window.onpageshow = function() {
+              var myDjangoList = (("{{cargas |safe}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                return {
+                    l   : '<',
+                    g   : '>',
+                    quo : '"'
+                }[b];
+              }));
+              myDjangoList = myDjangoList.replace(/u'/g, '\'')
+              myDjangoList = myDjangoList.replace(/'/g, '\"')
 
-          alert(lista);
-        </script>-->
+              var myData = JSON.parse( myDjangoList );
+
+              checar_conflito_cargas(myData);
+            };
+            
+            //console.log(JSON.parse('{{cargas}}'));*/
+          window.onpageshow = function() {
+            var lista_cargas = [
+              {% for carga in cargas%}
+                {% if not forloop.first %}, {% endif %}
+                {
+                  numero_nf: "{{carga.numero_nf}}",
+                  industria: "{{carga.industria}}",
+                  dia_descarga: "{{carga.dia_descarga}}",
+                  status: "{{carga.status}}"
+                }
+              {% endfor %}
+            ]
+
+            checar_conflito_cargas(lista_cargas, 5);
+          }
+        </script>
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
         {% for carga in cargas %}
           <tr>
@@ -53,7 +81,7 @@
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
-            <td>{{carga.user}}</td>
+            <!--<td>{{carga.user}}</td>-->
           </tr>
         {% endfor %}
         <!--<script>

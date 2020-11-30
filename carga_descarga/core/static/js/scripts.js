@@ -24,3 +24,12 @@ function validar_add_carga(){
     window.alert('Falta colocar as validações!')
     document.getElementById("formulario").submit();
 }
+
+function checar_conflito_cargas(lista_cargas, qtde){
+    //context_dict['lista_cargas']=json.dumps(lista_cargas);
+    console.log(lista_cargas);
+    console.log("numero nf 1a carga: " + lista_cargas[0].numero_nf);
+    //for(i=0; i<qtde; i++){
+        //console.log(lista_cargas[i]);
+    //}
+}

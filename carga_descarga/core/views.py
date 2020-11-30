@@ -16,6 +16,8 @@ def acomp(request, usuario):
     else: 
         cargas = Carga.objects.all().order_by('-created_at').filter(user = request.user)
 
+    #context_dict['cargas']=json.dumps(cargas)
+
     return render(request,'core/acomp.html', {'usuario': usuario, 'cargas': cargas})
 
 def addCarga(request):
