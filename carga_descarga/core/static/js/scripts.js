@@ -19,7 +19,8 @@ $(document).ready(function(){
         window.location.href = baseUrl + '?ordenador=' + ordenador;
     });
 });
+
 function validar_add_carga(){
-    window.alert('falta colocar as validações')
+    window.alert('Falta colocar as validações!')
     document.getElementById("formulario").submit();
 }
