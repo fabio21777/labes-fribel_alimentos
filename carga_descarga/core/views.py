@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 def acomp(request, usuario):
+    print(usuario)
     filter = request.GET.get('filter')
     ordenador = request.GET.get('ordenador')
 
@@ -13,7 +14,7 @@ def acomp(request, usuario):
     elif ordenador:
         cargas = Carga.objects.all().order_by(ordenador).filter(user=request.user)
     else: 
-        cargas = Carga.objects.all().order_by('-created_at').filter(user=request.user)
+        cargas = Carga.objects.all().order_by('-created_at')
 
     return render(request,'core/acomp.html', {'usuario': usuario, 'cargas': cargas})
 
@@ -32,6 +33,7 @@ def set_carga(request):
     frete=request.POST.get('frete')
     observacao=request.POST.get('observacao')
     carga=Carga.objects.create(numero_nf= numero_nf,industria=industria,dia_descarga=dia_descarga,user=user,status='Aguardando',tipo_entrada=tipo_entrada,Produto=Produto,QTD=QTD,UN=UN,movimentacao=movimentacao,frete=frete,observacao=observacao)
-    return redirect('/acompanhamento/usuario')
+ 
+    return redirect('/acompanhamento/centro-dist')#temporario
 def login(request):
     return render(request,'core/login.html')
