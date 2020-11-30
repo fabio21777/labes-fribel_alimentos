@@ -12,11 +12,8 @@ def acomp(request, usuario):
         cargas = Carga.objects.filter(status=filter, user = request.user) 
     elif ordenador:
         cargas = Carga.objects.all().order_by(ordenador).filter(user = request.user)
-    
     else: 
         cargas = Carga.objects.all().order_by('-created_at').filter(user = request.user)
-
-    #context_dict['cargas']=json.dumps(cargas)
 
     return render(request,'core/acomp.html', {'usuario': usuario, 'cargas': cargas, 'tamanho': len(cargas)})
 
