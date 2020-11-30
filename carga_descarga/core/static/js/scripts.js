@@ -19,6 +19,7 @@ $(document).ready(function(){
         window.location.href = baseUrl + '?ordenador=' + ordenador;
     });
 });
+
 function validar_add_carga(){
     NotaFiscal=document.getElementById("NF")
     industria=document.getElementById("industria")
@@ -46,5 +47,26 @@ function validar_add_carga(){
     
     if (controle == true && window.confirm("deseja confirmar o cadastro  da carga?") ) {
         document.getElementById("formulario").submit();
+    }
+}
+
+function checar_conflito_cargas(lista_cargas, qtde_cargas){
+    var conflito = 0;
+    let lista_dia_descarga = [];
+    var counts = {};
+
+    for(i=0; i<qtde_cargas; i++){
+        lista_dia_descarga.push(lista_cargas[i].dia_descarga);
+    }
+
+    for(i=0; i<lista_dia_descarga.length; i++){
+        var num = lista_dia_descarga[i];
+        counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }
+
+    for(i=0; i<qtde_cargas; i++){
+        if(counts[lista_cargas[i].dia_descarga] > 1){
+            alert("Existe conflito de dia de descarga!");
+        }
     }
 }

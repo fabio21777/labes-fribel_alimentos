@@ -10,16 +10,17 @@ def acomp(request, usuario):
     ordenador = request.GET.get('ordenador')
 
     if filter:
-        cargas = Carga.objects.filter(status=filter, user=request.user) 
+        cargas = Carga.objects.filter(status=filter, user = request.user) 
     elif ordenador:
-        cargas = Carga.objects.all().order_by(ordenador).filter(user=request.user)
+        cargas = Carga.objects.all().order_by(ordenador).filter(user = request.user)
     else: 
         cargas = Carga.objects.all().order_by('-created_at')
 
-    return render(request,'core/acomp.html', {'usuario': usuario, 'cargas': cargas})
+    return render(request,'core/acomp.html', {'usuario': usuario, 'cargas': cargas, 'tamanho': len(cargas)})
 
 def addCarga(request):
     return render(request,'core/adicionar_carga.html')
+
 def set_carga(request):
     industria=request.POST.get('industria')
     numero_nf=request.POST.get('NF')
@@ -35,5 +36,6 @@ def set_carga(request):
     carga=Carga.objects.create(numero_nf= numero_nf,industria=industria,dia_descarga=dia_descarga,user=user,status='Aguardando',tipo_entrada=tipo_entrada,Produto=Produto,QTD=QTD,UN=UN,movimentacao=movimentacao,frete=frete,observacao=observacao)
  
     return redirect('/acompanhamento/centro-dist')#temporario
+
 def login(request):
     return render(request,'core/login.html')

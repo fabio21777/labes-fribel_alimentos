@@ -20,7 +20,6 @@
       <option value="industria">Indústria</option>
       <option value="status">Status</option>
     </select>
-    <!--<a href=""><button type="button" class="btn bt1" >ORDENAR POR</button></a>-->
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
     {% if usuario == "centro-dist" %}
       <a href="adicionarCarga/"><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
@@ -39,13 +38,26 @@
         </tr>
       </thead>
       <tbody>
-        <!--
+        <!--Este script converte uma lista django para um dict javascript e chama a função 
+        para checar conflito de data de descarga-->
         <script>
-          let lista = [];
-          lista = cargas;
+          window.onpageshow = function() {
+            var qtde_cargas = {{tamanho}};
+            var lista_cargas = [
+              {% for carga in cargas%}
+                {% if not forloop.first %}, {% endif %}
+                {
+                  numero_nf: "{{carga.numero_nf}}",
+                  industria: "{{carga.industria}}",
+                  dia_descarga: "{{carga.dia_descarga}}",
+                  status: "{{carga.status}}"
+                }
+              {% endfor %}
+            ]
 
-          alert(lista);
-        </script>-->
+            checar_conflito_cargas(lista_cargas, qtde_cargas);
+          }
+        </script>
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
         {% for carga in cargas %}
           <tr>
@@ -54,12 +66,9 @@
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
-            <td>{{carga.user}}</td>
+            <!--<td>{{carga.user}}</td>-->
           </tr>
         {% endfor %}
-        <!--<script>
-          alert(lista[0]);
-        </script>-->
       </tbody>
     </table>
   </div>

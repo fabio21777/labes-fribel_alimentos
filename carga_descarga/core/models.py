@@ -20,8 +20,6 @@ class Carga(models.Model):
     frete=models.CharField(max_length=10,blank=True)
     observacao=models.CharField(max_length=200,blank=True)
 
-
-
     #Sempre que um registro for criado essa variável determina a data no BD
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
