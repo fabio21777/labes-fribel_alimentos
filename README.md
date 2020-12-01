@@ -19,8 +19,6 @@
 
 #### Telas:
 |[] Tela de login         |
-|-------------------------|
 |[x]Tela de acompanhamento|
-|-------------------------|
 |[x]Tela de criar carga   |
 
