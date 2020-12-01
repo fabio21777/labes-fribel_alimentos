@@ -6,7 +6,7 @@
 #### Características:
 - Sistema web
 - Sistema criado com Python (Django), HTML 5, CSS e JavaScript
-- Sistema com gerenciamento de acesso via autenticação
+- Sistema com gerenciamento de permissão de acesso via autenticação
 - Sistema conectado com outros sistemas para importação de informações
 
 #### Funcionalidades:
