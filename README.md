@@ -26,8 +26,8 @@
 |Indústria|Produto| 
 |Dia de descarga|Quantidade|
 |Status|Movimentação|
-||Frete|
-||Observação|
-||Box|
-||Unidade|
+|z|Frete|
+|z|Observação|
+|z|Box|
+|z|Unidade|
 
