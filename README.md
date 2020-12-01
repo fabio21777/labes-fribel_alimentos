@@ -16,3 +16,12 @@
 - Alerta de conflito de cargas marcadas para descarga no mesmo dia
 - Alerta de liberação de carga
 - Detalhamento de cargas com informações de nota fiscal e banco de dados 
+
+#### Telas:
+
+------------------
+|Tela de login|[]|
+------------------
+|Tela de acompanhamento|[x]|
+------------------
+|Tela de criar carga|[x]|
