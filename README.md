@@ -17,15 +17,15 @@
 - Alerta de liberação de carga
 - Detalhamento de cargas com informações de nota fiscal e banco de dados 
 
-#### Dados principais:
+#### Dados das cargas:
 |Dados principais|Dados adicionais|
-|-----------|----------|
+|----------|----------|
 |Número da nota fiscal|Tipo de entrada|
 |Indústria|Produto| 
 |Dia de descarga|Quantidade|
 |Status|Movimentação|
-|z|Frete|
-|z|Observação|
-|z|Box|
-|z|Unidade|
+||Frete|
+||Observação|
+||Box|
+||Unidade|
 
