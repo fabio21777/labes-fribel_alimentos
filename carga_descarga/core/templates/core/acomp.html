@@ -21,7 +21,7 @@
       <option value="status">Status</option>
     </select>
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
-    {% if usuario == "centro-dist" %}
+    {% if tipo_user.tipo_user == 'CD' %}
       <a href="adicionarCarga/"><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
     {% endif %}
   </div>
@@ -35,6 +35,9 @@
           <th scope="col">Dia da Descarga</th>
           <th scope="col">Status</th>
           <th scope="col">Usuário</th>
+          {% if tipo_user.tipo_user == 'Diretoria' %}
+            <th scope="col">liberar</th>
+          {% endif %}
         </tr>
       </thead>
       <tbody>
@@ -60,13 +63,22 @@
         </script>
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
         {% for carga in cargas %}
-          <tr>
+          {% if carga.status == 'aguardando'  %}
+            <tr style="background-color:#ff9da5 ;">
+          {% else %}
+            <tr style="background-color: #65ff89;">
+          {% endif %}
             <th scope="row"><button type="button" class="btn bt-table ">Editar</button></th>
             <td>{{carga.numero_nf}}</td>
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
-            <!--<td>{{carga.user}}</td>-->
+            <td>{{usario.username}}
+            {% if tipo_user.tipo_user == 'Diretoria' and carga.status == 'aguardando'  %}
+              <th scope="row"><a href="liberarCarga/{{carga.id}}"><button type="button" class="btn bt2 ">Liberar</button></a></th>
+            {% else %}
+            <td>                </td>
+            {% endif %}
           </tr>
         {% endfor %}
       </tbody>

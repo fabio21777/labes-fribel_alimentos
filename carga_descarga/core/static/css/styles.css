@@ -16,6 +16,11 @@ button.bt1{
     background-color: #004b97;
     padding: 10px 30px;
 }
+button.bt2{
+  color: white;
+  background-color:#89b348 ;
+  padding: 10px 20px;
+}
 #table{
     padding-top: 30px;
 }

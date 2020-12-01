@@ -13,7 +13,9 @@ class Tipo_user(models.Model):
         ('Padrao','padrao')
     )
     tipo_user=models.CharField('TIPO_USER', max_length=15, choices=TIPO_USER)
-    user_tipo_user = models.ForeignKey(User, on_delete=models.CASCADE,unique=True)
+    user_tipo = models.ForeignKey(User, on_delete=models.CASCADE,unique=True)
+    def __str__(self):
+        return self.tipo_user
 
 class Carga(models.Model):
     STATUS = (

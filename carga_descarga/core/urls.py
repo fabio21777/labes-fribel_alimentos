@@ -7,5 +7,6 @@ urlpatterns = [
     path('acompanhamento/<str:usuario>', views.acomp, name = 'acompanhamento'),
     path('acompanhamento/adicionarCarga/', views.addCarga, name = 'adicionar-carga'),
     path('acompanhamento/adicionarCarga/submit',views.set_carga, name = 'set-carga'),
+    path('acompanhamento/liberarCarga/<int:id>/',views.liberarCarga),
     path('', views.login, name = 'login'), #Tela home
 ]
