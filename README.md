@@ -19,7 +19,7 @@
 
 #### Dados das cargas:
 |Dados principais|Dados adicionais|
-|----------|----------|
+|-|-|
 |Número da nota fiscal|Tipo de entrada|
 |Indústria|Produto| 
 |Dia de descarga|Quantidade|
