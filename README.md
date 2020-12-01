@@ -19,9 +19,15 @@
 
 #### Dados principais:
 |Atributos|
-|---------------------|
-|Número da nota fiscal|
-|Indústria|
-|Dia de descarga|
-|Status|
+|--------------------|
+|Dados principais|Dados adicionais|
+|-----------|----------|
+|Número da nota fiscal|Tipo de entrada|
+|Indústria|Produto| 
+|Dia de descarga|Quantidade|
+|Status|Movimentação|
+||Frete|
+||Observação|
+||Box|
+||Unidade|
 
