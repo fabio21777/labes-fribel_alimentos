@@ -1,7 +1,7 @@
 # Sistema de Controle de Carga e Descarga de Mercadorias
 ![](/carga_descarga/core/static/imagens/logo.png)
 
-### Sistema para automatizar o processo de carga e descarga de mercadorias da Fribel Alimentos Ltda.
+### Sistema para automatizar o processo de carga e descarga de mercadorias da Fribel Comércio de Alimentos Ltda.
 
 #### Características:
 - Sistema web
