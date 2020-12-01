@@ -18,8 +18,6 @@
 - Detalhamento de cargas com informações de nota fiscal e banco de dados 
 
 #### Dados principais:
-|Atributos|
-|--------------------|
 |Dados principais|Dados adicionais|
 |-----------|----------|
 |Número da nota fiscal|Tipo de entrada|
