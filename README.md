@@ -18,10 +18,9 @@
 - Detalhamento de cargas com informações de nota fiscal e banco de dados 
 
 #### Telas:
-|-------------------------|
 |[] Tela de login         |
 |-------------------------|
 |[x]Tela de acompanhamento|
 |-------------------------|
 |[x]Tela de criar carga   |
-|-------------------------|
+
