@@ -6,6 +6,14 @@ class Box(models.Model):
 
     def __str__(self):
         return self.box_name
+class Tipo_user(models.Model):
+    TIPO_USER=(
+        ('Diretoria','diretoria'),
+        ('CD','cd'),
+        ('Padrao','padrao')
+    )
+    tipo_user=models.CharField('TIPO_USER', max_length=15, choices=TIPO_USER)
+    user_tipo_user = models.ForeignKey(User, on_delete=models.CASCADE,unique=True)
 
 class Carga(models.Model):
     STATUS = (
