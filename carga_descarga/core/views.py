@@ -13,9 +13,9 @@ def acomp(request, usuario):
     ordenador = request.GET.get('ordenador')
 
     if filter:
-        cargas = Carga.objects.filter(status=filter, user = request.user) 
+        cargas = Carga.objects.filter(status=filter) 
     elif ordenador:
-        cargas = Carga.objects.all().order_by(ordenador).filter(user = request.user)
+        cargas = Carga.objects.all().order_by(ordenador)
     else: 
         cargas = Carga.objects.all().order_by('-created_at')
 
@@ -36,7 +36,7 @@ def set_carga(request):
     movimentacao=request.POST.get('movimentacao')
     frete=request.POST.get('frete')
     observacao=request.POST.get('observacao')
-    carga=Carga.objects.create(numero_nf= numero_nf,industria=industria,dia_descarga=dia_descarga,user=user,status='Aguardando',tipo_entrada=tipo_entrada,Produto=Produto,QTD=QTD,UN=UN,movimentacao=movimentacao,frete=frete,observacao=observacao)
+    carga=Carga.objects.create(numero_nf= numero_nf,industria=industria,dia_descarga=dia_descarga,user=user,status='aguardando',tipo_entrada=tipo_entrada,Produto=Produto,QTD=QTD,UN=UN,movimentacao=movimentacao,frete=frete,observacao=observacao)
  
     return redirect('/acompanhamento/fsm')#temporario
 def liberarCarga(request,id):

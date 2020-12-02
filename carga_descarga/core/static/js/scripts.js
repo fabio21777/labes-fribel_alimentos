@@ -25,8 +25,14 @@ function validar_add_carga(){
     industria=document.getElementById("industria")
     Produto=document.getElementById("Produto")
     observacao=document.getElementById("observacao")
+    previsao=document.getElementById("previsao")
     var controle=true
-
+    const ast="*"
+    const alerta=document.getElementById("previsao_h3")
+    if (!previsao.value){
+        alerta.style.color="red"
+        controle=false
+    }
     if (industria.value.length > 40 ){
         window.alert("O tamanho maximo do nome da industria é 40 Caracteres")
         controle=false

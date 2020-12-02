@@ -22,7 +22,7 @@
     </select>
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
     {% if tipo_user.tipo_user == 'CD' %}
-      <a href="adicionarCarga/"><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
+      <a class="btnaddcarga" href="adicionarCarga/"><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
     {% endif %}
   </div>
   <div id="table">
@@ -37,6 +37,9 @@
           <th scope="col">Usuário</th>
           {% if tipo_user.tipo_user == 'Diretoria' %}
             <th scope="col">liberar</th>
+          {% else %}
+            <th> </th>
+          
           {% endif %}
         </tr>
       </thead>
@@ -73,7 +76,7 @@
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
-            <td>{{usario.username}}
+            <td>{{carga.user}}
             {% if tipo_user.tipo_user == 'Diretoria' and carga.status == 'aguardando'  %}
               <th scope="row"><a href="liberarCarga/{{carga.id}}"><button type="button" class="btn bt2 ">Liberar</button></a></th>
             {% else %}
