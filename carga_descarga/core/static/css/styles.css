@@ -34,6 +34,9 @@ button.bt-table{
     padding: 10px 30px;
 
 }
+a.btnaddcarga{
+  padding-left: 600px;
+}
 
 /* filter */
 #filter {
@@ -62,7 +65,7 @@ input.form-control {
 }
 div.principal{
     padding-top: 300px;
-    padding-left: 400px;
+    padding-left: 200px;
 }
 #senha{
     padding-top: 10px;
@@ -89,12 +92,12 @@ h3.addcargah3indus{
     padding-right: 103px;
 }
 h3.addcargah3prev{
-    padding-right: 80px;
+    padding-right: 73px;
     padding-left: 30px;
 }
 #titulo{
     padding-bottom: 60px;
-    padding-left: 190px;
+    padding-left: 350px;
 }
 div.pand{
     padding-top: 20px;
@@ -104,14 +107,14 @@ h3.addcargah3obs{
 }
 textarea.addcarga{
 
-    width: 450px;
+    width: 740px;
 }
 #principal{
-    padding-left: 150px;
+    padding-left: 100px;
 
 }
 div.btadd{
-    padding-left: 450px;
+    padding-left: 510px;
 }
 h3.tipEnt{
     padding-right: 20PX;
@@ -134,6 +137,9 @@ select.un{
 }
 select.tipoEntrada{
     width: 260px;
+}
+select.selectf{
+  width: 360px;
 }
 input.QTD{
     width: 100px;

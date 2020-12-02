@@ -21,12 +21,18 @@ $(document).ready(function(){
 });
 
 function validar_add_carga(){
-    NotaFiscal = document.getElementById("NF")
-    industria = document.getElementById("industria")
-    Produto = document.getElementById("Produto")
-    observacao = document.getElementById("observacao")
-    var controle = true
-
+    NotaFiscal=document.getElementById("NF")
+    industria=document.getElementById("industria")
+    Produto=document.getElementById("Produto")
+    observacao=document.getElementById("observacao")
+    previsao=document.getElementById("previsao")
+    var controle=true
+    const ast="*"
+    const alerta=document.getElementById("previsao_h3")
+    if (!previsao.value){
+        alerta.style.color="red"
+        controle=false
+    }
     if (industria.value.length > 40 ){
         window.alert("O tamanho máximo do nome da indústria é 40 caracteres!")
         controle = false
