@@ -66,6 +66,7 @@ function checar_conflito_cargas(lista_cargas, qtde_cargas){
     for(i=0; i<qtde_cargas; i++){
         if(counts[lista_cargas[i].dia_descarga] > 1){
             alert("Existe conflito de dia de descarga!");
+            break;
         }
     }
 }
