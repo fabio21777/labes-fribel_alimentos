@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -16,29 +17,17 @@
                 <div id="logo">
                     <img src="{% static 'imagens/logo.png' %}" alt="logo fribel">
                 </div>
-                <div class="container"><a class="navbar-brand" href="#">Home</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="container"><a class="navbar-brand" href="javascript:history.back()">Home</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse"
                         id="navcol-1">
                         <ul class="nav navbar-nav">
-                            <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Sobre nos</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Chamada</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Sobre nós</a></li>
                         </ul>
                         <form class="form-inline mr-auto" target="_self">
                             <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" name="search" id="search-field"></div>
                         </form><span class="navbar-text"> <a href="#" class="login">Log In</a></span><a class="btn btn-light action-button" role="button" href="#">Sign Up</a></div>
                 </div>
             </nav>
-            <div class="container hero">
-                <div class="row">
-                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                        <p>Soluções de Chamados pela equipe de TI Fribel. </p><button class="btn btn-light btn-lg action-button" type="button">Faça seu chamado aqui!</button></div>
-                    <div
-                        class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
-                        <div class="iphone-mockup"><img src="{% static 'imagens/logo.png' %}" class="device">
-                            <div class="screen"></div>
-                        </div>
-                </div>
-            </div>
         </div>
     </div>
     </div>
@@ -49,19 +38,19 @@
     <!--Footer-->
     <div class="footer-dark">
         <footer>
-            <div class="container">
-                <div class="row">
+            <div id="footer-box" class="container">
+                <div id="footer-infos" class="row">
                     <div class="col-md-6 item text">
-                        <h3>FRIBEL</h3>
+                        <h3>Fribel Comércio de Alimentos Ltda</h3>
                         <p>Informações:</p>
-                        <p>(xx) xxxxxxxxx / xxxxxxxxx</p>
+                        <p>(91) 3299-8050 / 99164-1044</p>
                         <br>
-                        <p>it@labes.com.br</p>
-                        <p>R. Augusto Corrêa, 01 - Guamá, Belém - PA, 66075-110</p>
+                        <p>sac@fribel.com.br</p>
+                        <p>Trav. Pedro Marques Mesquita, 707 - Centro, Marituba - PA, 67200-000</p>
                     </div>
-                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                    <div class="col item social"><a href="https://www.facebook.com/fribelalimentos" target="_blank"><i class="fab fa-facebook"></i></a></a><a href="https://www.instagram.com/fribelalimentos/?hl=pt-br" target="_blank"><i class="fab fa-instagram"></i></a></div>
                 </div>
-                <p class="copyright">FRIBEL © 2020</p>
+                <p class="copyright">Fribel Comércio de Alimentos Ltda © 2020</p>
             </div>
         </footer>
     </div>

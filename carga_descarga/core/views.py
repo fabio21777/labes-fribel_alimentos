@@ -7,8 +7,8 @@ from datetime import datetime
 
 def acomp(request, usuario):
     print(usuario)
-    usuario=User.objects.get(username=usuario)
-    tipo_user=Tipo_user.objects.get(user_tipo=int(usuario.id))
+    usuario = User.objects.get(username = usuario)
+    tipo_user = Tipo_user.objects.get(user_tipo = int(usuario.id))
     filter = request.GET.get('filter')
     ordenador = request.GET.get('ordenador')
 
@@ -23,7 +23,6 @@ def acomp(request, usuario):
 
 def addCarga(request):
     return render(request,'core/adicionar_carga.html')
-
 def set_carga(request):
     industria=request.POST.get('industria')
     numero_nf=request.POST.get('NF')
@@ -37,12 +36,14 @@ def set_carga(request):
     frete=request.POST.get('frete')
     observacao=request.POST.get('observacao')
     carga=Carga.objects.create(numero_nf= numero_nf,industria=industria,dia_descarga=dia_descarga,user=user,status='aguardando',tipo_entrada=tipo_entrada,Produto=Produto,QTD=QTD,UN=UN,movimentacao=movimentacao,frete=frete,observacao=observacao)
- 
     return redirect('/acompanhamento/fsm')#temporario
+
 def liberarCarga(request,id):
-    carga=Carga.objects.get(pk=id)
-    carga.status='liberado'
+    carga = Carga.objects.get(pk = id)
+    carga.status = 'liberado'
     carga.save()
+
     return redirect('/acompanhamento/admin-fribel')
+
 def login(request):
     return render(request,'core/login.html')
