@@ -16,6 +16,7 @@ def acomp(request, usuario):
         cargas = Carga.objects.filter(status=filter) 
     elif ordenador:
         cargas = Carga.objects.all().order_by(ordenador)
+        print(ordenador)
     else: 
         cargas = Carga.objects.all().order_by('-created_at')
 
