@@ -3,9 +3,9 @@ $(document).ready(function(){
     var ordenador = $('#ordenador');
     var btnSearch = $('#btnSearch');
     var campoBusca = $('#campoBusca');
-    var listaFilter = document.getElementById("filter");
-    var listaOrdenador = document.getElementById("ordenador");
     var baseUrl = window.location.href;
+    /*var listaFilter = document.getElementById("filter");
+    var listaOrdenador = document.getElementById("ordenador");*/
 
     Url = baseUrl.split('?');
     baseUrl = Url[0];
