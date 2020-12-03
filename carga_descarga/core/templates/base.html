@@ -23,8 +23,14 @@
                         <ul class="nav navbar-nav">
                             <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Sobre nós</a></li>
                         </ul>
-                        <form class="form-inline mr-auto" target="_self">
-                            <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" name="search" id="search-field"></div>
+                        <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self">
+                            <div class="form-group">
+                                <label for="search-field">
+                                    <i class="fa fa-search"></i>
+                                </label>
+                                <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
+                                <button id="btnSearch" class="btnSearch" type="submit">Pesquisar</button>
+                            </div>
                         </form><span class="navbar-text"> <a href="#" class="login">Log In</a></span><a class="btn btn-light action-button" role="button" href="#">Sign Up</a></div>
                 </div>
             </nav>
@@ -48,7 +54,7 @@
                         <p>sac@fribel.com.br</p>
                         <p>Trav. Pedro Marques Mesquita, 707 - Centro, Marituba - PA, 67200-000</p>
                     </div>
-                    <div class="col item social"><a href="https://www.facebook.com/fribelalimentos" target="_blank"><i class="fab fa-facebook"></i></a></a><a href="https://www.instagram.com/fribelalimentos/?hl=pt-br" target="_blank"><i class="fab fa-instagram"></i></a></div>
+                    <div id = "redesSociais" class="col item social"><a href="https://www.facebook.com/fribelalimentos" target="_blank"><i class="fab fa-facebook"></i></a></a><a href="https://www.instagram.com/fribelalimentos/?hl=pt-br" target="_blank"><i class="fab fa-instagram"></i></a></div>
                 </div>
                 <p class="copyright">Fribel Comércio de Alimentos Ltda © 2020</p>
             </div>
