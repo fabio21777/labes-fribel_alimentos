@@ -25,24 +25,29 @@ function validar_add_carga(){
     industria=document.getElementById("industria")
     Produto=document.getElementById("Produto")
     observacao=document.getElementById("observacao")
+    previsao=document.getElementById("previsao")
     var controle=true
-
-    if (industria.value.length > 40 ){
-        window.alert("O tamanho maximo do nome da industria é 40 Caracteres")
+    const ast="*"
+    const alerta=document.getElementById("previsao_h3")
+    if (!previsao.value){
+        alerta.style.color="red"
         controle=false
+    }
+    if (industria.value.length > 40 ){
+        window.alert("O tamanho máximo do nome da indústria é 40 caracteres!")
+        controle = false
     }
     if (NotaFiscal.value.length > 45){
-        controle=false
-        window.alert("O tamanho maximo da NF é 40 Caracteres")
-
+        controle = false
+        window.alert("O tamanho máximo da NF é 40 caracteres!")
     }
     if(Produto.value.length > 40){
-        controle=false
-        window.alert("O tamanho maximo do produto é 40 cararacteres")
+        controle = false
+        window.alert("O tamanho máximo do produto é 40 cararacteres!")
     }
     if (observacao.value.length > 200){
-        controle=false
-        window.alert("foi e excedido o tamanho do campo observação")
+        controle = false
+        window.alert("Foi excedido o tamanho do campo observação!")
     }
     
     if (controle == true && window.confirm("deseja confirmar o cadastro  da carga?") ) {
@@ -67,6 +72,7 @@ function checar_conflito_cargas(lista_cargas, qtde_cargas){
     for(i=0; i<qtde_cargas; i++){
         if(counts[lista_cargas[i].dia_descarga] > 1){
             alert("Existe conflito de dia de descarga!");
+            break;
         }
     }
 }

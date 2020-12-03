@@ -7,6 +7,18 @@ class Box(models.Model):
     def __str__(self):
         return self.name
 
+class Tipo_user(models.Model):
+    TIPO_USER = (
+        ('Diretoria', 'diretoria'),
+        ('CD', 'cd'),
+        ('Padrao', 'padrao')
+    )
+    tipo_user = models.CharField('TIPO_USER', max_length = 15, choices = TIPO_USER)
+    user_tipo = models.ForeignKey(User, on_delete = models.CASCADE, unique = True)
+    
+    def __str__(self):
+        return self.tipo_user
+
 class Carga(models.Model):
     STATUS = (
         ('liberado', 'Liberado'),
@@ -29,6 +41,7 @@ class Carga(models.Model):
     #Sempre que um registro for criado essa variável determina a data no BD
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    finalizada=models.BooleanField(default=False)
 
     def __str__(self):
         return self.numero_nf
