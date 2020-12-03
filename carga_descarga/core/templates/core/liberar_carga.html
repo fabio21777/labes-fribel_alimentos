@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="liberar_carga"> 
+        {% block title %} Liberar Carga {% endblock %} <br> 
+        {% for carga in cargas%}
+            {{carga.industria}}    
+            <form method="post" class="post-form">{% csrf_token %}
+                {{ boxs.as_table }}
+                <button type="submit" class="save btn btn-default" formaction= "{% url 'liberar' id=carga.id %}">Confirmar</button>                                                           
+            </form> 
+            {% endfor %}
+        
+    </div> 
+{% endblock %}
+
+
+
+

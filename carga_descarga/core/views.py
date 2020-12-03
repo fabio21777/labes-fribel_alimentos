@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Carga
+from django.http import HttpResponseRedirect
+from .models import Carga,Box
 from django.contrib.auth.models import User
 from datetime import datetime
+from .forms import BoxForm
+from django import forms
+from django.urls import reverse
 
 def acomp(request, usuario):
     print(usuario)
@@ -36,6 +40,25 @@ def set_carga(request):
     carga=Carga.objects.create(numero_nf= numero_nf,industria=industria,dia_descarga=dia_descarga,user=user,status='Aguardando',tipo_entrada=tipo_entrada,Produto=Produto,QTD=QTD,UN=UN,movimentacao=movimentacao,frete=frete,observacao=observacao)
  
     return redirect('/acompanhamento/centro-dist')#temporario
+
+def liberar_carga(request):
+    cargas_liberadas = Carga.objects.filter(status='liberado',box='')
+    box = BoxForm
+    return render(request, 'core/liberar_carga.html', {'boxs': box,'cargas': cargas_liberadas})
+
+def liberar(request,id):
+    teste= 'teste'
+    carga = Carga.objects.get(id=id)
+    if request.method == 'POST':
+        box_escolhido = BoxForm(request.POST)
+        if box_escolhido.is_valid():
+            box_escolhido = box_escolhido.cleaned_data['box']
+            box = Box.objects.get(id=box_escolhido)
+            carga.box = box.name
+            carga.save()
+            teste= carga.box
+    return redirect ('liberar-carga')
+
 
 def login(request):
     return render(request,'core/login.html')
