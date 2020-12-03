@@ -20,6 +20,7 @@ button.bt1{
     color: white; 
     background-color: #004b97;
     padding: 10px 30px;
+    
 }
 button.bt2{
   color: white;
@@ -39,7 +40,7 @@ button.bt-table{
 
 }
 a.btnaddcarga{
-  padding-left: 320px;
+  margin-left: 320px;
 }
 
 /* filter */
