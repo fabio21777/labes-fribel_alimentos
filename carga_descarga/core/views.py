@@ -7,6 +7,7 @@ from datetime import datetime
 
 def acomp(request, usuario):
     print(usuario)
+    search = request.GET.get('search')
     usuario = User.objects.get(username = usuario)
     tipo_user = Tipo_user.objects.get(user_tipo = int(usuario.id))
     filter = request.GET.get('filter')
@@ -16,7 +17,8 @@ def acomp(request, usuario):
         cargas = Carga.objects.filter(status=filter) 
     elif ordenador:
         cargas = Carga.objects.all().order_by(ordenador)
-        print(ordenador)
+    elif search:
+        cargas = Carga.objects.filter(industria__icontains=search)
     else: 
         cargas = Carga.objects.all().order_by('-created_at')
 

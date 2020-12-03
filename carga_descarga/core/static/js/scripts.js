@@ -1,6 +1,8 @@
 $(document).ready(function(){
     var filter = $('#filter');
     var ordenador = $('#ordenador');
+    var btnSearch = $('#btnSearch');
+    var campoBusca = $('#campoBusca');
     var listaFilter = document.getElementById("filter");
     var listaOrdenador = document.getElementById("ordenador");
     var baseUrl = window.location.href;
@@ -17,6 +19,10 @@ $(document).ready(function(){
         var ordenador = $(this).val();
         //window.onload(ordenador.val($("#ordenador option").eq(ordenador.val).val()));
         window.location.href = baseUrl + '?ordenador=' + ordenador;
+    });
+
+    $(btnSearch).on('click', function(){
+        campoBusca.submit();
     });
 });
 

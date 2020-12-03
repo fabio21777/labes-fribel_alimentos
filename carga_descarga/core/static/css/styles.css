@@ -278,15 +278,18 @@ h3.frete{
   .header-blue .action-button:hover {
     color:#fff;
   }
+
+  .header-blue .navbar .form-inline{
+    width: 600px;
+  }
   
   .header-blue .navbar .form-inline label {
     color:#d9d9d9;
   }
   
   .header-blue .navbar .form-inline .search-field {
-    display:inline-block;
-    width:80%;
-    background-color: #fff;
+    width:245px;
+    background-color: #fff(184, 38, 38);
     border:none;
     border-bottom:1px solid transparent;
     border-radius:18px;
@@ -294,6 +297,18 @@ h3.frete{
     box-shadow:none;
     transition:border-bottom-color 0.3s;
     margin-left: 10px;
+  }
+
+  .header-blue .navbar .form-inline .btnSearch{
+    position: absolute;
+    left: 680px;
+    cursor: pointer;
+  }
+
+  .header-blue .navbar .form-inline .btnSearch:hover{
+    position: absolute;
+    left: 650px;
+    background-color: #89b348;
   }
   
   .header-blue .navbar .form-inline .search-field:focus {
