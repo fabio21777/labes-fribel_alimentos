@@ -5,7 +5,7 @@
 {% block content %}
 <div class="conteiner">
   
-  <div class="row pand1">
+  <div id = "conjuntoOpcoes" class="row pand1">
     <span>Filtrar por:</span>
     <select name="filter" id="filter" class="form-control">
       <option value="" selected disabled>Selecione um filtro</option>
@@ -19,8 +19,6 @@
       <option value="numero_nf">Número NF</option>
       <option value="industria">Indústria</option>
       <option value="status">Status</option>
-
-      <script>console.log(ordenador.option.value)</script>
     </select>
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
     {% if tipo_user.tipo_user == 'CD' %}

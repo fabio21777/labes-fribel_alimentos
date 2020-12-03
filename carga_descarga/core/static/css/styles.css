@@ -1,9 +1,13 @@
 /*acomp styles*/
-
 body{
     background: url("/static/imagens/fundo.jpg") no-repeat center top fixed;/*rgb(41, 160, 120);*/
 
 }
+
+#conjuntoOpcoes{
+  padding-top: 10px;
+}
+
 div.pand1{
     margin-top: auto;
     padding-top: 80px; 
@@ -13,6 +17,7 @@ div.pand1{
     padding-right: 10px;
 }
 button.bt1{
+    display: inline-block;
     color: white; 
     background-color: #004b97;
     padding: 10px 30px;
@@ -281,14 +286,14 @@ h3.frete{
   .header-blue .navbar .form-inline .search-field {
     display:inline-block;
     width:80%;
-    background:none;
+    background-color: #fff;
     border:none;
     border-bottom:1px solid transparent;
-    border-radius:0;
-    color:#ccc;
+    border-radius:18px;
+    color:black;
     box-shadow:none;
-    color:inherit;
     transition:border-bottom-color 0.3s;
+    margin-left: 10px;
   }
   
   .header-blue .navbar .form-inline .search-field:focus {
