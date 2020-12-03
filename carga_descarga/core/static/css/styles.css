@@ -40,13 +40,13 @@ button.bt-table{
 
 }
 a.btnaddcarga{
-  padding-left: 600px;
+  padding-left: 320px;
 }
 
 /* filter */
 #filter {
     display: inline-block;
-    width: 235px;
+    width: 180px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -54,7 +54,7 @@ a.btnaddcarga{
 /* ordenador */
 #ordenador {
     display: inline-block;
-    width: 235px;
+    width: 305px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -306,8 +306,6 @@ h3.frete{
   }
 
   .header-blue .navbar .form-inline .btnSearch:hover{
-    position: absolute;
-    left: 650px;
     background-color: #89b348;
   }
   
