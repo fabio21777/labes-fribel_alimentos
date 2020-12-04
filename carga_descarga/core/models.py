@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 class Box(models.Model):
     name = models.CharField('Nome do Box',max_length=20)
     is_free = models.BooleanField('status do box',default=True)
+    name1 = models.CharField('Nome do Box',max_length=20)
     def __str__(self):
         return self.name
 
@@ -18,7 +18,6 @@ class Tipo_user(models.Model):
     
     def __str__(self):
         return self.tipo_user
-
 class Carga(models.Model):
     STATUS = (
         ('liberado', 'Liberado'),

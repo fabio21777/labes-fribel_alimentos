@@ -5,9 +5,9 @@ from .models import Carga,Box
 from .models import Tipo_user
 from django.contrib.auth.models import User
 from datetime import datetime
-from .forms import BoxForm
-from django import forms
-from django.urls import reverse
+#from .forms import BoxForm
+#from django import forms
+#from django.urls import reverse
 
 def acomp(request, usuario):
     print(usuario)
