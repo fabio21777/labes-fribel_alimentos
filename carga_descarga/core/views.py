@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Carga
+from django.http import HttpResponseRedirect
+from .models import Carga,Box
 from .models import Tipo_user
 from django.contrib.auth.models import User
 from datetime import datetime
+from .forms import BoxForm
+from django import forms
+from django.urls import reverse
 
 def acomp(request, usuario):
     print(usuario)
+    search = request.GET.get('search')
     usuario = User.objects.get(username = usuario)
     tipo_user = Tipo_user.objects.get(user_tipo = int(usuario.id))
     filter = request.GET.get('filter')
@@ -16,6 +21,8 @@ def acomp(request, usuario):
         cargas = Carga.objects.filter(status=filter) 
     elif ordenador:
         cargas = Carga.objects.all().order_by(ordenador)
+    elif search:
+        cargas = Carga.objects.filter(industria__icontains=search)
     else: 
         cargas = Carga.objects.all().order_by('-created_at')
 
@@ -44,6 +51,25 @@ def liberarCarga(request,id):
     carga.save()
 
     return redirect('/acompanhamento/admin-fribel')
+
+def liberar_carga(request):
+    cargas_liberadas = Carga.objects.filter(status='liberado',box='')
+    box = BoxForm
+    return render(request, 'core/liberar_carga.html', {'boxs': box,'cargas': cargas_liberadas})
+
+def liberar(request,id):
+    teste= 'teste'
+    carga = Carga.objects.get(id=id)
+    if request.method == 'POST':
+        box_escolhido = BoxForm(request.POST)
+        if box_escolhido.is_valid():
+            box_escolhido = box_escolhido.cleaned_data['box']
+            box = Box.objects.get(id=box_escolhido)
+            carga.box = box.name
+            carga.save()
+            teste= carga.box
+    return redirect ('liberar-carga')
+
 
 def login(request):
     return render(request,'core/login.html')

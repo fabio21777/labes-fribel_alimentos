@@ -1,9 +1,12 @@
 /*acomp styles*/
-
 body{
     background: url("/static/imagens/fundo.jpg") no-repeat center top fixed;/*rgb(41, 160, 120);*/
-
 }
+
+#conjuntoOpcoes{
+  padding-top: 10px;
+}
+
 div.pand1{
     margin-top: auto;
     padding-top: 80px; 
@@ -13,9 +16,11 @@ div.pand1{
     padding-right: 10px;
 }
 button.bt1{
+    display: inline-block;
     color: white; 
     background-color: #004b97;
     padding: 10px 30px;
+    
 }
 button.bt2{
   color: white;
@@ -35,13 +40,13 @@ button.bt-table{
 
 }
 a.btnaddcarga{
-  padding-left: 600px;
+  margin-left: 320px;
 }
 
 /* filter */
 #filter {
     display: inline-block;
-    width: 235px;
+    width: 180px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -49,7 +54,7 @@ a.btnaddcarga{
 /* ordenador */
 #ordenador {
     display: inline-block;
-    width: 235px;
+    width: 305px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -273,22 +278,35 @@ h3.frete{
   .header-blue .action-button:hover {
     color:#fff;
   }
+
+  .header-blue .navbar .form-inline{
+    width: 600px;
+  }
   
   .header-blue .navbar .form-inline label {
     color:#d9d9d9;
   }
   
   .header-blue .navbar .form-inline .search-field {
-    display:inline-block;
-    width:80%;
-    background:none;
+    width:245px;
+    background-color: #fff(184, 38, 38);
     border:none;
     border-bottom:1px solid transparent;
-    border-radius:0;
-    color:#ccc;
+    border-radius:18px;
+    color:black;
     box-shadow:none;
-    color:inherit;
     transition:border-bottom-color 0.3s;
+    margin-left: 10px;
+  }
+
+  .header-blue .navbar .form-inline .btnSearch{
+    position: absolute;
+    left: 680px;
+    cursor: pointer;
+  }
+
+  .header-blue .navbar .form-inline .btnSearch:hover{
+    background-color: #89b348;
   }
   
   .header-blue .navbar .form-inline .search-field:focus {
