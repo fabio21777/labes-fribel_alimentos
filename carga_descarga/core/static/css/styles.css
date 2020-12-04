@@ -40,13 +40,13 @@ button.bt-table{
 
 }
 a.btnaddcarga{
-  margin-left: 320px;
+  margin-left: 380px;
 }
 
 /* filter */
 #filter {
     display: inline-block;
-    width: 180px;
+    width: 200px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -54,7 +54,7 @@ a.btnaddcarga{
 /* ordenador */
 #ordenador {
     display: inline-block;
-    width: 305px;
+    width: 200px;
     margin-left: 10px;
     margin-right: 10px;
 }
