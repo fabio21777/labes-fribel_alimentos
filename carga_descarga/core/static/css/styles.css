@@ -302,7 +302,12 @@ h3.frete{
   .header-blue .navbar .dropdown-menu .dropdown-item:focus, .header-blue .navbar .dropdown-menu .dropdown-item:hover {
     background:#ebeff1;
   }
-  
+  div.basefri{
+    background-color: #89b348;
+  }
+  div.padding{
+    padding-bottom: 50px;
+  }
   .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
     border:1px solid rgba(255,255,255,0.7);
     border-radius:40px;
