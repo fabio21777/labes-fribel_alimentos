@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
+
+{% block title %} Liberar Carga {% endblock %}
+
 {% block content %}
+
     <div class="liberar_carga"> 
-        {% block title %} Liberar Carga {% endblock %} <br> 
-        {% for carga in cargas%}
-            {{carga.industria}}    
-            <form method="post" class="post-form">{% csrf_token %}
+        <div class="container libcarga">
+        <h1>Cargas Liberadas</h1>
+            {% for carga in cargas%}
+            <h1 class="libCarga">{{carga.industria}} </h1>   
+            <form method="post" class="post-form form-libcarga">{% csrf_token %}
                 {{ boxs.as_table }}
-                <button type="submit" class="save btn btn-default" formaction= "{% url 'liberar' id=carga.id %}">Confirmar</button>                                                           
+                <button type="submit" id="btn-libCarga" class="btn btn-libCarga"  formaction= "{% url 'liberar' id=carga.id %}">Confirmar</button>                                                           
+            
             </form> 
-            {% endfor %}
+        {% endfor %}
         
-    </div> 
+        </div> 
+    </div>
 {% endblock %}
 
 

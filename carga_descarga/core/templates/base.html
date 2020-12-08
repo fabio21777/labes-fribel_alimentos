@@ -11,9 +11,6 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
     <!-- Header + Navbar-->
     <div>
         <div class="header-blue">
@@ -40,6 +37,12 @@
             </nav>
         </div>
     </div>
+    </div>
+    <div class="conteiner justify-content-center row" style="background-color: #89b348;">
+        <button class="btn btnbase"><h3 class="base">Lista Das Cargas</h3></button>
+        <button class="btn btnbase"><h3 class="base">Adicionar Carga</h3></button>
+        <button class="btn btnbase"><h3 class="base">Liberar Para Box</h3></button>
+        <button class="btn btnbase"><h3 class="base">Editar Carga</h3></button>
     </div>
     
     {% block content %}

@@ -39,6 +39,48 @@ button.bt-table{
     padding: 10px 30px;
 
 }
+button.btn-libCarga:hover{
+  color: #004b97;
+  background-color: #89b348;
+
+}
+button.btn-libCarga{
+  padding: 10px 30px;
+}
+h1.libCarga{
+  color: #004b97;
+}
+div.libcarga{
+  padding-left: 300px; 
+  padding-bottom: 300px;
+  
+
+}
+button.btnbase{
+  background-color: #89b348;
+}
+button.btnbase:hover{
+  background-color:#004b97;
+  color: #89b348;
+}
+h3.base{
+  color:black;
+}
+h3.base:hover{
+  color: #89b348;
+}
+
+form.form-libcarga{
+  padding-bottom: 60px;
+  font-size: 25px;
+}
+#id_box{
+  border-radius: 10px;
+}
+#btn-libCarga{
+  border-radius: 10px;
+  border: black;
+}
 a.btnaddcarga{
   margin-left: 380px;
 }
@@ -162,13 +204,11 @@ h3.frete{
 .header-blue {
     padding-bottom:80px;
     font-family:'Source Sans Pro', sans-serif;
-    margin-bottom: 30px;
     height: 80px;
   }
   
   @media (min-width:768px) {
     .header-blue {
-      padding-bottom:50px;
     }
   }
   
@@ -305,10 +345,11 @@ h3.frete{
     cursor: pointer;
   }
 
+
   .header-blue .navbar .form-inline .btnSearch:hover{
     background-color: #89b348;
   }
-  
+
   .header-blue .navbar .form-inline .search-field:focus {
     border-bottom:1px solid #ccc;
   }
@@ -389,7 +430,7 @@ h3.frete{
 .footer-dark {
     padding:50px 0;
     color:#f0f9ff;
-    background-color:#282d32;
+    background-color:#004b97;
     margin-bottom: 0px;
     margin-top: 60px;
   }
@@ -477,3 +518,6 @@ h3.frete{
     font-size:13px;
     margin-bottom:0;
   }
+h3.h3-fri{
+  color: white;
+}

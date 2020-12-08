@@ -53,8 +53,9 @@ def liberarCarga(request,id):
     return redirect('/acompanhamento/admin-fribel')
 
 def liberar_carga(request):
-    cargas_liberadas = Carga.objects.filter(status='liberado',box='')
+    cargas_liberadas = Carga.objects.filter(status='liberado')
     box = BoxForm
+    print('teste',cargas_liberadas)
     return render(request, 'core/liberar_carga.html', {'boxs': box,'cargas': cargas_liberadas})
 
 def liberar(request,id):
