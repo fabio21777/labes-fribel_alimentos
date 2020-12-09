@@ -11,6 +11,7 @@ from django.urls import reverse
 
 def acomp(request, usuario):
     print(usuario)
+    acomp='acomp'
     search = request.GET.get('search')
     usuario = User.objects.get(username = usuario)
     tipo_user = Tipo_user.objects.get(user_tipo = int(usuario.id))
@@ -26,7 +27,7 @@ def acomp(request, usuario):
     else: 
         cargas = Carga.objects.all().order_by('-created_at')
 
-    return render(request,'core/acomp.html', {'usuario': usuario, 'cargas': cargas, 'tamanho': len(cargas), 'tipo_user':tipo_user})
+    return render(request,'core/acomp.html', {'usuario': usuario,'acomp':acomp, 'cargas': cargas, 'tamanho': len(cargas), 'tipo_user':tipo_user})
 
 def addCarga(request):
     return render(request,'core/adicionar_carga.html')

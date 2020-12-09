@@ -37,15 +37,13 @@
             </nav>
         </div>
     </div>
-    </div>
     <div class="conteiner justify-content-center row basefri">
-        <a href="\acompanhamento/admin-fribel"><button class="btn btnbase"><h3 class="base">Lista Das Cargas</h3></button></a><!--temporario-->
-        <a href="\acompanhamento/adicionarCarga/"><button class="btn btnbase"><h3 class="base">Adicionar Carga</h3></button></a>
-        <a href="\liberar"><button class="btn btnbase"><h3 class="base">Liberar Para Box</h3></button></a>
+        <a href="\acompanhamento/admin-fribel"><button class="btn btnbase" id="bt_list_carga" value="{{acomp}}"><h3 class="base" id="h3_list_carga">Lista Das Cargas</h3></button></a><!--temporario-->
+        <a href="\acompanhamento/adicionarCarga/"><button class="btn btnbase" id="bt_add_carga"><h3 class="base" id="h3_add_carga">Adicionar Carga</h3></button></a>
+        <a href="\liberar"><button class="btn btnbase" id="bt_liberar"><h3 id="h3_liberar" class="base" >Liberar Para Box</h3></button></a>
         <a href="#"><button class="btn btnbase"><h3 class="base">Editar Carga</h3></button></a>
     </div>
     <div class="padding"></div>
-    
     {% block content %}
     {% endblock %}
     

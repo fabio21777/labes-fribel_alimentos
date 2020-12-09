@@ -4,6 +4,26 @@ $(document).ready(function(){
     var btnSearch = $('#btnSearch');
     var campoBusca = $('#campoBusca');
     var baseUrl = window.location.href;
+    bt_add_carga=document.getElementById("bt_add_carga")
+    h3_add_carga=document.getElementById("h3_add_carga")
+    bt_liberar=document.getElementById("bt_liberar")
+    h3_liberar=document.getElementById("h3_liberar")
+    bt_list_carga=document.getElementById("bt_list_carga")
+    h3_list_carga=document.getElementById("h3_list_carga")
+    value_list_carga=document.getElementById("bt_list_carga").value
+    path=window.location.pathname
+    if (path=='/acompanhamento/adicionarCarga/'){
+        h3_add_carga.style.color="#89b348"
+        bt_add_carga.style.backgroundColor ="#004b97"
+    }
+    if (path=='/liberar'){
+        h3_liberar.style.color="#89b348"
+        bt_liberar.style.backgroundColor ="#004b97"
+    }
+    if (value_list_carga == "acomp"){
+        bt_list_carga.style.backgroundColor ="#004b97"
+        h3_list_carga.style.color="#89b348"
+    }
     /*var listaFilter = document.getElementById("filter");
     var listaOrdenador = document.getElementById("ordenador");*/
 
