@@ -11,7 +11,9 @@ $(document).ready(function(){
     bt_list_carga=document.getElementById("bt_list_carga")
     h3_list_carga=document.getElementById("h3_list_carga")
     value_list_carga=document.getElementById("bt_list_carga").value
+    navmod=document.getElementById("navmod")
     path=window.location.pathname
+    
     if (path=='/acompanhamento/adicionarCarga/'){
         h3_add_carga.style.color="#89b348"
         bt_add_carga.style.backgroundColor ="#004b97"
@@ -24,6 +26,10 @@ $(document).ready(function(){
         bt_list_carga.style.backgroundColor ="#004b97"
         h3_list_carga.style.color="#89b348"
     }
+    /*if(path== '/'){
+        navmod.innerHTML=''
+    }*/
+    
     /*var listaFilter = document.getElementById("filter");
     var listaOrdenador = document.getElementById("ordenador");*/
 
@@ -47,6 +53,7 @@ $(document).ready(function(){
 });
 
 function validar_add_carga(){
+
     NotaFiscal=document.getElementById("NF")
     industria=document.getElementById("industria")
     Produto=document.getElementById("Produto")
@@ -63,9 +70,21 @@ function validar_add_carga(){
         window.alert("O tamanho máximo do nome da indústria é 40 caracteres!")
         controle = false
     }
+    if (industria.value.length==0){
+        window.alert("Campo industria está vazio")
+        controle = false
+    }
+
     if (NotaFiscal.value.length > 45){
         controle = false
         window.alert("O tamanho máximo da NF é 40 caracteres!")
+    }
+    if (NotaFiscal.value.length==0){
+        if (window.confirm("Campo nota fiscal está  vazio deseja confirmar? ")){
+        }
+        else{
+            controle = false
+        }
     }
     if(Produto.value.length > 40){
         controle = false

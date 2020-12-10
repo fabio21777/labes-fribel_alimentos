@@ -74,4 +74,5 @@ def liberar(request,id):
 
 
 def login(request):
-    return render(request,'core/login.html')
+    login='login'
+    return render(request,'core/login.html',{login:'login'})
