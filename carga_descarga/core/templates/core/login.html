@@ -4,7 +4,7 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
-<div class="container principal" id="principal">
+<div class="container principal container align-self-center" id="principal">
     <form id= "formulario" class="form-group"  action="login\submit", method="POST"> {% csrf_token%}
         <div id="usuario">
             <input  class="form-control" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'USUARIO'" placeholder="USUARIO" name="username" >
@@ -14,7 +14,7 @@
         </div>
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-danger">{{ message }}</div>
+                <div class="alert alert-danger col-md-5">{{ message }}</div>
             {% endfor %}
         {% endif %}
         <div class="col-md-12 offset-md botao" >
