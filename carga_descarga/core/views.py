@@ -8,6 +8,12 @@ from datetime import datetime
 from .forms import BoxForm
 from django import forms
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.views.decorators.csrf import csrf_protect
+
 
 def acomp(request, usuario):
     print(usuario)
@@ -73,6 +79,23 @@ def liberar(request,id):
     return redirect ('liberar-carga')
 
 
-def login(request):
+def login_pag(request):
     login='login'
     return render(request,'core/login.html',{login:'login'})
+@csrf_protect
+def login_autentificacao(request):
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            url='/acompanhamento/'+username
+            return redirect(url)
+        else:
+            messages.error(request, 'Usuário/Senha inválidos. Por Favor Tente novamente ou entre em contato com o suporte')
+    return redirect('/')
+@login_required(login_url='/')
+def logout_user(request):
+    logout(request)
+    return redirect('/')

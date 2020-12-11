@@ -111,7 +111,8 @@ input.form-control {
     width: 300px;
 }
 div.principal{
-    padding-top: 300px;
+    padding-top: 200px;
+    padding-bottom: 100px;
     padding-left: 200px;
 }
 #senha{
@@ -157,7 +158,7 @@ textarea.addcarga{
     width: 740px;
 }
 #principal{
-    padding-left: 100px;
+    padding-left: 400px;
 
 }
 div.btadd{

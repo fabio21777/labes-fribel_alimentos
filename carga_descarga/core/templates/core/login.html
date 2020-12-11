@@ -5,15 +5,20 @@
 
 {% block content %}
 <div class="container principal" id="principal">
-    <form id= "formulario" class="form-group" enctype="multipart/form-data" action="submit", method="POST"> {% csrf_token%}
+    <form id= "formulario" class="form-group"  action="login\submit", method="POST"> {% csrf_token%}
         <div id="usuario">
-            <input  class="form-control" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'USUARIO'" placeholder="USUARIO" >
+            <input  class="form-control" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'USUARIO'" placeholder="USUARIO" name="username" >
         </div>
         <div id="senha" >
-            <input  class="form-control" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'SENHA'" placeholder="SENHA" >
+            <input  class="form-control" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'SENHA'" placeholder="SENHA" name="password" >
         </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
         <div class="col-md-12 offset-md botao" >
-            <button type="button" class="btn bt1" >ENTRAR</button>
+            <button type="submit" class="btn bt1" >ENTRAR</button>
         </div>
     </form>
 </div>

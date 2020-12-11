@@ -10,5 +10,6 @@ urlpatterns = [
     path('acompanhamento/liberarCarga/<str:id>/',views.liberarCarga),
     path('liberar',views.liberar_carga, name = 'liberar-carga'),
     path('liberar/<str:id>/',views.liberar, name = 'liberar'),
-    path('', views.login, name = 'login'), #Tela home
+    path('login/submit',views.login_autentificacao),
+    path('', views.login_pag, name = 'login'), #Tela home
 ]
