@@ -57,7 +57,7 @@ def liberarCarga(request,id):
     carga.status = 'liberado'
     carga.save()
 
-    return redirect('/acompanhamento/admin-fribel')
+    return redirect('/acompanhamento/admin-fribel')#tenporario
 
 def liberar_carga(request):
     cargas_liberadas = Carga.objects.filter(status='liberado',box='')
