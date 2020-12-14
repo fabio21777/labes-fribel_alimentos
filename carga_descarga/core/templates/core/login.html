@@ -4,7 +4,7 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
-<div class="container principal container align-self-center" id="principal">
+<div class="container principal container align-self-center" id="principal_login">
     <form id= "formulario" class="form-group"  action="login\submit", method="POST"> {% csrf_token%}
         <div id="usuario">
             <input  class="form-control" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'USUARIO'" placeholder="USUARIO" name="username" >

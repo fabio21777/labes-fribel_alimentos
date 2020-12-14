@@ -51,7 +51,7 @@ h1.libCarga{
   color: #004b97;
 }
 div.libcarga{
-  padding-left: 300px; 
+  padding-left: 400px; 
   padding-bottom: 300px;
   
 
@@ -113,7 +113,7 @@ input.form-control {
 div.principal{
     padding-top: 200px;
     padding-bottom: 100px;
-    padding-left: 200px;
+    padding-left: 400px;
 }
 #senha{
     padding-top: 10px;
@@ -160,6 +160,9 @@ textarea.addcarga{
 #principal{
     padding-left: 110px;
 
+}
+#principal_addcarga{
+  padding-left: 110px;
 }
 div.btadd{
     padding-left: 510px;
