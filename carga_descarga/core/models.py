@@ -31,7 +31,7 @@ class Carga(models.Model):
     tipo_entrada=models.CharField(max_length=20,blank=True)
     Produto=models.CharField(max_length=40,blank=True)
     QTD=models.CharField(max_length=10,blank=True)
-    UN=models.CharField(max_length=10,blank=True)
+    UN=models.CharField(max_length=12,blank=True)
     movimentacao=models.CharField(max_length=20,blank=True)
     frete=models.CharField(max_length=10,blank=True)
     observacao=models.CharField(max_length=200,blank=True)

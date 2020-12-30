@@ -5,7 +5,7 @@ from datetime import date
 from django.contrib.auth.models import User
 
 # Create your tests here.
-class Cargatestecase(TestCase):
+'''class Cargatestecase(TestCase):
     def setUp(self):
         try:
             Carga.objects.create(numero_nf= '51080701212344000127550010000000981364117781',industria='123456789987456321456987412589632145870',dia_descarga='2020-12-15',user=User.objects.get(pk=1),status='aguardando',tipo_entrada='paletizada',Produto='refrigerante',QTD='10000000',UN='kg',movimentacao='normal',frete='fob',observacao='teste')#teste industria
@@ -108,7 +108,7 @@ class Cargatestecase(TestCase):
             print("erro!!")
         if len(carga13)>0:
             valido=True
-        self.assertEqual(valido,True)
+        self.assertEqual(valido,True)'''
     
 
         

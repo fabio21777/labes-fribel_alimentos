@@ -13,8 +13,19 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
-
-
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+def teste_selenium():
+    try:
+        browser = webdriver.Chrome()
+        browser.get('http://127.0.0.1:8000/acompanhamento/adicionarCarga/')
+        inputElement = browser.find_element_by_id("industria")
+        inputElement.send_keys('teste')
+        driver.quit()
+    except:
+        print("erro")
 def acomp(request, usuario):
     print(usuario)
     acomp='acomp'
@@ -50,7 +61,7 @@ def set_carga(request):
     frete=request.POST.get('frete')
     observacao=request.POST.get('observacao')
     carga=Carga.objects.create(numero_nf= numero_nf,industria=industria,dia_descarga=dia_descarga,user=user,status='aguardando',tipo_entrada=tipo_entrada,Produto=Produto,QTD=QTD,UN=UN,movimentacao=movimentacao,frete=frete,observacao=observacao)
-    return redirect('/acompanhamento/fsm')#temporario
+    return redirect('/acompanhamento/admin-fribel')#temporario
 
 def liberarCarga(request,id):
     carga = Carga.objects.get(pk = id)
@@ -81,6 +92,7 @@ def liberar(request,id):
 
 def login_pag(request):
     login='login'
+    teste_selenium()
     return render(request,'core/login.html',{login:'login'})
 @csrf_protect
 def login_autentificacao(request):
