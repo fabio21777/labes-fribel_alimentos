@@ -62,8 +62,16 @@ def teste_selenium(ind='teste_selenium_default',nf='03459875631475_selenium_defa
         browser.quit()
     except:
         print("erro não foi possivel realizar os teste")
-def selenium_teste_01():
-    teste_selenium(ind='friboi',nf='034598756314758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+def selenium_Campo_Indústria():
+    teste_selenium(ind='1234567899874563214569874125896321458796',nf='034598756314758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+    teste_selenium(ind='12345678998745632145698741258963214587965',nf='03459875639958',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+    teste_selenium(ind=' 234567899874563214569874125896321458796',nf='034598756634758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+def selenium_Campo_Nota_Fiscal():
+    teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+    teste_selenium(ind='1234567899874563214569874125896321458796',nf='5108070121234400012755001@#00000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+    teste_selenium(ind='1234567899874563214569874125896321458796',nf='510807012123440',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+def selenium_Campo_Previsão():
+    teste='teste'
 
 def acomp(request, usuario):
     print(usuario)
@@ -131,7 +139,7 @@ def liberar(request,id):
 
 def login_pag(request):
     login='login'
-    #selenium_teste_01()
+    #selenium_Campo_Indústria()
     #consulta_bd_cargas_em_aberto()
     return render(request,'core/login.html',{login:'login'})
 @csrf_protect
@@ -156,7 +164,7 @@ def conexao_bd():
     return(connection)
 def consulta_bd_cargas_em_aberto():
     cursor=conexao_bd().cursor()
-    cursor.execute(" SELECT PCNFENTPREENT.CODFILIAL                                                        
+    cursor.execute("""SELECT PCNFENTPREENT.CODFILIAL                                                        
       , PCFILIAL.RAZAOSOCIAL                                                           
       , PCNFENTPREENT.NUMNOTA                                                          
       , PCNFENTPREENT.SIMPLESNACIONAL                                                  
@@ -234,10 +242,26 @@ def consulta_bd_cargas_em_aberto():
     AND PCNFENTPREENT.CODENTVEICULO = PCENTVEICULO.CODENTVEICULO (+)                   
     AND PCFORNEC.CODCOMPRADOR       = PCEMPR.MATRICULA           (+)                   
     AND PCNFENTPREENT.CODFILIAL     = PCFILIAL.CODIGO            (+)                   
-    AND PCNFENTPREENT.DTEMISSAO BETWEEN         TO_DATE('01122020', 'DD-MM-YYYY') AND         TO_DATE('29122020', 'DD-MM-YYYY') 
+    AND PCNFENTPREENT.DTEMISSAO BETWEEN         TO_DATE('01122020', 'DD-MM-YYYY') AND         TO_DATE('31122020', 'DD-MM-YYYY') 
   AND PCNFENTPREENT.CODFILIAL     IN ( '1', '2' )               
-   AND NVL(REGEXP_REPLACE(PCNFENTPREENT.ROTINALANC, '[^0-9]'), '1308') IN ('1301','1321')")
+   AND NVL(REGEXP_REPLACE(PCNFENTPREENT.ROTINALANC, '[^0-9]'), '1308') IN ('1301','1321')
+ """)
     for i in cursor:
         print(i)
     cursor.close
 
+#saida do select
+"""('1', 'FRIBEL COMERCIO DE ALIMENTOS LTDA', 77326, 'N', '1', datetime.datetime(2020, 12, 31, 0, 0), 243521, 'C', 0, 2795, 'I C MELO & CIA LTDA ', 21, 133, 19, datetime.datetime(2020, 12, 31, 0, 0), '1', 0, '9', '10', 'ANTONIA', 120821.5, 0, 120821.5, 'L', 'I C MELO & CIA LTDA ', None, datetime.datetime(2020, 12, 31, 8, 58, 38), 54, 0, 'S', 'TIAGO SILVA DE SA', datetime.datetime(2020, 12, 31, 0, 0), 'N', 'X', 'S', None, 0, 'S', 'S', 'E', 0, None, None, None)
+
+('1', 'FRIBEL COMERCIO DE ALIMENTOS LTDA', 56789, 'N', '2', datetime.datetime(2020, 12, 30, 0, 0), 243507, 'F', 0, 2730, 'ALIMENTOS ESTRELA LTDA', 2730, 133, 19, datetime.datetime(2020, 12, 30, 0, 0), '1', 0, '16', '50', 'ANTONIA', 355200, 0, 355200, 'L', 'ALIMENTOS ESTRELA LTDA', None, datetime.datetime(2020, 12, 30, 16, 39, 30), 1, 1, 'S', 'TIAGO SILVA DE SA', datetime.datetime(2020, 12, 31, 0, 0), 'N', 'X', 'S', 'Carga:    70 /   1. ALIQUOTA DE IPI REDUZIDA A ZERO CONF  CODIGO DE CLASSIFICACAO FISCAL NR  1601 00 00  . N A O  
+ A C E I T A R E M O S   R E C L A M A C O E S   P O S T E R I O R E S. LACRE: 0000891Placa do Veiculo: IWL-2031 - Reboque: ITS-3822', 0, 'S', 'S', 'E', 0, None, None, None)     
+
+('1', 'FRIBEL COMERCIO DE ALIMENTOS LTDA', 2688, 'N', '1', datetime.datetime(2020, 12, 28, 0, 0), 243440, 'C', 0, 193, 'LATICINIO SANTA CLARA', 193, 133, 19, datetime.datetime(2020, 12, 29, 0, 0), '5', 0, '9', '40', 'ANTONIA', 150, 0, 155.1, 'L', 'LATICINIO SANTA CLARA', None, datetime.datetime(2020, 12, 29, 9, 29, 34), 1, 0, 'S', 'TIAGO SILVA DE SA', datetime.datetime(2020, 12, 31, 0, 0), 'N', 'X', 'S', 'N Brinde: 74 EMPRESA OPTANTE PELO BENEFICIO FISCAL RICMS DECRETO 4676/01 ART 145 REFERENTE A NOTA FISCAL DE DEVOLUCAO N 3154124 EMITIDA DIA 19/12/2020 Impresso por: VANIA Transportador: LATICINIOS SANTA CLARA Frete por Conta: 0 - Contratacao do Frete por', 0, 'S', 'S', 'E', 0, None, None, None)        
+
+('1', 'FRIBEL COMERCIO DE ALIMENTOS LTDA', 686615, 'N', '1', datetime.datetime(2020, 12, 29, 0, 0), 243520, 'C', 0, 541, 'GOIASMINAS INDUSTRIA DE LATICINIOS LTDA', 541, 133, 19, 
+datetime.datetime(2020, 12, 31, 0, 0), '1', 0, '8', '48', 'ANTONIA', 72444, 0, 72444, 'L', 'GOIASMINAS INDUSTRIA DE LATICINIOS LTDA', None, datetime.datetime(2020, 12, 31, 8, 36, 55), 4, 0, 'S', 'TIAGO SILVA DE SA', datetime.datetime(2020, 12, 31, 0, 0), 'N', 'X', 'S', 'Em caso de nao recebimento ou extravio do boleto bancario, devera ser solicito 2 via 
+do mesmo ao Depto. Financeiro desta empresa, atraves do telefone (11) 2889-5959 e via e-mail para cobranca@italac.com.br.;A solicitacao devera ocorrer com antecedencia mi', 0, 'S', 'S', 'E', 0, None, None, None)
+
+('1', 'FRIBEL COMERCIO DE ALIMENTOS LTDA', 686613, 'N', '1', datetime.datetime(2020, 12, 29, 0, 0), 243519, 'C', 0, 541, 'GOIASMINAS INDUSTRIA DE LATICINIOS LTDA', 541, 133, 19, 
+datetime.datetime(2020, 12, 31, 0, 0), '1', 0, '8', '47', 'ANTONIA', 87091.2, 0, 87091.2, 'L', 'GOIASMINAS INDUSTRIA DE LATICINIOS LTDA', None, datetime.datetime(2020, 12, 31, 8, 36, 26), 1, 0, 'S', 'TIAGO SILVA DE SA', datetime.datetime(2020, 12, 31, 0, 0), 'N', 'X', 'S', 'Em caso de nao recebimento ou extravio do boleto bancario, devera ser solicito 2 
+via do mesmo ao Depto. Financeiro desta empresa, atraves do telefone (11) 2889-5959 e via e-mail para cobranca@italac.com.br.;A solicitacao devera ocorrer com antecedencia mi', 0, 'S', 'S', 'E', 0, None, None, None)"""
