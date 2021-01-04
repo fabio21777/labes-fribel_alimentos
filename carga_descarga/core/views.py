@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from .models import Carga,Box
 from .models import Tipo_user
 from django.contrib.auth.models import User
-from datetime import datetime
+from datetime import datetime,date
+
 from .forms import BoxForm
 from django import forms
 from django.urls import reverse
@@ -23,6 +24,15 @@ from selenium.common.exceptions import TimeoutException
 import cx_Oracle
 # Importar a classe que contém as funções e aplicar um alias
 import time
+def espera_alert(browser):
+    try:
+        WebDriverWait(browser, 3).until(EC.alert_is_present(),'Timed out waiting for PA creation ' +'confirmation popup to appear.')
+        alert = browser.switch_to.alert
+        alert.accept()
+        print("alert accepted")
+    except TimeoutException:
+        print("no alert")
+    
 def teste_selenium(ind='teste_selenium_default',nf='03459875631475_selenium_default',tpentrada='Entrada Normal_selenium_default',previsão='20-01-2020',produto='carne_selenium_default',qtd='10000',un='CX',movimentacao='Carga batida',frete='FOB',observacao ='teste_selenium_default'):
     browser = webdriver.Chrome()
     browser.maximize_window ()
@@ -58,20 +68,8 @@ def teste_selenium(ind='teste_selenium_default',nf='03459875631475_selenium_defa
     inputElement_observacao.send_keys(observacao)
         ################################################################
     inputElement_btadd=browser.find_element_by_id("btadd").click()
-    try:
-        WebDriverWait(browser, 3).until(EC.alert_is_present(),'Timed out waiting for PA creation ' +'confirmation popup to appear.')
-        alert = browser.switch_to.alert
-        alert.accept()
-        print("alert accepted")
-    except TimeoutException:
-        print("no alert")
-    try:
-        WebDriverWait(browser, 3).until(EC.alert_is_present(),'Timed out waiting for PA creation ' +'confirmation popup to appear.')
-        alert = browser.switch_to.alert
-        alert.accept()
-        print("alert accepted")
-    except TimeoutException:
-        print("no alert")
+    espera_alert(browser)
+    espera_alert(browser)
     url=browser.current_url
     browser.close()
     return(url)
@@ -79,18 +77,33 @@ def teste_selenium(ind='teste_selenium_default',nf='03459875631475_selenium_defa
 
 def selenium_Campo_Indústria():
     
-    teste1=teste_selenium(ind='1234567899874563214569874125896321458796',nf='034598756314758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
-    teste2=teste_selenium(ind='123456789987456321456987412589632145879656942',nf='03459875639958',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
-    teste3=teste_selenium(ind=' 234567899874563214569874125896321458796',nf='034598756634758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+    teste1=teste_selenium(ind='1234567899874563214569874125896321458796',nf='034598756314758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
+    teste2=teste_selenium(ind='123456789987456321456987412589632145879656942',nf='03459875639958',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
+    teste3=teste_selenium(ind=' 234567899874563214569874125896321458796',nf='034598756634758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
     print('----teste1-------',teste1)
     print('----teste2-------',teste2)
     print('----teste3-------',teste3)
 def selenium_Campo_Nota_Fiscal():
-    teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
-    teste_selenium(ind='1234567899874563214569874125896321458796',nf='5108070121234400012755001@#00000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
-    teste_selenium(ind='1234567899874563214569874125896321458796',nf='510807012123440',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste_01_teste')
+    teste4=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
+    teste5=teste_selenium(ind='1234567899874563214569874125896321458796',nf='5108070121234400012755001@#00000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
+    teste6=teste_selenium(ind='1234567899874563214569874125896321458796',nf='510807012123440',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
 def selenium_Campo_Previsão():
-    teste='teste'
+    teste7=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-2021',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste8=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão=date.today(),produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste9=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-2020',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste10=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-202020',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste11=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+def selenium_Campo_QTD():
+    teste12=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='nescal',qtd='10',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste13=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='nescal',qtd='1000000000000000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+
+def  selenium_Produto():
+    teste14=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste15=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='"refrigerante leite café suco de laranja energético',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+def selenium_Tipo_de_Entrada():
+    teste16=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada errada',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste17=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Carga batida',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+
 
 def acomp(request, usuario):
     print(usuario)
