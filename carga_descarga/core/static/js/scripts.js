@@ -70,6 +70,10 @@ function validar_add_carga(){
         window.alert("O tamanho máximo do nome da indústria é 40 caracteres!")
         controle = false
     }
+    if(industria.value.length>0 && industria.value[0]==' '){
+        window.alert("O campo industria tem um espaço em branco no inicio por favor remove-lo")
+        controle = false
+    }
     if (industria.value.length==0){
         window.alert("Campo industria está vazio")
         controle = false
@@ -79,7 +83,7 @@ function validar_add_carga(){
         controle = false
         window.alert("O tamanho máximo da NF é 40 caracteres!")
     }
-    if (NotaFiscal.value.length==0){
+    if (NotaFiscal.value.length==0 && controle != false){
         if (window.confirm("Campo nota fiscal está  vazio deseja confirmar? ")){
         }
         else{

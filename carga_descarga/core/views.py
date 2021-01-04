@@ -250,7 +250,7 @@ def liberar(request,id):
 
 def login_pag(request):
     login='login'
-    validação=selenium_Campo_Indústria()
+    validação=selenium_Campo_Nota_Fiscal()
     for i in validação:
         print(i)
     #consulta_bd_cargas_em_aberto()
