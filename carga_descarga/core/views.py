@@ -33,7 +33,7 @@ def espera_alert(browser):
     except TimeoutException:
         print("no alert")
     
-def teste_selenium(ind='teste_selenium_default',nf='03459875631475_selenium_default',tpentrada='Entrada Normal_selenium_default',previsão='20-01-2020',produto='carne_selenium_default',qtd='10000',un='CX',movimentacao='Carga batida',frete='FOB',observacao ='teste_selenium_default'):
+def teste_selenium_add_carga(ind='teste_selenium_add_carga_default',nf='03459875631475_selenium_default',tpentrada='Entrada Normal_selenium_default',previsão='20-01-2020',produto='carne_selenium_default',qtd='10000',un='CX',movimentacao='Carga batida',frete='FOB',observacao ='teste_selenium_add_carga_default'):
     browser = webdriver.Chrome()
     browser.maximize_window ()
     browser.get('http://127.0.0.1:8000/acompanhamento/adicionarCarga/')
@@ -74,36 +74,115 @@ def teste_selenium(ind='teste_selenium_default',nf='03459875631475_selenium_defa
     browser.close()
     return(url)
     
-
+def validar_teste(teste):
+    if teste == 'http://127.0.0.1:8000/acompanhamento/adicionarCarga/':
+        return (True)
+    else:
+        return (False)
 def selenium_Campo_Indústria():
-    
-    teste1=teste_selenium(ind='1234567899874563214569874125896321458796',nf='034598756314758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
-    teste2=teste_selenium(ind='123456789987456321456987412589632145879656942',nf='03459875639958',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
-    teste3=teste_selenium(ind=' 234567899874563214569874125896321458796',nf='034598756634758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
-    print('----teste1-------',teste1)
-    print('----teste2-------',teste2)
-    print('----teste3-------',teste3)
+    resultado=[]
+    teste1=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='034598756314758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
+    teste2=teste_selenium_add_carga(ind='123456789987456321456987412589632145879656942',nf='03459875639958',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
+    teste3=teste_selenium_add_carga(ind=' 234567899874563214569874125896321458796',nf='034598756634758',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='teste campo industria')
+    if validar_teste(teste1)==True:
+        resultado.append('teste1 Fail')
+    else:
+        resultado.append('teste1 Pass')
+    if validar_teste(teste2)==True:
+        resultado.append('teste2 Pass')
+    else:
+        resultado.append('teste2 Fail')
+    if validar_teste(teste3)==True:
+        resultado.append('teste3 Pass')
+    else:
+        resultado.append('teste3 Fail')
+    return (resultado)
+
 def selenium_Campo_Nota_Fiscal():
-    teste4=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
-    teste5=teste_selenium(ind='1234567899874563214569874125896321458796',nf='5108070121234400012755001@#00000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
-    teste6=teste_selenium(ind='1234567899874563214569874125896321458796',nf='510807012123440',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
+    resultado=[]
+    teste4=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
+    teste5=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='5108070121234400012755001@#00000981364117781',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
+    teste6=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='510807012123440',tpentrada='Entrada Normal',previsão='22-01-2021',produto='chaque',qtd='10000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Nota_Fiscal')
+    if validar_teste(teste4)==True:
+        resultado.append('teste4 Fail')
+    else:
+        resultado.append('teste4 Pass')
+    if validar_teste(teste5)==True:
+        resultado.append('teste5 Pass')
+    else:
+        resultado.append('teste5 Fail')
+    if validar_teste(teste6)==True:
+        resultado.append('teste6 Pass')
+    else:
+        resultado.append('teste6 Fail')
+    return (resultado)
 def selenium_Campo_Previsão():
-    teste7=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-2021',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-    teste8=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão=date.today(),produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-    teste9=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-2020',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-    teste10=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-202020',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-    teste11=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    resultado=[]
+    teste7=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-2021',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste8=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão=date.today(),produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste9=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-2020',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste10=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-01-202020',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste11=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10',produto='nescal',qtd='5000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    if validar_teste(teste7)==True:
+        resultado.append('teste 7 Fail')
+    else:
+        resultado.append('teste 7 Pass')
+    if validar_teste(teste8)==True:
+        resultado.append('teste 8 Fail')
+    else:
+        resultado.append('teste 8 Pass')
+    if validar_teste(teste9)==True:
+        resultado.append('teste 9 Pass')
+    else:
+        resultado.append('teste 9 Fail')
+    if validar_teste(teste10)==True:
+        resultado.append('teste 10 Pass')
+    else:
+        resultado.append('teste 10 Fail')
+    if validar_teste(teste11)==True:
+        resultado.append('teste 11 Pass')
+    else:
+        resultado.append('teste 11 Fail')
+    return (resultado)
 def selenium_Campo_QTD():
-    teste12=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='nescal',qtd='10',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-    teste13=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='nescal',qtd='1000000000000000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-
+    resultado=[]
+    teste12=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='nescal',qtd='10',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste13=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='nescal',qtd='1000000000000000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    if validar_teste(teste12)==True:
+        resultado.append('teste 12 Fail')
+    else:
+        resultado.append('teste 12 Pass')
+    if validar_teste(teste13)==True:
+        resultado.append('teste 13 Pass')
+    else:
+        resultado.append('teste 13 Fail')
+    return(resultado)
 def  selenium_Produto():
-    teste14=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-    teste15=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='"refrigerante leite café suco de laranja energético',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    resultado=[]
+    teste14=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste15=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada Normal',previsão='15-10-2021',produto='"refrigerante leite café suco de laranja energético',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    if validar_teste(teste14)==True:
+        resultado.append('teste 14 Fail')
+    else:
+        resultado.append('teste 14 Pass')
+    if validar_teste(teste15)==True:
+        resultado.append('teste 15 Pass')
+    else:
+        resultado.append('teste 15 Fail')
+    return(resultado)
 def selenium_Tipo_de_Entrada():
-    teste16=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada errada',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-    teste17=teste_selenium(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Carga batida',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
-
+    resultado=[]
+    teste16=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Entrada errada',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    teste17=teste_selenium_add_carga(ind='1234567899874563214569874125896321458796',nf='51080701212344000127550010000000981364117781',tpentrada='Carga batida',previsão='15-10-2021',produto='refrigerante',qtd='100000',un='KG',movimentacao='Carga Paletizada',frete='CIF',observacao ='Campo_Previsão')
+    if validar_teste(teste16)==True:
+        resultado.append('teste 16 Pass')
+    else:
+        resultado.append('teste 16 Fail')
+    if validar_teste(teste17)==True:
+        resultado.append('teste 17 Fail')
+    else:
+        resultado.append('teste 17 Pass')
+    return(resultado)
 
 def acomp(request, usuario):
     print(usuario)
@@ -171,7 +250,9 @@ def liberar(request,id):
 
 def login_pag(request):
     login='login'
-    selenium_Campo_Indústria()
+    validação=selenium_Campo_Indústria()
+    for i in validação:
+        print(i)
     #consulta_bd_cargas_em_aberto()
     return render(request,'core/login.html',{login:'login'})
 @csrf_protect
