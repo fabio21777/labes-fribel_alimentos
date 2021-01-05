@@ -17,58 +17,75 @@ import cx_Oracle
 from .teste_selenium import *
 # Importar a classe que contém as funções e aplicar um alias
 
+
 def acomp(request, usuario):
     print(usuario)
-    acomp='acomp'
+    acomp = 'acomp'
     search = request.GET.get('search')
-    usuario = User.objects.get(username = usuario)
-    tipo_user = Tipo_user.objects.get(user_tipo = int(usuario.id))
+    usuario = User.objects.get(username=usuario)
+    tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
     filter = request.GET.get('filter')
     ordenador = request.GET.get('ordenador')
-
     if filter:
-        cargas = Carga.objects.filter(status=filter) 
+        cargas = Carga.objects.filter(status=filter)
     elif ordenador:
         cargas = Carga.objects.all().order_by(ordenador)
     elif search:
         cargas = Carga.objects.filter(industria__icontains=search)
-    else: 
+    else:
         cargas = Carga.objects.all().order_by('-created_at')
 
-    return render(request,'core/acomp.html', {'usuario': usuario,'acomp':acomp, 'cargas': cargas, 'tamanho': len(cargas), 'tipo_user':tipo_user})
+    return render(request, 'core/acomp.html', {'usuario': usuario,
+                                               'acomp': acomp,
+                                               'cargas': cargas,
+                                               'tamanho': len(cargas),
+                                               'tipo_user': tipo_user})
+
 
 def addCarga(request):
-    return render(request,'core/adicionar_carga.html')
-def set_carga(request):
-    industria=request.POST.get('industria')
-    numero_nf=request.POST.get('NF')
-    dia_descarga=datetime.fromisoformat(request.POST.get('previsao'))
-    user=User.objects.get(pk=1)#é so pra não da erro
-    tipo_entrada=request.POST.get('tipo_entrada')
-    Produto=request.POST.get('Produto')
-    QTD=request.POST.get('QTD')
-    UN=request.POST.get('un')
-    movimentacao=request.POST.get('movimentacao')
-    frete=request.POST.get('frete')
-    observacao=request.POST.get('observacao')
-    carga=Carga.objects.create(numero_nf= numero_nf,industria=industria,dia_descarga=dia_descarga,user=user,status='aguardando',tipo_entrada=tipo_entrada,Produto=Produto,QTD=QTD,UN=UN,movimentacao=movimentacao,frete=frete,observacao=observacao)
-    return redirect('/acompanhamento/admin-fribel')#temporario
+    return render(request, 'core/adicionar_carga.html')
 
-def liberarCarga(request,id):
-    carga = Carga.objects.get(pk = id)
+
+def set_carga(request):
+    industria = request.POST.get('industria')
+    numero_nf = request.POST.get('NF')
+    dia_descarga = datetime.fromisoformat(request.POST.get('previsao'))
+    # É so pra não da erro
+    user = User.objects.get(pk=1)
+    tipo_entrada = request.POST.get('tipo_entrada')
+    Produto = request.POST.get('Produto')
+    QTD = request.POST.get('QTD')
+    UN = request.POST.get('un')
+    movimentacao = request.POST.get('movimentacao')
+    frete = request.POST.get('frete')
+    observacao = request.POST.get('observacao')
+    carga = Carga.objects.create(numero_nf=numero_nf, industria=industria,
+                                 dia_descarga=dia_descarga, user=user,
+                                 status='aguardando',
+                                 tipo_entrada=tipo_entrada,
+                                 Produto=Produto, QTD=QTD, UN=UN,
+                                 movimentacao=movimentacao,
+                                 frete=frete, observacao=observacao)
+    # Temporario
+    return redirect('/acompanhamento/admin-fribel')
+
+
+def liberarCarga(request, id):
+    carga = Carga.objects.get(pk=id)
     carga.status = 'liberado'
     carga.save()
+    # Tenporario
+    return redirect('/acompanhamento/admin-fribel')
 
-    return redirect('/acompanhamento/admin-fribel')#tenporario
 
 def liberar_carga(request):
-    cargas_liberadas = Carga.objects.filter(status='liberado',box='')
+    cargas_liberadas = Carga.objects.filter(status='liberado', box='')
     box = BoxForm
-    print('teste',cargas_liberadas)
-    return render(request, 'core/liberar_carga.html', {'boxs': box,'cargas': cargas_liberadas})
+    return render(request, 'core/liberar_carga.html',
+                  {'boxs': box, 'cargas': cargas_liberadas})
 
-def liberar(request,id):
-    teste= 'teste'
+
+def liberar(request, id):
     carga = Carga.objects.get(id=id)
     if request.method == 'POST':
         box_escolhido = BoxForm(request.POST)
@@ -77,17 +94,18 @@ def liberar(request,id):
             box = Box.objects.get(id=box_escolhido)
             carga.box = box.name
             carga.save()
-            teste= carga.box
-    return redirect ('liberar-carga')
+    return redirect('liberar-carga')
 
 
 def login_pag(request):
-    login='login'
-    validação=selenium_Campo_Indústria()
+    login = 'login'
+    validação = selenium_Campo_Indústria()
     for i in validação:
         print(i)
-    #consulta_bd_cargas_em_aberto()
-    return render(request,'core/login.html',{login:'login'})
+    # Consulta_bd_cargas_em_aberto()
+    return render(request, 'core/login.html', {login: 'login'})
+
+
 @csrf_protect
 def login_autentificacao(request):
     if request.POST:
@@ -96,18 +114,30 @@ def login_autentificacao(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            url='/acompanhamento/'+username
+            url = '/acompanhamento/' + username
             return redirect(url)
         else:
-            messages.error(request, 'Usuário/Senha inválidos. Por Favor Tente novamente ou entre em contato com o suporte')
+            messages.error(request, 'Usuário/Senha inválidos.Por Favor Tente \
+                                     novamente ou entre em contato com o \
+                                     suporte')
     return redirect('/')
+
+
 @login_required(login_url='/')
 def logout_user(request):
     logout(request)
     return redirect('/')
+
+
 def conexao_bd():
-    connection = cx_Oracle.connect("FRIBEL", "123456789", "(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.150)(PORT = 1521)))(CONNECT_DATA =(SID = WINT)))")
+    connection = cx_Oracle.connect("FRIBEL", "123456789",
+                                   "(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = \
+                                    (PROTOCOL = TCP)(HOST = 192.168.0.150) \
+                                    (PORT = 1521))) \
+                                    (CONNECT_DATA =(SID = WINT)))")
     return(connection)
+
+
 def consulta_bd_cargas_em_aberto():
     cursor=conexao_bd().cursor()
     cursor.execute("""SELECT PCNFENTPREENT.CODFILIAL                                                        
