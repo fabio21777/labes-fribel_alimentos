@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import time
-from datetime import date
+from datetime import date, datetime
 
 
 def espera_alert(browser):
@@ -66,8 +66,8 @@ def teste_selenium_add_carga(ind='teste_selenium_add_carga_default',
     browser.find_element_by_id("btadd").click()
     espera_alert(browser)
     espera_alert(browser)
-    url = browser.current_url
     time.sleep(2)
+    url = browser.current_url
     browser.close()
     return(url)
 
@@ -81,8 +81,7 @@ def validar_teste(teste):
 
 def selenium_Campo_Indústria():
     resultado = []
-    teste1 = teste_selenium_add_carga(ind='123456789987456321\
-                                      4569874125896321458796',
+    teste1 = teste_selenium_add_carga(ind='1234567899874569589879',
                                       nf='034598756314758',
                                       tpentrada='Entrada Normal',
                                       previsão='22-01-2021',
@@ -92,8 +91,8 @@ def selenium_Campo_Indústria():
                                       movimentacao='Carga Paletizada',
                                       frete='CIF',
                                       observacao='teste campo industria')
-    teste2 = teste_selenium_add_carga(ind='123456789987456321456\
-                                      987412589632145879656942',
+    teste2 = teste_selenium_add_carga(ind='123456789987456\
+                                      958987956942',
                                       nf='03459875639958',
                                       tpentrada='Entrada Normal',
                                       previsão='22-01-2021',
@@ -103,8 +102,8 @@ def selenium_Campo_Indústria():
                                       movimentacao='Carga Paletizada',
                                       frete='CIF',
                                       observacao='teste campo industria')
-    teste3 = teste_selenium_add_carga(ind=' 234567899874563214569\
-                                      874125896321458796',
+    teste3 = teste_selenium_add_carga(ind=' 234567899874569\
+                                      589879',
                                       nf='034598756634758',
                                       tpentrada='Entrada Normal',
                                       previsão='22-01-2021',
@@ -132,10 +131,8 @@ def selenium_Campo_Indústria():
 
 def selenium_Campo_Nota_Fiscal():
     resultado = []
-    teste4 = teste_selenium_add_carga(ind='1234567899874563214569\
-                                      874125896321458796',
-                                      nf='510807012123440001275500\
-                                      10000000981364117781',
+    teste4 = teste_selenium_add_carga(ind='1234567899874569589879',
+                                      nf='51080701212344000127550010000000981',
                                       tpentrada='Entrada Normal',
                                       previsão='22-01-2021',
                                       produto='chaque',
@@ -145,10 +142,8 @@ def selenium_Campo_Nota_Fiscal():
                                       frete='CIF',
                                       observacao='Campo_Nota_Fiscal')
 
-    teste5 = teste_selenium_add_carga(ind='1234567899874563214569874\
-                                      125896321458796',
-                                      nf='5108070121234400012755001@#\
-                                      00000981364117781',
+    teste5 = teste_selenium_add_carga(ind='123456789987456987412589879',
+                                      nf='5108070121234400012755001@#00000981',
                                       tpentrada='Entrada Normal',
                                       previsão='22-01-2021',
                                       produto='chaque',
@@ -157,8 +152,7 @@ def selenium_Campo_Nota_Fiscal():
                                       movimentacao='Carga Paletizada',
                                       frete='CIF',
                                       observacao='Campo_Nota_Fiscal')
-    teste6 = teste_selenium_add_carga(ind='1234567899874563214569874\
-                                      125896321458796',
+    teste6 = teste_selenium_add_carga(ind='123456789987456987412589879',
                                       nf='510807012123440',
                                       tpentrada='Entrada Normal',
                                       previsão='22-01-2021',
@@ -185,10 +179,9 @@ def selenium_Campo_Nota_Fiscal():
 
 def selenium_Campo_Previsão():
     resultado = []
-    teste7 = teste_selenium_add_carga(ind='123456789987456321456987412\
-                                      5896321458796',
-                                      nf='510807012123440001275500100000\
-                                      00981364117781',
+    data_e_hora_atuais = datetime.now()
+    teste7 = teste_selenium_add_carga(ind='1234567899874569589879',
+                                      nf='5108070121234400012755001000',
                                       tpentrada='Entrada Normal',
                                       previsão='15-01-2021',
                                       produto='nescal',
@@ -197,22 +190,18 @@ def selenium_Campo_Previsão():
                                       movimentacao='Carga Paletizada',
                                       frete='CIF',
                                       observacao='Campo_Previsão')
-    teste8 = teste_selenium_add_carga(ind='123456789987456321456987412589632\
-                                      1458796',
-                                      nf='51080701212344000127550010000000981\
-                                      364117781',
+    teste8 = teste_selenium_add_carga(ind='123456789987456958963145879',
+                                      nf='5108070121234400012755001000000',
                                       tpentrada='Entrada Normal',
-                                      previsão=date.today(),
+                                      previsão=data_e_hora_atuais.strftime('%d/%m/%Y'),
                                       produto='nescal',
                                       qtd='5000',
                                       un='KG',
                                       movimentacao='Carga Paletizada',
                                       frete='CIF',
                                       observacao='Campo_Previsão')
-    teste9 = teste_selenium_add_carga(ind='12345678998745632145698741258963214\
-                                      58796',
-                                      nf='5108070121234400012755001000000098136\
-                                      4117781',
+    teste9 = teste_selenium_add_carga(ind='12345678998745695896321458796',
+                                      nf='5108070121234400012755001000000098136411',
                                       tpentrada='Entrada Normal',
                                       previsão='15-01-2020',
                                       produto='nescal',
@@ -221,10 +210,8 @@ def selenium_Campo_Previsão():
                                       movimentacao='Carga Paletizada',
                                       frete='CIF',
                                       observacao='Campo_Previsão')
-    teste10 = teste_selenium_add_carga(ind='123456789987456321456987412589632145\
-                                       8796',
-                                       nf='51080701212344000127550010000000981364\
-                                       117781',
+    teste10 = teste_selenium_add_carga(ind='12345678998745695898796',
+                                       nf='5108070121234400012755001000000098136411',
                                        tpentrada='Entrada Normal',
                                        previsão='15-01-202020',
                                        produto='nescal',
@@ -233,10 +220,8 @@ def selenium_Campo_Previsão():
                                        movimentacao='Carga Paletizada',
                                        frete='CIF',
                                        observacao='Campo_Previsão')
-    teste11 = teste_selenium_add_carga(ind='12345678998745632145698741\
-                                       25896321458796',
-                                       nf='51080701212344000127550010000\
-                                       000981364117781',
+    teste11 = teste_selenium_add_carga(ind='123456789987456987412589879',
+                                       nf='51080701212344000127550010000000981',
                                        tpentrada='Entrada Normal',
                                        previsão='15-10',
                                        produto='nescal',
@@ -270,10 +255,8 @@ def selenium_Campo_Previsão():
 
 def selenium_Campo_QTD():
     resultado = []
-    teste12 = teste_selenium_add_carga(ind='12345678998745632145698741258963\
-                                       21458796',
-                                       nf='5108070121234400012755001000000098\
-                                       1364117781',
+    teste12 = teste_selenium_add_carga(ind='1234567899874569589632145879',
+                                       nf='51080701212344000127550010000000981',
                                        tpentrada='Entrada Normal',
                                        previsão='15-10-2021',
                                        produto='nescal',
@@ -282,10 +265,8 @@ def selenium_Campo_QTD():
                                        movimentacao='Carga Paletizada',
                                        frete='CIF',
                                        observacao='Campo_Previsão')
-    teste13 = teste_selenium_add_carga(ind='123456789987456321456987412589632\
-                                       1458796',
-                                       nf='51080701212344000127550010000000981\
-                                       364117781',
+    teste13 = teste_selenium_add_carga(ind='1234567899874569589632145879',
+                                       nf='51080701212344000127550010000000981',
                                        tpentrada='Entrada Normal',
                                        previsão='15-10-2021',
                                        produto='nescal',
@@ -307,10 +288,8 @@ def selenium_Campo_QTD():
 
 def selenium_Produto():
     resultado = []
-    teste14 = teste_selenium_add_carga(ind='12345678998745632145698741258963\
-                                       21458796',
-                                       nf='5108070121234400012755001000000098\
-                                       1364117781',
+    teste14 = teste_selenium_add_carga(ind='1234567899874569589632145879',
+                                       nf='51080701212344000127550010000000981',
                                        tpentrada='Entrada Normal',
                                        previsão='15-10-2021',
                                        produto='refrigerante',
@@ -319,14 +298,11 @@ def selenium_Produto():
                                        movimentacao='Carga Paletizada',
                                        frete='CIF',
                                        observacao='Campo_Previsão')
-    teste15 = teste_selenium_add_carga(ind='12345678998745632145698741258963214\
-                                       58796',
-                                       nf='51080701212344000127550010000000981\
-                                       364117781',
+    teste15 = teste_selenium_add_carga(ind='12345678998745695896321458796',
+                                       nf='51080701212344000127550010000000981',
                                        tpentrada='Entrada Normal',
                                        previsão='15-10-2021',
-                                       produto='"refrigerante leite café suco de\
-                                       laranja energético',
+                                       produto='"refrigerante leite café suco de laranja energético',
                                        qtd='100000',
                                        un='KG',
                                        movimentacao='Carga Paletizada',
@@ -345,10 +321,8 @@ def selenium_Produto():
 
 def selenium_Tipo_de_Entrada():
     resultado = []
-    teste16 = teste_selenium_add_carga(ind='12345678998745632145698741258\
-                                       96321458796',
-                                       nf='5108070121234400012755001000000\
-                                       0981364117781',
+    teste16 = teste_selenium_add_carga(ind='1234567899874569589879',
+                                       nf='51080701212344000127550010000000981',
                                        tpentrada='Entrada errada',
                                        previsão='15-10-2021',
                                        produto='refrigerante',
@@ -357,10 +331,8 @@ def selenium_Tipo_de_Entrada():
                                        movimentacao='Carga Paletizada',
                                        frete='CIF',
                                        observacao='Campo_Previsão')
-    teste17 = teste_selenium_add_carga(ind='123456789987456321456987412589632\
-                                       1458796',
-                                       nf='51080701212344000127550010000000981\
-                                       364117781',
+    teste17 = teste_selenium_add_carga(ind='1234567899874569589632145879',
+                                       nf='51080701212344000127550010000000981',
                                        tpentrada='Carga batida',
                                        previsão='15-10-2021',
                                        produto='refrigerante',
@@ -378,3 +350,18 @@ def selenium_Tipo_de_Entrada():
     else:
         resultado.append('teste 17 Pass')
     return(resultado)
+
+
+def all_teste():
+    teste_ind = selenium_Campo_Indústria()
+    teste_nf = selenium_Campo_Nota_Fiscal()
+    teste_previsao = selenium_Campo_Previsão()
+    teste_qtd = selenium_Campo_QTD()
+    teste_produto = selenium_Produto()
+    teste_tp_entrada = selenium_Tipo_de_Entrada()
+    print(teste_ind)
+    print(teste_nf)
+    print(teste_previsao)
+    print(teste_qtd)
+    print(teste_produto)
+    print(teste_tp_entrada)

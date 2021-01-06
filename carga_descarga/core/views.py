@@ -14,11 +14,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
 from .teste_selenium import *
-from . conection_bd import *
+from .conection_bd import consulta_bd_cargas_em_aberto
 # Importar a classe que contém as funções e aplicar um alias
 
 
-def acomp(request, usuario):
+def acompanhamento_carga(request, usuario):
     print(usuario)
     acomp = 'acomp'
     search = request.GET.get('search')
@@ -42,7 +42,7 @@ def acomp(request, usuario):
                                                'tipo_user': tipo_user})
 
 
-def addCarga(request):
+def add_Carga(request):
     return render(request, 'core/adicionar_carga.html')
 
 
@@ -99,7 +99,8 @@ def liberar(request, id):
 
 def login_pag(request):
     login = 'login'
-    Consulta_bd_cargas_em_aberto()
+    #  all_teste()
+    consulta_bd_cargas_em_aberto()
     return render(request, 'core/login.html', {login: 'login'})
 
 
