@@ -59,13 +59,13 @@ def set_carga(request):
     movimentacao = request.POST.get('movimentacao')
     frete = request.POST.get('frete')
     observacao = request.POST.get('observacao')
-    carga = Carga.objects.create(numero_nf=numero_nf, industria=industria,
-                                 dia_descarga=dia_descarga, user=user,
-                                 status='aguardando',
-                                 tipo_entrada=tipo_entrada,
-                                 Produto=Produto, QTD=QTD, UN=UN,
-                                 movimentacao=movimentacao,
-                                 frete=frete, observacao=observacao)
+    Carga.objects.create(numero_nf=numero_nf, industria=industria,
+                         dia_descarga=dia_descarga, user=user,
+                         status='aguardando',
+                         tipo_entrada=tipo_entrada,
+                         Produto=Produto, QTD=QTD, UN=UN,
+                         movimentacao=movimentacao,
+                         frete=frete, observacao=observacao)
     # Temporario
     return redirect('/acompanhamento/admin-fribel')
 
