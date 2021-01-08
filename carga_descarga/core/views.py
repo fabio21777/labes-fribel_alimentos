@@ -18,8 +18,18 @@ from .conection_bd import consulta_bd_cargas_em_aberto
 # Importar a classe que contém as funções e aplicar um alias
 
 
+def cargas_erp():
+    try:
+        cargas = consulta_bd_cargas_em_aberto()
+        for carga in cargas:
+            print(carga['NUMNOTA'])
+    except:
+
+
+
 def acompanhamento_carga(request, usuario):
     print(usuario)
+    carregar_cargas_ERP = cargas_erp()
     acomp = 'acomp'
     search = request.GET.get('search')
     usuario = User.objects.get(username=usuario)
@@ -74,8 +84,7 @@ def liberarCarga(request, id):
     carga = Carga.objects.get(pk=id)
     carga.status = 'liberado'
     carga.save()
-    # Tenporario
-    return redirect('/acompanhamento/admin-fribel')
+    return redirect('/acompanhamento/admin-fribel')  # Tenporario
 
 
 def liberar_carga(request):
@@ -100,7 +109,6 @@ def liberar(request, id):
 def login_pag(request):
     login = 'login'
     #  all_teste()
-    consulta_bd_cargas_em_aberto()
     return render(request, 'core/login.html', {login: 'login'})
 
 
