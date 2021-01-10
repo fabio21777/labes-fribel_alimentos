@@ -24,6 +24,15 @@
       <option value="status">Status (ordem crescente)</option>
       <option value="-status">Status (ordem decrescente)</option>
     </select>
+    <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self">
+        <div class="form-group">
+          <label for="search-field">
+            <i class="fa fa-search"></i>
+          </label>
+          <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
+          <button id="btnSearch" class="btn btnSearch" type="submit">Pesquisar</button>
+        </div>
+    </form>
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
     {% if tipo_user.tipo_user == 'CD' %}
       <a class="btnaddcarga" href="adicionarCarga/"><button type="button" class="btn bt1">ADICIONAR CARGA</button></a>

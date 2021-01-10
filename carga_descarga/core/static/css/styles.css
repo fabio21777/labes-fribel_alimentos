@@ -53,8 +53,6 @@ h1.libCarga{
 div.libcarga{
   padding-left: 400px; 
   padding-bottom: 300px;
-  
-
 }
 button.btnbase{
   background-color: #89b348;
@@ -65,7 +63,9 @@ button.btnbase:hover{
 }
 h3.base{
   color:black;
+  font-size: 20px;
 }
+
 h3.base:hover{
   color: #89b348;
 }
@@ -82,7 +82,34 @@ form.form-libcarga{
   border: black;
 }
 a.btnaddcarga{
-  margin-left: 380px;
+  margin-right: 40px;
+}
+
+.form-inline .search-field {
+  width:245px;
+  background-color: #fff(184, 38, 38);
+  border:none;
+  border-bottom:1px solid transparent;
+  border-radius:18px;
+  color:black;
+  box-shadow:none;
+  transition:border-bottom-color 0.3s;
+  margin-left: 10px;
+}
+
+/*Campo busca*/
+.form-inline .btnSearch{
+  position: absolute;
+  left: 930px;
+  cursor: pointer;
+}
+
+.form-inline .btnSearch:hover{
+  background-color: #89b348;
+}
+
+.form-inline .search-field:focus {
+  border-bottom:1px solid #ccc;
 }
 
 /* filter */
@@ -129,9 +156,7 @@ input.addcarga{
 h1{
     color: #89b348;
 }
-h3{
-    color: #004b97;
-}
+
 h3.addcargah3nf{
     padding-right: 40px;
     padding-left: 30px;
@@ -336,33 +361,6 @@ h3.frete{
     color:#d9d9d9;
   }
   
-  .header-blue .navbar .form-inline .search-field {
-    width:245px;
-    background-color: #fff(184, 38, 38);
-    border:none;
-    border-bottom:1px solid transparent;
-    border-radius:18px;
-    color:black;
-    box-shadow:none;
-    transition:border-bottom-color 0.3s;
-    margin-left: 10px;
-  }
-
-  .header-blue .navbar .form-inline .btnSearch{
-    position: absolute;
-    left: 980px;
-    cursor: pointer;
-  }
-
-
-  .header-blue .navbar .form-inline .btnSearch:hover{
-    background-color: #89b348;
-  }
-
-  .header-blue .navbar .form-inline .search-field:focus {
-    border-bottom:1px solid #ccc;
-  }
-  
   .header-blue .hero {
     margin-top:20px;
     text-align:center;
@@ -434,7 +432,10 @@ h3.frete{
     opacity:0.2;
   }
   
-  
+  a.login{
+    margin-left: 660px;
+  }
+
 /*Footer*/
 .footer-dark {
     padding:50px 0;

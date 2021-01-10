@@ -23,6 +23,7 @@ def cargas_erp():
         for carga in cargas:
             print(carga['NUMNOTA'])
     except:
+        print('Erro nas cargas ERP') #Provisório, pode trocar
 
 def acompanhamento_carga(request, usuario):
     print(usuario)
@@ -33,6 +34,7 @@ def acompanhamento_carga(request, usuario):
     tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
     filter = request.GET.get('filter')
     ordenador = request.GET.get('ordenador')
+    
     if filter:
         cargas = Carga.objects.filter(status=filter)
     elif ordenador:
@@ -100,7 +102,9 @@ def liberar(request, id):
     return redirect('liberar-carga')
 
 def historico_cargas_liberadas(request):
-    return render(request, 'core/historico.html')
+    cargas = Carga.objects.all().order_by('-created_at')
+
+    return render(request, 'core/historico.html', {'cargas': cargas})
 
 def login_pag(request):
     login = 'login'

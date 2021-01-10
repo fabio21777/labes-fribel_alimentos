@@ -24,15 +24,7 @@
                         <ul class="nav navbar-nav">
                             <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Sobre nós</a></li>
                         </ul>
-                        <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self">
-                            <div class="form-group">
-                                <label for="search-field">
-                                    <i class="fa fa-search"></i>
-                                </label>
-                                <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
-                                <button id="btnSearch" class="btn btnSearch" type="submit">Pesquisar</button>
-                            </div>
-                        </form><span class="navbar-text"> <a href="#" class="login">Log In</a></span><a class="btn btn-light action-button" role="button" href="#">Sign Up</a></div>
+                        <span class="navbar-text"> <a href="#" class="login">Log In</a></span><a class="btn btn-light action-button" role="button" href="#">Sign Up</a></div>
                 </div>
             </nav>
         </div>
@@ -42,6 +34,7 @@
             <a href="\acompanhamento/admin-fribel"><button class="btn btnbase" id="bt_list_carga" value="{{acomp}}"><h3 class="base" id="h3_list_carga">Lista Das Cargas</h3></button></a><!--temporario-->
             <a href="\acompanhamento/adicionarCarga/"><button class="btn btnbase" id="bt_add_carga"><h3 class="base" id="h3_add_carga">Adicionar Carga</h3></button></a>
             <a href="\liberar"><button class="btn btnbase" id="bt_liberar"><h3 id="h3_liberar" class="base" >Liberar Para Box</h3></button></a>
+            <a href="\acompanhamento/historico/"><button class="btn btnbase"><h3 class="base">Histórico de cargas liberadas</h3></button></a>
             <a href="#"><button class="btn btnbase"><h3 class="base">Editar Carga</h3></button></a>
         </div>
     {% endif %}
