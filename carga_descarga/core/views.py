@@ -17,15 +17,12 @@ from .teste_selenium import *
 from .conection_bd import consulta_bd_cargas_em_aberto
 # Importar a classe que contém as funções e aplicar um alias
 
-
 def cargas_erp():
     try:
         cargas = consulta_bd_cargas_em_aberto()
         for carga in cargas:
             print(carga['NUMNOTA'])
     except:
-
-
 
 def acompanhamento_carga(request, usuario):
     print(usuario)
@@ -55,7 +52,6 @@ def acompanhamento_carga(request, usuario):
 def add_Carga(request):
     return render(request, 'core/adicionar_carga.html')
 
-
 def set_carga(request):
     industria = request.POST.get('industria')
     numero_nf = request.POST.get('NF')
@@ -79,13 +75,11 @@ def set_carga(request):
     # Temporario
     return redirect('/acompanhamento/admin-fribel')
 
-
 def liberarCarga(request, id):
     carga = Carga.objects.get(pk=id)
     carga.status = 'liberado'
     carga.save()
-    return redirect('/acompanhamento/admin-fribel')  # Tenporario
-
+    return redirect('/acompanhamento/admin-fribel')  # Temporário
 
 def liberar_carga(request):
     cargas_liberadas = Carga.objects.filter(status='liberado', box='')
@@ -105,12 +99,13 @@ def liberar(request, id):
             carga.save()
     return redirect('liberar-carga')
 
+def historico_cargas_liberadas(request):
+    return render(request, 'core/historico.html')
 
 def login_pag(request):
     login = 'login'
     #  all_teste()
     return render(request, 'core/login.html', {login: 'login'})
-
 
 @csrf_protect
 def login_autentificacao(request):
