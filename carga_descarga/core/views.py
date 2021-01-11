@@ -23,7 +23,9 @@ def cargas_erp():
         for carga in cargas:
             print(carga['NUMNOTA'])
     except:
-        print('Erro nas cargas ERP') #Provisório, pode trocar
+        # Provisório, pode trocar
+        print('Erro nas cargas ERP')
+
 
 def acompanhamento_carga(request, usuario):
     print(usuario)
@@ -34,7 +36,6 @@ def acompanhamento_carga(request, usuario):
     tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
     filter = request.GET.get('filter')
     ordenador = request.GET.get('ordenador')
-    
     if filter:
         cargas = Carga.objects.filter(status=filter)
     elif ordenador:
@@ -53,6 +54,7 @@ def acompanhamento_carga(request, usuario):
 
 def add_Carga(request):
     return render(request, 'core/adicionar_carga.html')
+
 
 def set_carga(request):
     industria = request.POST.get('industria')
@@ -77,20 +79,22 @@ def set_carga(request):
     # Temporario
     return redirect('/acompanhamento/admin-fribel')
 
+
 def liberarCarga(request, id):
     carga = Carga.objects.get(pk=id)
     carga.status = 'liberado'
     carga.save()
     return redirect('/acompanhamento/admin-fribel')  # Temporário
 
-def liberar_carga(request):
+
+def liberar_carga_box(request):
     cargas_liberadas = Carga.objects.filter(status='liberado', box='')
     box = BoxForm
-    return render(request, 'core/liberar_carga.html',
+    return render(request, 'core/liberar_carga_box.html',
                   {'boxs': box, 'cargas': cargas_liberadas})
 
 
-def liberar(request, id):
+def reservar_box(request, id):
     carga = Carga.objects.get(id=id)
     if request.method == 'POST':
         box_escolhido = BoxForm(request.POST)
@@ -99,17 +103,20 @@ def liberar(request, id):
             box = Box.objects.get(id=box_escolhido)
             carga.box = box.name
             carga.save()
-    return redirect('liberar-carga')
+    return redirect('liberar-carga-box')
+
 
 def historico_cargas_liberadas(request):
     cargas = Carga.objects.all().order_by('-created_at')
 
     return render(request, 'core/historico.html', {'cargas': cargas})
 
+
 def login_pag(request):
     login = 'login'
     #  all_teste()
     return render(request, 'core/login.html', {login: 'login'})
+    
 
 @csrf_protect
 def login_autentificacao(request):
