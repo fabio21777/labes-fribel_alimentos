@@ -12,5 +12,6 @@ urlpatterns = [
     path('liberar/<str:id>/',views.liberar, name = 'liberar'),
     path('login/submit',views.login_autentificacao),
     path('', views.login_pag, name = 'login'), #Tela home
-    path('acompanhamento/historico/', views.historico_cargas_liberadas, name = 'historico')
+    path('acompanhamento/historico/', views.historico_cargas_liberadas, name = 'historico'),
+    path('logout_user',views.logout_user)
 ]
