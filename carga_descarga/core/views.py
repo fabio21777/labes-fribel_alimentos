@@ -19,7 +19,17 @@ from .conection_bd import conexao_bd
 # Importar a classe que contém as funções e aplicar um alias
 
 def cargas_erp():
+
+    try:
+        cargas = consulta_bd_cargas_em_aberto()
+        for carga in cargas:
+            print(carga['NUMNOTA'])
+    except:
+        # Provisório, pode trocar
+        print('Erro nas cargas ERP')
+
     cargas =conexao_bd()
+
 
 @login_required(login_url='/')
 def acompanhamento_carga(request, usuario):
@@ -31,7 +41,6 @@ def acompanhamento_carga(request, usuario):
     tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
     filter = request.GET.get('filter')
     ordenador = request.GET.get('ordenador')
-    
     if filter:
         cargas = Carga.objects.filter(status=filter)
     elif ordenador:
@@ -52,11 +61,13 @@ def add_Carga(request):
     return render(request, 'core/adicionar_carga.html')
 
 
+
 def return_usuario():
     if request.user.is_authenticated:
         id_user = request.user.id
     usuario = User.objects.get(pk=id_user)
     return(usuario)
+
 
 
 def set_carga(request):
@@ -83,6 +94,8 @@ def set_carga(request):
     return redirect('/acompanhamento/'+user.username)
 
 
+
+
 @login_required(login_url='/')
 def liberarCarga(request, id):
     carga = Carga.objects.get(pk=id)
@@ -92,15 +105,16 @@ def liberarCarga(request, id):
     return redirect('/acompanhamento/'+user.username)
 
 
+
 @login_required(login_url='/')
-def liberar_carga(request):
+def liberar_carga_box(request):
     cargas_liberadas = Carga.objects.filter(status='liberado', box='')
     box = BoxForm
-    return render(request, 'core/liberar_carga.html',
+    return render(request, 'core/liberar_carga_box.html',
                   {'boxs': box, 'cargas': cargas_liberadas})
 
 
-def liberar(request, id):
+def reservar_box(request, id):
     carga = Carga.objects.get(id=id)
     if request.method == 'POST':
         box_escolhido = BoxForm(request.POST)
@@ -109,7 +123,8 @@ def liberar(request, id):
             box = Box.objects.get(id=box_escolhido)
             carga.box = box.name
             carga.save()
-    return redirect('liberar-carga')
+    return redirect('liberar-carga-box')
+
 
 
 @login_required(login_url='/')
@@ -118,10 +133,12 @@ def historico_cargas_liberadas(request):
 
     return render(request, 'core/historico.html', {'cargas': cargas})
 
+
 def login_pag(request):
     login = 'login'
     #  all_teste()
     return render(request, 'core/login.html', {login: 'login'})
+    
 
 @csrf_protect
 def login_autentificacao(request):
