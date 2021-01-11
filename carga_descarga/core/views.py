@@ -17,15 +17,13 @@ from .teste_selenium import *
 from .conection_bd import consulta_bd_cargas_em_aberto
 # Importar a classe que contém as funções e aplicar um alias
 
-
 def cargas_erp():
     try:
         cargas = consulta_bd_cargas_em_aberto()
         for carga in cargas:
             print(carga['NUMNOTA'])
     except:
-
-
+        print('Erro nas cargas ERP') #Provisório, pode trocar
 
 def acompanhamento_carga(request, usuario):
     print(usuario)
@@ -36,6 +34,7 @@ def acompanhamento_carga(request, usuario):
     tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
     filter = request.GET.get('filter')
     ordenador = request.GET.get('ordenador')
+    
     if filter:
         cargas = Carga.objects.filter(status=filter)
     elif ordenador:
@@ -54,7 +53,6 @@ def acompanhamento_carga(request, usuario):
 
 def add_Carga(request):
     return render(request, 'core/adicionar_carga.html')
-
 
 def set_carga(request):
     industria = request.POST.get('industria')
@@ -79,13 +77,11 @@ def set_carga(request):
     # Temporario
     return redirect('/acompanhamento/admin-fribel')
 
-
 def liberarCarga(request, id):
     carga = Carga.objects.get(pk=id)
     carga.status = 'liberado'
     carga.save()
-    return redirect('/acompanhamento/admin-fribel')  # Tenporario
-
+    return redirect('/acompanhamento/admin-fribel')  # Temporário
 
 def liberar_carga(request):
     cargas_liberadas = Carga.objects.filter(status='liberado', box='')
@@ -105,12 +101,15 @@ def liberar(request, id):
             carga.save()
     return redirect('liberar-carga')
 
+def historico_cargas_liberadas(request):
+    cargas = Carga.objects.all().order_by('-created_at')
+
+    return render(request, 'core/historico.html', {'cargas': cargas})
 
 def login_pag(request):
     login = 'login'
     #  all_teste()
     return render(request, 'core/login.html', {login: 'login'})
-
 
 @csrf_protect
 def login_autentificacao(request):
