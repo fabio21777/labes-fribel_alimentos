@@ -15,9 +15,11 @@ from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
 from .teste_selenium import *
 from .conection_bd import consulta_bd_cargas_em_aberto
+from .conection_bd import conexao_bd
 # Importar a classe que contém as funções e aplicar um alias
 
 def cargas_erp():
+
     try:
         cargas = consulta_bd_cargas_em_aberto()
         for carga in cargas:
@@ -26,7 +28,10 @@ def cargas_erp():
         # Provisório, pode trocar
         print('Erro nas cargas ERP')
 
+    cargas =conexao_bd()
 
+
+@login_required(login_url='/')
 def acompanhamento_carga(request, usuario):
     print(usuario)
     carregar_cargas_ERP = cargas_erp()
@@ -51,17 +56,25 @@ def acompanhamento_carga(request, usuario):
                                                'tamanho': len(cargas),
                                                'tipo_user': tipo_user})
 
-
+@login_required(login_url='/')
 def add_Carga(request):
     return render(request, 'core/adicionar_carga.html')
+
+
+
+def return_usuario():
+    if request.user.is_authenticated:
+        id_user = request.user.id
+    usuario = User.objects.get(pk=id_user)
+    return(usuario)
+
 
 
 def set_carga(request):
     industria = request.POST.get('industria')
     numero_nf = request.POST.get('NF')
     dia_descarga = datetime.fromisoformat(request.POST.get('previsao'))
-    # É so pra não da erro
-    user = User.objects.get(pk=1)
+    user = return_usuario()
     tipo_entrada = request.POST.get('tipo_entrada')
     Produto = request.POST.get('Produto')
     QTD = request.POST.get('QTD')
@@ -69,24 +82,31 @@ def set_carga(request):
     movimentacao = request.POST.get('movimentacao')
     frete = request.POST.get('frete')
     observacao = request.POST.get('observacao')
-    carga = Carga.objects.create(numero_nf=numero_nf, industria=industria,
-                                 dia_descarga=dia_descarga, user=user,
+    carga = Carga.objects.create(numero_nf=numero_nf,
+                                 industria=industria,
+                                 dia_descarga=dia_descarga,
+                                 user=user,
                                  status='aguardando',
                                  tipo_entrada=tipo_entrada,
                                  Produto=Produto, QTD=QTD, UN=UN,
                                  movimentacao=movimentacao,
                                  frete=frete, observacao=observacao)
-    # Temporario
-    return redirect('/acompanhamento/admin-fribel')
+    return redirect('/acompanhamento/'+user.username)
 
 
+
+
+@login_required(login_url='/')
 def liberarCarga(request, id):
     carga = Carga.objects.get(pk=id)
     carga.status = 'liberado'
     carga.save()
-    return redirect('/acompanhamento/admin-fribel')  # Temporário
+    user = return_usuario()
+    return redirect('/acompanhamento/'+user.username)
 
 
+
+@login_required(login_url='/')
 def liberar_carga_box(request):
     cargas_liberadas = Carga.objects.filter(status='liberado', box='')
     box = BoxForm
@@ -106,6 +126,8 @@ def reservar_box(request, id):
     return redirect('liberar-carga-box')
 
 
+
+@login_required(login_url='/')
 def historico_cargas_liberadas(request):
     cargas = Carga.objects.all().order_by('-created_at')
 

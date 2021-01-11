@@ -18,4 +18,5 @@ urlpatterns = [
     path('', views.login_pag, name='login'),
     path('acompanhamento/historico/', views.historico_cargas_liberadas,
          name='historico')
+    path('logout_user',views.logout_user)
 ]
