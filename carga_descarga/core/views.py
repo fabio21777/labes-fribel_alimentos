@@ -66,7 +66,7 @@ def cargas_erp(usuario):
                                  observacao=observacao)
                             
     except:
-      print("não foi carregada nenhuma carga do ERP é por conta da conexão do banco so é possivel acessa na intranet")
+      print(" ERRO FATAL,-------------->não foi carregada nenhuma carga do ERP é por conta da conexão do banco so é possivel acessa na intranet")
 
 
 @login_required(login_url='/')
@@ -101,8 +101,9 @@ def add_Carga(request):
 
 
 
-def informacoes_cargas(request):
-    return render(request, 'core/informacoes_cargas.html')
+def informacoes_cargas(request,id):
+    carga=Carga.objects.get(pk=id)
+    return render(request, 'core/informacoes_cargas.html',{'carga':carga})
 
 def set_carga(request):
     industria = request.POST.get('industria')
