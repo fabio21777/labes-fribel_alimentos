@@ -27,32 +27,32 @@ def return_usuario():
 
 
 def cargas_erp(usuario):
-    cargas = consulta_bd_cargas_em_aberto()
-    for carga in cargas:
-        industria = carga['FORNECEDOR']
-        numero_nf = carga['NUMNOTA']
-        valor_carga = carga['VLTOTAL']
-        dia_descarga = carga['DTACHEGADA']
-        user = usuario
-        if  carga['STATUS'] == 'L':
-            status='liberado'
-        else:
-            status='aguardando'
-        if carga['TIPODESCARGA']== '1':
-            tipo_entrada='Entrada Normal'
-        else:
-            tipo_entrada='Entrada Bonificada'
-        Produto = ' '
-        QTD = carga['QTITENS']
-        movimentacao = '    '
-        if carga['TIPOFRETE'] == 'C': 
-            frete = 'CIF'
-        else:
-            frete ='FOB' 
-        observacao = str(carga['OBS'])
-        print('teste',observacao)
-        if len(Carga.objects.filter(numero_nf=numero_nf)) == 0:
-            Carga.objects.create(numero_nf=numero_nf,
+    try:
+        cargas = consulta_bd_cargas_em_aberto()
+        for carga in cargas:
+            industria = carga['FORNECEDOR']
+            numero_nf = carga['NUMNOTA']
+            valor_carga = carga['VLTOTAL']
+            dia_descarga = carga['DTACHEGADA']
+            user = usuario
+            if  carga['STATUS'] == 'L':
+                status='liberado'
+            else:
+                status='aguardando'
+            if carga['TIPODESCARGA']== '1':
+                tipo_entrada='Entrada Normal'
+            else:
+                tipo_entrada='Entrada Bonificada'
+            Produto = ' '
+            QTD = carga['QTITENS']
+            movimentacao = '    '
+            if carga['TIPOFRETE'] == 'C': 
+                frete = 'CIF'
+            else:
+                frete ='FOB' 
+            observacao = str(carga['OBS'])
+            if len(Carga.objects.filter(numero_nf=numero_nf)) == 0:
+                Carga.objects.create(numero_nf=numero_nf,
                                  industria=industria,
                                  valor_carga=valor_carga,
                                  dia_descarga=dia_descarga,
@@ -64,7 +64,9 @@ def cargas_erp(usuario):
                                  movimentacao=movimentacao,
                                  frete=frete, 
                                  observacao=observacao)
-        
+                            
+    except:
+      print("não foi carregada nenhuma carga do ERP é por conta da conexão do banco so é possivel acessa na intranet")
 
 
 @login_required(login_url='/')
