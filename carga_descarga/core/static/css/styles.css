@@ -15,6 +15,11 @@ div.pand1{
 #link_filtro{
     padding-right: 10px;
 }
+button.btnsair{
+  color: white;
+  background-color: #89b348;
+}
+
 button.bt1{
     display: inline-block;
     color: white; 

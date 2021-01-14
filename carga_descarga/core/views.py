@@ -16,6 +16,8 @@ from django.views.decorators.csrf import csrf_protect
 from .teste_selenium import *
 from .conection_bd import consulta_bd_cargas_em_aberto
 from .conection_bd import conexao_bd
+import cx_Oracle
+from datetime import datetime, timedelta
 # Importar a classe que contém as funções e aplicar um alias
 
 def cargas_erp():
@@ -28,13 +30,11 @@ def cargas_erp():
         # Provisório, pode trocar
         print('Erro nas cargas ERP')
 
-    cargas =conexao_bd()
-
 
 @login_required(login_url='/')
 def acompanhamento_carga(request, usuario):
     print(usuario)
-    carregar_cargas_ERP = cargas_erp()
+    connection = cx_Oracle.connect("FRIBEL", "FG2hu3DV4T","(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.150) (PORT = 1521)))(CONNECT_DATA =(SID = WINT)))")
     acomp = 'acomp'
     search = request.GET.get('search')
     usuario = User.objects.get(username=usuario)
@@ -69,10 +69,13 @@ def return_usuario():
     return(usuario)
 
 
+def informacoes_cargas(request):
+    return render(request, 'core/informacoes_cargas.html')
 
 def set_carga(request):
     industria = request.POST.get('industria')
     numero_nf = request.POST.get('NF')
+    valor_carga = request.POST.get('valor')
     dia_descarga = datetime.fromisoformat(request.POST.get('previsao'))
     user = return_usuario()
     tipo_entrada = request.POST.get('tipo_entrada')
@@ -84,6 +87,7 @@ def set_carga(request):
     observacao = request.POST.get('observacao')
     carga = Carga.objects.create(numero_nf=numero_nf,
                                  industria=industria,
+                                 valor_carga=valor_carga,
                                  dia_descarga=dia_descarga,
                                  user=user,
                                  status='aguardando',
