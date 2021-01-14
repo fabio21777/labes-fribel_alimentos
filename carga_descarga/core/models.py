@@ -34,7 +34,7 @@ class Carga(models.Model):
     UN = models.CharField(max_length=12, blank=True)
     movimentacao = models.CharField(max_length=20, blank=True)
     frete = models.CharField(max_length=10, blank=True)
-    observacao = models.CharField(max_length=200, blank=True)
+    observacao = models.CharField(max_length=500, blank=True)
     box = models.CharField('Box', max_length=20, blank=True)
     valor_carga = models.CharField(max_length=12, blank=True)
     #Sempre que um registro for criado essa variável determina a data no BD

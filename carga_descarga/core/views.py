@@ -19,25 +19,61 @@ from .conection_bd import conexao_bd
 import cx_Oracle
 from datetime import datetime, timedelta
 # Importar a classe que contém as funções e aplicar um alias
+def return_usuario():
+    if request.user.is_authenticated:
+        id_user = request.user.id
+    usuario = User.objects.get(pk=id_user)
+    return(usuario)
 
-def cargas_erp():
 
-    try:
-        cargas = consulta_bd_cargas_em_aberto()
-        for carga in cargas:
-            print(carga['NUMNOTA'])
-    except:
-        # Provisório, pode trocar
-        print('Erro nas cargas ERP')
+def cargas_erp(usuario):
+    cargas = consulta_bd_cargas_em_aberto()
+    for carga in cargas:
+        industria = carga['FORNECEDOR']
+        numero_nf = carga['NUMNOTA']
+        valor_carga = carga['VLTOTAL']
+        dia_descarga = carga['DTACHEGADA']
+        user = usuario
+        if  carga['STATUS'] == 'L':
+            status='liberado'
+        else:
+            status='aguardando'
+        if carga['TIPODESCARGA']== '1':
+            tipo_entrada='Entrada Normal'
+        else:
+            tipo_entrada='Entrada Bonificada'
+        Produto = ' '
+        QTD = carga['QTITENS']
+        movimentacao = '    '
+        if carga['TIPOFRETE'] == 'C': 
+            frete = 'CIF'
+        else:
+            frete ='FOB' 
+        observacao = str(carga['OBS'])
+        print('teste',observacao)
+        if len(Carga.objects.filter(numero_nf=numero_nf)) == 0:
+            Carga.objects.create(numero_nf=numero_nf,
+                                 industria=industria,
+                                 valor_carga=valor_carga,
+                                 dia_descarga=dia_descarga,
+                                 user=user,
+                                 status=status,
+                                 tipo_entrada=tipo_entrada,
+                                 Produto=Produto, QTD=QTD, 
+                                 UN=' ',
+                                 movimentacao=movimentacao,
+                                 frete=frete, 
+                                 observacao=observacao)
+        
 
 
 @login_required(login_url='/')
 def acompanhamento_carga(request, usuario):
     print(usuario)
-    connection = cx_Oracle.connect("FRIBEL", "FG2hu3DV4T","(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.150) (PORT = 1521)))(CONNECT_DATA =(SID = WINT)))")
+    usuario = User.objects.get(username=usuario)
+    cargas_erp(usuario)
     acomp = 'acomp'
     search = request.GET.get('search')
-    usuario = User.objects.get(username=usuario)
     tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
     filter = request.GET.get('filter')
     ordenador = request.GET.get('ordenador')
@@ -61,12 +97,6 @@ def add_Carga(request):
     return render(request, 'core/adicionar_carga.html')
 
 
-
-def return_usuario():
-    if request.user.is_authenticated:
-        id_user = request.user.id
-    usuario = User.objects.get(pk=id_user)
-    return(usuario)
 
 
 def informacoes_cargas(request):
