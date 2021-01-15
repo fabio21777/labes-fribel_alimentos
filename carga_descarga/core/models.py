@@ -26,6 +26,7 @@ class Carga(models.Model):
     numero_nf = models.CharField('Numero NF', max_length=45)
     industria = models.CharField('Industria', max_length=40)
     dia_descarga = models.DateField('Dia da descarga')
+    user_ERP = models.CharField(max_length=30, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField('Status', max_length=15, choices=STATUS)
     tipo_entrada = models.CharField(max_length=20, blank=True)
@@ -44,3 +45,18 @@ class Carga(models.Model):
 
     def __str__(self):
         return self.numero_nf
+class Itens_cargas(models.Model):
+    numero_pedido = models.CharField(max_length=10, blank=True)
+    cod_prod = models.CharField(max_length=10, blank=True)
+    descricao = models.CharField(max_length=100, blank=True)
+    tipo_embalagem = models.CharField(max_length=2, blank=True)
+    embalagem = models.CharField(max_length=20, blank=True)
+    unidade = models.CharField(max_length=12, blank=True)
+    departamento = models.CharField(max_length=30, blank=True)
+    QTD_unitaria =  models.CharField(max_length=5, blank=True)
+    QTD_caixa = models.CharField(max_length=5, blank=True)
+    QTD_pedida = models.CharField(max_length=10, blank=True)
+    QTD_reservada = models.CharField(max_length=10, blank=True)
+    QTD_ult_entrada = models.CharField(max_length=10, blank=True)
+    data_ultima_entrada = models.DateField('Dia da descarga')
+    user_tipo = models.ForeignKey(Carga, on_delete = models.CASCADE)

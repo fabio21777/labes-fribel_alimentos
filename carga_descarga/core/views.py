@@ -35,6 +35,7 @@ def cargas_erp(usuario):
             valor_carga = carga['VLTOTAL']
             dia_descarga = carga['DTACHEGADA']
             user = usuario
+            user_ERP = carga['FUNCLANC']
             if  carga['STATUS'] == 'L':
                 status='liberado'
             else:
@@ -57,6 +58,7 @@ def cargas_erp(usuario):
                                  valor_carga=valor_carga,
                                  dia_descarga=dia_descarga,
                                  user=user,
+                                 user_ERP=user_ERP,
                                  status=status,
                                  tipo_entrada=tipo_entrada,
                                  Produto=Produto, QTD=QTD, 

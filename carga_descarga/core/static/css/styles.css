@@ -49,6 +49,9 @@ button.btn-libCarga:hover{
   background-color: #89b348;
 
 }
+h5.inf_carga{
+  background-color:white;
+}
 button.btn-libCarga{
   padding: 10px 30px;
 }
