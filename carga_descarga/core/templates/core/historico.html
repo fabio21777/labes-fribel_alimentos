@@ -4,29 +4,60 @@
 
 {% block content %}
 <div class="conteiner">
-    <!--Por enquanto uma cópia mais pobre da página acompanhamento-->
+    <div id = "conjuntoOpcoes" class="row pand1">
+        <span>Filtrar por:</span>
+        <select name="filter" id="filter" class="form-control">
+            <option value="" selected disabled>Selecione um filtro</option>
+            <option value="liberado">Cargas liberadas</option>
+            <option value="aguardando">Cargas em espera</option>
+        </select>
+        <span>Ordenar por:</span>
+        <select name="ordenador" id="ordenador" class="form-control">
+            <option value="" selected disabled>Selecione uma coluna</option>
+            <option value="dia_descarga">Dia da descarga (ordem crescente)</option>
+            <option value="-dia_descarga">Dia da descarga (ordem decrescente)</option>
+            <option value="numero_nf">Número NF (ordem crescente)</option>
+            <option value="-numero_nf">Número NF (ordem decrescente)</option>
+            <option value="industria">Indústria (ordem crescente)</option>
+            <option value="-industria">Indústria (ordem decrescente)</option>
+            <option value="status">Status (ordem crescente)</option>
+            <option value="-status">Status (ordem decrescente)</option>
+        </select>
+        <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self">
+            <div class="form-group">
+                <label for="search-field">
+                    <i class="fa fa-search"></i>
+                </label>
+                <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
+                <button id="btnSearch" class="btn btnSearch" type="submit">Pesquisar</button>
+            </div>
+        </form>
+    </div>
     <div id="table">
-            <table class="table table-hover">
-                <thead>
-                    <tr id="tr-color">
-                        <th scope="col">#</th>
-                        <th scope="col">Número NF</th>
-                        <th scope="col">Indústria</th>
-                        <th scope="col">Dia da Descarga</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Usuário</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
-                    {% for carga in cargas %}
-                        <td>{{carga.numero_nf}}</td>
-                        <td>{{carga.industria}}</td>
-                        <td>{{carga.dia_descarga}}</td>
-                        <td>{{carga.status}}</td>
-                        <td>{{carga.user}}
-                    {% endfor %}
-                </tbody>
+        <table class="table table-hover">
+            <thead>
+                <tr id="tr-color">
+                    <th scope="col">#</th>
+                    <th scope="col">Número NF</th>
+                    <th scope="col">Indústria</th>
+                    <th scope="col">Dia da Descarga</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Usuário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Esse laço for carrega todas as cargas liberadas-->
+                {% for carga in cargas %}
+                <tr>
+                    <th scope="row"></th>
+                    <td>{{carga.numero_nf}}</td>
+                    <td>{{carga.industria}}</td>
+                    <td>{{carga.dia_descarga}}</td>
+                    <td>{{carga.status}}</td>
+                    <td>{{carga.user}}
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 </div>
