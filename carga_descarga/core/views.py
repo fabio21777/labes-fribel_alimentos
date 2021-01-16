@@ -172,7 +172,7 @@ def reservar_box(request, id):
 
 @login_required(login_url='/')
 def historico_cargas_liberadas(request):
-    cargas = Carga.objects.all().order_by('-created_at')
+    cargas = Carga.objects.filter(status='liberado')
     user = return_usuario(request)
     return render(request, 'core/historico.html', {'cargas': cargas,'user':user})
 

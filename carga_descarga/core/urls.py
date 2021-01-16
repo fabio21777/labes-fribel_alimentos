@@ -18,6 +18,6 @@ urlpatterns = [
     path('', views.login_pag, name='login'),
     path('acompanhamento/historico/', views.historico_cargas_liberadas,
          name='historico'),
-    path('acompanhamneto/informacoes_cargas/<str:id>', views.informacoes_cargas),
+    path('acompanhamento/informacoes_cargas/<str:id>', views.informacoes_cargas),
     path('logout_user',views.logout_user)
 ]
