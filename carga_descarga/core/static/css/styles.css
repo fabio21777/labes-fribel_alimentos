@@ -116,6 +116,16 @@ a.btnaddcarga{
   background-color: #89b348;
 }
 
+.form-inline .btnSearch-historico{
+  position: absolute;
+  margin-left: 280px;
+  cursor: pointer;
+}
+
+.form-inline .btnSearch-historico:hover{
+  background-color: #89b348;
+}
+
 .form-inline .search-field:focus {
   border-bottom:1px solid #ccc;
 }

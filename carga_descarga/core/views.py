@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
-from .models import Carga,Box
-from .models import Tipo_user
+from .models import Carga, Carga_Liberada, Box, Tipo_user
 from django.contrib.auth.models import User
 from datetime import datetime,date
 from .forms import BoxForm
@@ -169,20 +168,11 @@ def reservar_box(request, id):
     return redirect('liberar-carga-box')
 
 
-
-@login_required(login_url='/')
-def historico_cargas_liberadas(request):
-    cargas = Carga.objects.filter(status='liberado')
-    user = return_usuario(request)
-    return render(request, 'core/historico.html', {'cargas': cargas,'user':user})
-
-
 def login_pag(request):
     login = 'login'
     #  all_teste()
     return render(request, 'core/login.html', {login: 'login'})
     
-
 @csrf_protect
 def login_autentificacao(request):
     if request.POST:
@@ -204,3 +194,43 @@ def login_autentificacao(request):
 def logout_user(request):
     logout(request)
     return redirect('/')
+
+###HISTÓRICO DE CARGAS LIBERADAS###
+@login_required(login_url='/')
+def historico_cargas_liberadas(request):
+    #usuario = User.objects.get(username=usuario)
+    #cargas_erp(usuario)
+    #acomp = 'acomp'
+    #tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
+    search = request.GET.get('search')
+    ordenador = request.GET.get('ordenador')
+    lista_cargas = Carga.objects.all()
+
+    for carga_liberada in lista_cargas:
+        if carga_liberada.status == 'liberado':
+            try:
+                Carga_Liberada.objects.create(numero_nf=carga_liberada.numero_nf,
+                                    industria=carga_liberada.industria,
+                                    valor_carga=carga_liberada.valor_carga,
+                                    dia_descarga=date.today(),
+                                    user=carga_liberada.user,
+                                    status='liberado',
+                                    tipo_entrada=carga_liberada.tipo_entrada,
+                                    Produto=carga_liberada.Produto, 
+                                    QTD=carga_liberada.QTD, UN=carga_liberada.UN,
+                                    movimentacao=carga_liberada.movimentacao,
+                                    frete=carga_liberada.frete, 
+                                    observacao=carga_liberada.observacao,
+                                    id = carga_liberada.pk)
+            except:
+                print('Carga liberada já adicionada!')
+    
+    if ordenador:
+        cargas = Carga_Liberada.objects.all().order_by(ordenador)
+    elif search:
+        cargas = Carga_Liberada.objects.filter(industria__icontains=search)
+    else:
+        cargas = Carga_Liberada.objects.all().order_by('-created_at')
+
+    user = return_usuario(request)
+    return render(request, 'core/historico.html', {'cargas': cargas,'user':user})
