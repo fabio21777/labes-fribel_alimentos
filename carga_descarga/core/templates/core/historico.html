@@ -5,12 +5,6 @@
 {% block content %}
 <div class="conteiner">
     <div id = "conjuntoOpcoes" class="row pand1">
-        <span>Filtrar por:</span>
-        <select name="filter" id="filter" class="form-control">
-            <option value="" selected disabled>Selecione um filtro</option>
-            <option value="liberado">Cargas liberadas</option>
-            <option value="aguardando">Cargas em espera</option>
-        </select>
         <span>Ordenar por:</span>
         <select name="ordenador" id="ordenador" class="form-control">
             <option value="" selected disabled>Selecione uma coluna</option>
@@ -29,7 +23,7 @@
                     <i class="fa fa-search"></i>
                 </label>
                 <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
-                <button id="btnSearch" class="btn btnSearch" type="submit">Pesquisar</button>
+                <button id="btnSearch" class="btn btnSearch-historico" type="submit">Pesquisar</button>
             </div>
         </form>
     </div>
