@@ -197,6 +197,34 @@ def logout_user(request):
     return redirect('/')
 
 ###HISTÓRICO DE CARGAS LIBERADAS###
+#def set_carga_liberada(request, carga_liberada):
+    '''industria = carga_liberada.industria
+    numero_nf = carga_liberada.numero_nf
+    valor_carga = carga_liberada
+    dia_descarga = datetime.fromisoformat(request.POST.get('previsao'))
+    user = return_usuario(request)
+    tipo_entrada = request.POST.get('tipo_entrada')
+    Produto = request.POST.get('Produto')
+    QTD = request.POST.get('QTD')
+    UN = request.POST.get('un')
+    movimentacao = request.POST.get('movimentacao')
+    frete = request.POST.get('frete')
+    observacao = request.POST.get('observacao')'''
+    '''Carga_Liberada.objects.create(numero_nf=carga_liberada.numero_nf,
+                                 industria=carga_liberada.industria,
+                                 valor_carga=carga_liberada.valor_carga,
+                                 dia_descarga=carga_liberada.dia_descarga,
+                                 user=carga_liberada.user,
+                                 status='liberado',
+                                 tipo_entrada=carga_liberada.tipo_entrada,
+                                 Produto=carga_liberada.Produto, 
+                                 QTD=carga_liberada.QTD, UN=carga_liberada.UN,
+                                 movimentacao=carga_liberada.movimentacao,
+                                 frete=carga_liberada.frete, 
+                                 observacao=carga_liberada.observacao
+                                 #id = carga_liberada.getE)
+    return redirect(request)'''
+
 @login_required(login_url='/')
 def historico_cargas_liberadas(request):
     #usuario = User.objects.get(username=usuario)
@@ -205,6 +233,26 @@ def historico_cargas_liberadas(request):
     #tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
     search = request.GET.get('search')
     ordenador = request.GET.get('ordenador')
+    lista_cargas = Carga.objects.all()
+
+    for carga_liberada in lista_cargas:
+        if carga_liberada.status == 'liberado':
+            try:
+                Carga_Liberada.objects.create(numero_nf=carga_liberada.numero_nf,
+                                    industria=carga_liberada.industria,
+                                    valor_carga=carga_liberada.valor_carga,
+                                    dia_descarga=carga_liberada.dia_descarga,
+                                    user=carga_liberada.user,
+                                    status='liberado',
+                                    tipo_entrada=carga_liberada.tipo_entrada,
+                                    Produto=carga_liberada.Produto, 
+                                    QTD=carga_liberada.QTD, UN=carga_liberada.UN,
+                                    movimentacao=carga_liberada.movimentacao,
+                                    frete=carga_liberada.frete, 
+                                    observacao=carga_liberada.observacao,
+                                    id = carga_liberada.pk)
+            except:
+                print('Carga liberada já adicionada!')
     
     if ordenador:
         cargas = Carga_Liberada.objects.all().order_by(ordenador)
