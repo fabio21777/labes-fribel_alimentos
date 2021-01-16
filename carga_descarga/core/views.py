@@ -19,7 +19,8 @@ from .conection_bd import conexao_bd
 import cx_Oracle
 from datetime import datetime, timedelta
 # Importar a classe que contém as funções e aplicar um alias
-def return_usuario():
+
+def return_usuario(request):
     if request.user.is_authenticated:
         id_user = request.user.id
     usuario = User.objects.get(pk=id_user)
@@ -98,21 +99,23 @@ def acompanhamento_carga(request, usuario):
 
 @login_required(login_url='/')
 def add_Carga(request):
-    return render(request, 'core/adicionar_carga.html')
+    user = return_usuario(request)
+    return render(request, 'core/adicionar_carga.html',{"user":user})
 
 
 
 
 def informacoes_cargas(request,id):
     carga=Carga.objects.get(pk=id)
-    return render(request, 'core/informacoes_cargas.html',{'carga':carga})
+    user = return_usuario(request)
+    return render(request, 'core/informacoes_cargas.html',{'carga':carga,'user':user})
 
 def set_carga(request):
     industria = request.POST.get('industria')
     numero_nf = request.POST.get('NF')
     valor_carga = request.POST.get('valor')
     dia_descarga = datetime.fromisoformat(request.POST.get('previsao'))
-    user = return_usuario()
+    user = return_usuario(request)
     tipo_entrada = request.POST.get('tipo_entrada')
     Produto = request.POST.get('Produto')
     QTD = request.POST.get('QTD')
@@ -140,7 +143,7 @@ def liberarCarga(request, id):
     carga = Carga.objects.get(pk=id)
     carga.status = 'liberado'
     carga.save()
-    user = return_usuario()
+    user = return_usuario(request)
     return redirect('/acompanhamento/'+user.username)
 
 
@@ -149,8 +152,9 @@ def liberarCarga(request, id):
 def liberar_carga_box(request):
     cargas_liberadas = Carga.objects.filter(status='liberado', box='')
     box = BoxForm
+    user = return_usuario(request)
     return render(request, 'core/liberar_carga_box.html',
-                  {'boxs': box, 'cargas': cargas_liberadas})
+                  {'boxs': box, 'cargas': cargas_liberadas,'user':user})
 
 
 def reservar_box(request, id):
@@ -169,8 +173,8 @@ def reservar_box(request, id):
 @login_required(login_url='/')
 def historico_cargas_liberadas(request):
     cargas = Carga.objects.all().order_by('-created_at')
-
-    return render(request, 'core/historico.html', {'cargas': cargas})
+    user = return_usuario(request)
+    return render(request, 'core/historico.html', {'cargas': cargas,'user':user})
 
 
 def login_pag(request):
