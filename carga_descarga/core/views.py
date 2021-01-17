@@ -241,6 +241,6 @@ def excluir_carga(request, id):
     user = return_usuario(request)
     carga = Carga.objects.get(id=id)
 
-    print('função chamada')
+    carga.delete()
     
     return redirect('/acompanhamento/'+user.username)
