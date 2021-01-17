@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Carga, Carga_Liberada, Box, Tipo_user
 from django.contrib.auth.models import User
@@ -239,8 +238,8 @@ def historico_cargas_liberadas(request):
 @login_required(login_url='/')
 def excluir_carga(request, id):
     user = return_usuario(request)
-    carga = Carga.objects.get(id=id)
+    carga = get_object_or_404(Carga, pk = id)
 
-    carga.delete()
+    #carga.delete()
     
-    return redirect('/acompanhamento/'+user.username)
+    return redirect('/'+user.username)

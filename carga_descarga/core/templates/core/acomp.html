@@ -84,9 +84,9 @@
           {% else %}
             <tr style="background-color: #65ff89;">
           {% endif %}
-            <th scope="row">
+            <th scope="row" class="coluna_func">
               <button type="button" class="btn bt-table ">Editar</button>
-              <a class="btnExcluir" href="\excluir_carga/{{carga.id}}"><i class="fa fa-trash"></i></a>
+              <a id="bntExcluir" class="btnExcluir" href="" onclick="confirmarExclusao({{carga.industria}})"><i class="fa fa-trash"></i></a>
             </th>
             <td>{{carga.numero_nf}}</td>
             <td>{{carga.industria}}</td>
