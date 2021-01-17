@@ -105,6 +105,10 @@ a.btnaddcarga{
   margin-left: 10px;
 }
 
+a.btnExcluir i.fa-fa-trash{
+  margin-left: 50px;
+}
+
 /*Campo busca*/
 .form-inline .btnSearch{
   position: absolute;

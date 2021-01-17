@@ -19,5 +19,6 @@ urlpatterns = [
     path('acompanhamento/historico/', views.historico_cargas_liberadas,
          name='historico'),
     path('acompanhamento/informacoes_cargas/<str:id>', views.informacoes_cargas),
-    path('logout_user',views.logout_user)
+    path('logout_user',views.logout_user),
+    path('excluir_carga/<int:id>/', views.excluir_carga)
 ]

@@ -195,7 +195,7 @@ def logout_user(request):
     logout(request)
     return redirect('/')
 
-###HISTÓRICO DE CARGAS LIBERADAS###
+#HISTÓRICO DE CARGAS LIBERADAS
 @login_required(login_url='/')
 def historico_cargas_liberadas(request):
     #usuario = User.objects.get(username=usuario)
@@ -234,3 +234,13 @@ def historico_cargas_liberadas(request):
 
     user = return_usuario(request)
     return render(request, 'core/historico.html', {'cargas': cargas,'user':user})
+
+#ADIÇÃO, EXCLUSÃO E EDIÇÃO DE CARGAS
+@login_required(login_url='/')
+def excluir_carga(request, id):
+    user = return_usuario(request)
+    carga = Carga.objects.get(id=id)
+
+    print('função chamada')
+    
+    return redirect('/acompanhamento/'+user.username)
