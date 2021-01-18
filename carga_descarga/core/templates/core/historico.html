@@ -46,12 +46,11 @@
                     <th scope="row" class="coluna_func">
                         <a class="btnExcluir" href="{% url 'excluir_carga_historico' carga.id %}"><i class="fa fa-trash"></i></a>
                     </th>
-                    <th scope="row"></th>
                     <td>{{carga.numero_nf}}</td>
                     <td>{{carga.industria}}</td>
                     <td>{{carga.dia_descarga}}</td>
                     <td>{{carga.status}}</td>
-                    <td>{{carga.user}}
+                    <td>{{carga.user}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

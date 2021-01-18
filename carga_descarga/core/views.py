@@ -85,7 +85,7 @@ def acompanhamento_carga(request, usuario):
     elif ordenador:
         cargas = Carga.objects.all().order_by(ordenador)
     elif search:
-        cargas = Carga.objects.filter(industria__icontains=search)
+        cargas = Carga.objects.filter(industria__icontains=search.strip())
     else:
         cargas = Carga.objects.all().order_by('-created_at')
 
@@ -227,7 +227,7 @@ def historico_cargas_liberadas(request):
     if ordenador:
         cargas = Carga_Liberada.objects.all().order_by(ordenador)
     elif search:
-        cargas = Carga_Liberada.objects.filter(industria__icontains=search)
+        cargas = Carga_Liberada.objects.filter(industria__icontains=search.strip())
     else:
         cargas = Carga_Liberada.objects.all().order_by('-created_at')
 

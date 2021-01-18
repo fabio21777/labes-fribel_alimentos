@@ -3,6 +3,7 @@ $(document).ready(function(){
     var ordenador = $('#ordenador');
     var btnSearch = $('#btnSearch');
     var campoBusca = $('#campoBusca');
+    var inputBusca = $('#search_field')
     var baseUrl = window.location.href;
     bt_add_carga=document.getElementById("bt_add_carga")
     h3_add_carga=document.getElementById("h3_add_carga")
@@ -48,6 +49,7 @@ $(document).ready(function(){
     });
 
     $(btnSearch).on('click', function(){
+        inputBusca = inputBusca.trim();
         campoBusca.submit();
     });
 });
