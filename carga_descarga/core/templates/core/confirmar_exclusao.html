@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Confirmação de exclusão de carga {% endblock %}
+
+{% block content %}
+    <form method="post" action="">
+    {% csrf_token %}
+        <h1 class="confirmacaoExclusao">Você realmente deseja apagar a carga de NF: {{carga.numero_nf}}?</h1><br>
+        <input class="btn btn-primary" type="submit" value="Sim" />
+        <a class="cancelarExclusao" href="\acompanhamento/{{carga.user}}"><div class="btn btn-danger">Cancelar</div></a>
+    </form>
+{% endblock %}

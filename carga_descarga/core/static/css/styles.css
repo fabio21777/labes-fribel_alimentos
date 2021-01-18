@@ -557,3 +557,18 @@ h3.frete{
 h3.h3-fri{
   color: white;
 }
+
+/*Confirmação de exclusão styles*/
+h1.confirmacaoExclusao{
+  font-size: 30px;
+  margin-left: 15px;
+  color: black;
+}
+
+input.btn-btn-primary{
+  margin-left: 15px;
+}
+
+a.cancelarExclusao div.btn-btn-danger{
+  margin-left: 5px;
+}

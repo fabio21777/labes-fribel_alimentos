@@ -86,7 +86,7 @@
           {% endif %}
             <th scope="row" class="coluna_func">
               <button type="button" class="btn bt-table ">Editar</button>
-              <a id="bntExcluir" class="btnExcluir" href="" onclick="confirmarExclusao({{carga.industria}})"><i class="fa fa-trash"></i></a>
+              <a class="btnExcluir" href="{% url 'excluir_carga' carga.id %}"><i class="fa fa-trash"></i></a>
             </th>
             <td>{{carga.numero_nf}}</td>
             <td>{{carga.industria}}</td>

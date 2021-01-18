@@ -125,26 +125,3 @@ function checar_conflito_cargas(lista_cargas, qtde_cargas){
         }
     }
 }
-
-//Ignorem a bagunça, falta fazer funcionar
-function confirmarExclusao(industria) {
-    id = document.getElementById('id');
-    var industria_js = industria;
-    
-    //valor = id.value;
-    //console.log(id);
-    console.log(industria_js);
-    //var id = id;
-    //id_str = id.toString()
-    if (window.confirm("Tem certeza que deseja excluir essa carga?")) {
-        //window.location.href="criarCarga/"+id.toString();
-        //console.log(id);
-        try{
-            //window.location.href=Url[0]+'\excluirCarga/2';
-            //$('#coluna_func').html('<a class="botaoExcluir href="\excluirCarga/5""></a>');
-            window.alert("Carga excluída com sucesso!");
-        }catch(e){
-            console.log(e);
-        }
-    }    
-}

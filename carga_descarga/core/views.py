@@ -240,6 +240,14 @@ def excluir_carga(request, id):
     user = return_usuario(request)
     carga = get_object_or_404(Carga, pk = id)
 
-    #carga.delete()
+    if request.method == 'POST':
+        try:
+            carga.delete()
+        except:
+            print('Erro ao excluir carga!')
+
+        return redirect('\acompanhamento/'+user.username)
     
-    return redirect('/'+user.username)
+    return render(request, 'core/confirmar_exclusao.html', {'carga': carga})
+    
+    
