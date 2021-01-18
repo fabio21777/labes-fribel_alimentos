@@ -246,7 +246,7 @@ def excluir_carga(request, id):
         except:
             print('Erro ao excluir carga!')
 
-        return redirect('\acompanhamento/'+user.username)
+        return redirect('/acompanhamento/'+user.username)
     
     return render(request, 'core/confirmar_exclusao.html', {'carga': carga})
     
