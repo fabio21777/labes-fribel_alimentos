@@ -40,13 +40,15 @@ class Carga(models.Model):
     observacao = models.CharField(max_length=500, blank=True)
     box = models.CharField('Box', max_length=20, blank=True)
     valor_carga = models.CharField(max_length=12, blank=True)
+    numero_transacao = models.CharField(max_length=10, blank=True)
     #Sempre que um registro for criado essa variável determina a data no BD
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     finalizada = models.BooleanField(default=False)
+    is_ERP=models.BooleanField(default=False)
 
     def __str__(self):
-        return self.numero_nf
+        return (self.numero_nf)
 
 class Carga_Liberada(models.Model):
     STATUS = (
@@ -78,7 +80,7 @@ class Carga_Liberada(models.Model):
     def __str__(self):
         return self.numero_nf
 
-class Itens_cargas(models.Model):
+class Itens_carga(models.Model):
     numero_pedido = models.CharField(max_length=10, blank=True)
     cod_prod = models.CharField(max_length=10, blank=True)
     descricao = models.CharField(max_length=100, blank=True)
@@ -92,4 +94,4 @@ class Itens_cargas(models.Model):
     QTD_reservada = models.CharField(max_length=10, blank=True)
     QTD_ult_entrada = models.CharField(max_length=10, blank=True)
     data_ultima_entrada = models.DateField('Dia da descarga')
-    user_tipo = models.ForeignKey(Carga, on_delete = models.CASCADE)
+    carga = models.ForeignKey(Carga, on_delete = models.CASCADE)
