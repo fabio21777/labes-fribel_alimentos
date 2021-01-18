@@ -2,7 +2,7 @@ import cx_Oracle
 from datetime import datetime, timedelta
 
 def conexao_bd():
-    connection = cx_Oracle.connect("FRIBEL", "123456789",
+    connection = cx_Oracle.connect("FRIBEL", "FG2hu3DV4T",
                                    "(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = \
                                     (PROTOCOL = TCP)(HOST = 192.168.0.150) \
                                     (PORT = 1521))) \
@@ -19,7 +19,8 @@ def consulta_bd_cargas_em_aberto():
     cursor = conexao_bd().cursor()
     try:
       cursor.execute(""" SELECT PCNFENTPREENT.NUMNOTA                                                                                                                                                                    
-        , PCNFENTPREENT.DTEMISSAO                                                        
+        , PCNFENTPREENT.DTEMISSAO     
+        , PCNFENTPREENT.NUMTRANSENT                                                    
         , PCNFENTPREENT.TIPOFRETE                                                                                                                                                                     
         , PCFORNEC.FORNECEDOR                                                            
         , NVL(PCFORNEC.CODFORNECPRINC, PCFORNEC.CODFORNEC ) CODFORNECPRINC                                                                                                                                                                                       
@@ -68,6 +69,76 @@ def consulta_bd_cargas_em_aberto():
       print("não foi carregada nenhuma carga do ERP")
       cursor.close()
       return(data)
+
+
+def inf_carga_erp(nf):
+  print('------------>eu executo arquivo bd')
+  data=[]
+  cursor = conexao_bd().cursor()
+  cursor.execute("""SELECT PCITEM.NUMPED
+     , PCPEDIDO.CODFILIAL
+     , PCITEM.NUMSEQ
+     , PCPRODUT.CODPROD
+     , PCPRODUT.EMBALAGEMMASTER
+     , PCPRODUT.EMBALAGEM
+     , PCPRODUT.UNIDADE
+     , DECODE(PCPRODUT.OBS2, 'FL', 'S', PCPRODFILIAL.FORALINHA) FORALINHA
+     , PCPRODUT.NBM
+     , PCPRODUT.CODSEC
+     , PCPRODUT.DESCRICAO
+     , PCPRODUT.CODEPTO
+     , PCDEPTO.DESCRICAO DEPARTAMENTO
+     , PCPRODUT.CODFORNEC
+     , PCFORNEC.FORNECEDOR
+     , PCPRODUT.CODPRODPRINC
+     , NVL(PCFORNEC.PRAZOENTREGA, 0) PRAZOENTREGA
+     , PCEST.DTULTENT
+     , NVL(PCPRODUT.QTUNIT, 0) QTUNIT
+     , NVL(PCPRODUT.QTUNITCX, 0) QTUNITCX
+     , NVL(PCEST.CUSTOREP, 0) CUSTOREP
+     , NVL(PCITEM.PCOMPRA, 0) PCOMPRA
+     , NVL(PCEST.QTINDENIZ, 0) QTINDENIZ
+     , NVL(PCEST.QTBLOQUEADA, 0) QTBLOQUEADA
+     , NVL(PCITEM.QTPEDIDA, 0) QTPEDIDA
+     , NVL(PCEST.QTRESERV, 0) QTRESERV
+     , NVL(PCEST.QTULTENT, 0) QTULTENT
+     , NVL(PCMOVPREENT.TIPOEMBALAGEMPEDIDO, NVL(PCITEM.TIPOEMBALAGEMPEDIDO, PCPEDIDO.TIPOEMBALAGEMPEDIDO)) TIPOEMBALAGEMPEDIDO
+     , NVL(PCITEM.MULTIMPLOUNIDADEMASTER, PCPEDIDO.MULTIMPLOUNIDADEMASTER) MULTIMPLOUNIDADEMASTER ,
+      NVL(PCNFENTPREENT.STATUS, 'E0') STATUS
+  FROM PCPEDIDO
+     , PCITEM
+     , PCFORNEC
+     , PCPRODUT
+     , PCEST
+     , PCPRODFILIAL
+     , PCDEPTO
+     , PCMOVPREENT,
+     PCNFENTPREENT
+ WHERE PCPEDIDO.NUMPED    = PCITEM.NUMPED
+   AND PCPEDIDO.CODFILIAL = '1'
+   AND PCITEM.CODPROD     = PCPRODUT.CODPROD
+   AND PCPEDIDO.CODFILIAL = PCEST.CODFILIAL
+   AND PCITEM.CODPROD     = PCEST.CODPROD
+   AND PCPEDIDO.CODFORNEC = PCFORNEC.CODFORNEC
+   AND PCEST.CODPROD      = PCPRODFILIAL.CODPROD
+   AND PCEST.CODFILIAL    = PCPRODFILIAL.CODFILIAL
+   AND PCPRODUT.CODEPTO   = PCDEPTO.CODEPTO
+   AND PCMOVPREENT.CODPROD = PCITEM.CODPROD
+   AND PCMOVPREENT.NUMSEQPED  = PCITEM.NUMSEQ
+   AND PCMOVPREENT.NUMPED  = PCITEM.NUMPED
+   and pcmovpreent.numnota =    PCNFENTPREENT.Numnota
+   and pcmovpreent.numnota = '"""+nf+"'" )
+  columns = [col[0] for col in cursor.description]
+  cursor.rowfactory = lambda *args: dict(zip(columns, args))
+  data=cursor.fetchone()
+  for i in data:
+    data.append(i)
+    print('-------->',i)
+  cursor.close()
+  return(data)
+#select inf carga saida
+
+"""{'NUMPED': 29423, 'CODFILIAL': '1', 'NUMSEQ': 1, 'CODPROD': 11182, 'EMBALAGEMMASTER': None, 'EMBALAGEM': '+OU-15,8KG', 'UNIDADE': 'KG', 'FORALINHA': 'N', 'NBM': '02071200', 'CODSEC': 10002, 'DESCRICAO': 'FRANGO CONG DALIA (PV)', 'CODEPTO': 10, 'DEPARTAMENTO': 'CONGELADOS', 'CODFORNEC': 8, 'FORNECEDOR': 'COOPERATIVA DALIA ALIMENTOS LTDA', 'CODPRODPRINC': 11182, 'PRAZOENTREGA': 0, 'DTULTENT': datetime.datetime(2020, 12, 1, 0, 0), 'QTUNIT': 1, 'QTUNITCX': 1, 'CUSTOREP': 7.012613, 'PCOMPRA': 6.1, 'QTINDENIZ': 0, 'QTBLOQUEADA': 0, 'QTPEDIDA': 3200, 'QTRESERV': 0, 'QTULTENT': 4211.49, 'TIPOEMBALAGEMPEDIDO': 'V', 'MULTIMPLOUNIDADEMASTER': 'N', 'STATUS': 'L'}"""
 
 
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
-from .models import Carga, Carga_Liberada, Box, Tipo_user
+from .models import Carga, Carga_Liberada, Box, Tipo_user,Itens_carga
 from django.contrib.auth.models import User
 from datetime import datetime,date
 from .forms import BoxForm
@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_protect
 from .teste_selenium import *
 from .conection_bd import consulta_bd_cargas_em_aberto
 from .conection_bd import conexao_bd
+from .conection_bd import inf_carga_erp
 import cx_Oracle
 from datetime import datetime, timedelta
 # Importar a classe que contém as funções e aplicar um alias
@@ -25,11 +26,47 @@ def return_usuario(request):
     usuario = User.objects.get(pk=id_user)
     return(usuario)
 
+def get_inf_carga_erp(request,carga):
+   
+    if carga.is_ERP == True and len(Itens_carga.objects.filter(carga__numero_transacao=carga.numero_transacao))==0 :
+        print('------------>eu executo')
+        inf_cargas = inf_carga_erp(carga.numero_nf)
+        for inf_carga in inf_cargas:
+            numero_pedido = inf_carga['NUMPED']
+            cod_prod = inf_carga['CODPROD']
+            descricao = inf_carga['DESCRICAO']
+            tipo_embalagem = inf_carga['TIPOEMBALAGEMPEDIDO']
+            embalagem = inf_carga['EMBALAGEM']
+            unidade = inf_carga['UNIDADE']
+            departamento = inf_carga['DEPARTAMENTO']
+            QTD_unitaria =  inf_carga['QTUNIT']
+            QTD_caixa = inf_carga['QTUNITCX']
+            QTD_pedida = inf_carga['QTPEDIDA']
+            QTD_reservada = inf_carga['QTRESERV']
+            QTD_ult_entrada = inf_carga['QTULTENT']
+            data_ultima_entrada = inf_carga['DTULTENT']
+            carga = carga
+            Itens_carga.objects.create(numero_pedido=numero_pedido,
+                                    cod_prod=cod_prod,
+                                    descricao=descricao,
+                                    tipo_embalagem=tipo_embalagem,
+                                    embalagem=embalagem,
+                                    unidade=unidade,
+                                    departamento=departamento,
+                                    QTD_unitaria=QTD_unitaria,
+                                    QTD_caixa=QTD_caixa,
+                                    QTD_pedida=QTD_pedida,
+                                    QTD_reservada=QTD_reservada,
+                                    QTD_ult_entrada=QTD_ult_entrada,
+                                    data_ultima_entrada=data_ultima_entrada,
+                                    carga=carga )
+
 
 def cargas_erp(usuario):
     try:
         cargas = consulta_bd_cargas_em_aberto()
         for carga in cargas:
+            numero_transacao =  carga['NUMTRANSENT']
             industria = carga['FORNECEDOR']
             numero_nf = carga['NUMNOTA']
             valor_carga = carga['VLTOTAL']
@@ -55,6 +92,7 @@ def cargas_erp(usuario):
             if len(Carga.objects.filter(numero_nf=numero_nf)) == 0:
                 Carga.objects.create(numero_nf=numero_nf,
                                  industria=industria,
+                                 numero_transacao=numero_transacao,
                                  valor_carga=valor_carga,
                                  dia_descarga=dia_descarga,
                                  user=user,
@@ -63,10 +101,10 @@ def cargas_erp(usuario):
                                  tipo_entrada=tipo_entrada,
                                  Produto=Produto, QTD=QTD, 
                                  UN=' ',
+                                 is_ERP=True,
                                  movimentacao=movimentacao,
                                  frete=frete, 
-                                 observacao=observacao)
-                            
+                                 observacao=observacao)      
     except:
       print(" ERRO FATAL,-------------->não foi carregada nenhuma carga do ERP é por conta da conexão do banco so é possivel acessa na intranet")
 
@@ -106,6 +144,7 @@ def add_Carga(request):
 
 def informacoes_cargas(request,id):
     carga=Carga.objects.get(pk=id)
+    get_inf_carga_erp(request,carga)
     user = return_usuario(request)
     return render(request, 'core/informacoes_cargas.html',{'carga':carga,'user':user})
 
