@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Carga, Carga_Liberada, Box, Tipo_user
 from django.contrib.auth.models import User
@@ -195,7 +194,7 @@ def logout_user(request):
     logout(request)
     return redirect('/')
 
-###HISTÓRICO DE CARGAS LIBERADAS###
+#HISTÓRICO DE CARGAS LIBERADAS
 @login_required(login_url='/')
 def historico_cargas_liberadas(request):
     #usuario = User.objects.get(username=usuario)
@@ -234,3 +233,36 @@ def historico_cargas_liberadas(request):
 
     user = return_usuario(request)
     return render(request, 'core/historico.html', {'cargas': cargas,'user':user})
+
+#ADIÇÃO, EXCLUSÃO E EDIÇÃO DE CARGAS
+@login_required(login_url='/')
+def excluir_carga(request, id, pagina):
+    user = return_usuario(request)
+    carga = get_object_or_404(Carga, pk = id)
+
+    if request.method == 'POST':
+        try:
+            carga.delete()
+        except:
+            print('Erro ao excluir carga!')
+
+        return redirect('/acompanhamento/'+user.username)
+    
+    return render(request, 'core/confirmar_exclusao.html', {'carga': carga})
+
+@login_required(login_url='/')
+def excluir_carga_historico(request, id):
+    user = return_usuario(request)
+    carga = get_object_or_404(Carga_Liberada, pk = id)
+        
+    if request.method == 'POST':
+        try:
+            carga.delete()
+        except:
+            print('Erro ao excluir carga!')
+
+        return redirect('/acompanhamento/historico/')
+    
+    return render(request, 'core/confirmar_exclusao.html', {'carga': carga})
+    
+    

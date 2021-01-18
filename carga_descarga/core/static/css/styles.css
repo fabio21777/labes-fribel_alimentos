@@ -105,6 +105,10 @@ a.btnaddcarga{
   margin-left: 10px;
 }
 
+a.btnExcluir i.fa-fa-trash{
+  margin-left: 50px;
+}
+
 /*Campo busca*/
 .form-inline .btnSearch{
   position: absolute;
@@ -551,5 +555,42 @@ h3.frete{
     margin-bottom:0;
   }
 h3.h3-fri{
+  color: white;
+}
+
+/*Confirmação de exclusão styles*/
+h1.confirmacaoExclusao{
+  font-size: 25px;
+  margin-left: 20px;
+  color: black;
+}
+
+h2.cargaSelecionadaExclusao{
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+input.btn.btn-primary{
+  margin-left: 20px;
+  width: 90px;
+  height: 38px;
+  background-color: #89b348;
+  color: black;
+}
+
+input.btn.btn-primary:hover{
+  background-color: #004b97;
+  color: white;
+}
+
+a.cancelarExclusao div.btn.btn-danger{
+  margin-left: 5px;
+  width: 90px;
+  height: 38px;
+  color: black;
+}
+
+a.cancelarExclusao div.btn.btn-danger:hover{
+  background-color: #004b97;
   color: white;
 }

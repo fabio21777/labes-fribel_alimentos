@@ -84,7 +84,10 @@
           {% else %}
             <tr style="background-color: #65ff89;">
           {% endif %}
-            <th scope="row"><button type="button" class="btn bt-table ">Editar</button></th>
+            <th scope="row" class="coluna_func">
+              <button type="button" class="btn bt-table ">Editar</button>
+              <a class="btnExcluir" href="{% url 'excluir_carga' carga.id %}"><i class="fa fa-trash"></i></a>
+            </th>
             <td>{{carga.numero_nf}}</td>
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
