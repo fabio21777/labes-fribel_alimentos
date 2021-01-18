@@ -236,7 +236,7 @@ def historico_cargas_liberadas(request):
 
 #ADIÇÃO, EXCLUSÃO E EDIÇÃO DE CARGAS
 @login_required(login_url='/')
-def excluir_carga(request, id):
+def excluir_carga(request, id, pagina):
     user = return_usuario(request)
     carga = get_object_or_404(Carga, pk = id)
 
@@ -247,6 +247,21 @@ def excluir_carga(request, id):
             print('Erro ao excluir carga!')
 
         return redirect('/acompanhamento/'+user.username)
+    
+    return render(request, 'core/confirmar_exclusao.html', {'carga': carga})
+
+@login_required(login_url='/')
+def excluir_carga_historico(request, id):
+    user = return_usuario(request)
+    carga = get_object_or_404(Carga_Liberada, pk = id)
+        
+    if request.method == 'POST':
+        try:
+            carga.delete()
+        except:
+            print('Erro ao excluir carga!')
+
+        return redirect('/acompanhamento/historico/')
     
     return render(request, 'core/confirmar_exclusao.html', {'carga': carga})
     
