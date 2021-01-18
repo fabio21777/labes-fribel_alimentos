@@ -43,6 +43,9 @@
                 <!--Esse laço for carrega todas as cargas liberadas-->
                 {% for carga in cargas %}
                 <tr>
+                    <th scope="row" class="coluna_func">
+                        <a class="btnExcluir" href="{% url 'excluir_carga_historico' carga.id %}"><i class="fa fa-trash"></i></a>
+                    </th>
                     <th scope="row"></th>
                     <td>{{carga.numero_nf}}</td>
                     <td>{{carga.industria}}</td>

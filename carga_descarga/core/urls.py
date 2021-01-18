@@ -14,10 +14,11 @@ urlpatterns = [
     path('liberar', views.liberar_carga_box, name='liberar-carga-box'),
     path('liberar/<str:id>/', views.reservar_box, name='reservar-box'),
     path('login/submit', views.login_autentificacao),
-    # Tela home
-    path('', views.login_pag, name='login'),
+    path('', views.login_pag, name='login'), # Tela home
     path('acompanhamento/historico/', views.historico_cargas_liberadas,
          name='historico'),
     path('acompanhamento/informacoes_cargas/<str:id>', views.informacoes_cargas),
-    path('logout_user',views.logout_user)
+    path('logout_user',views.logout_user),
+    path('excluirCarga/<str:id>', views.excluir_carga, name="excluir_carga"),
+    path('excluirCargaLiberada/<str:id>', views.excluir_carga_historico, name="excluir_carga_historico")
 ]
