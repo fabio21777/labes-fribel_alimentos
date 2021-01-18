@@ -8,9 +8,9 @@
     <form class="form-contact contact_form"  method="post" id="formulario" action="\acompanhamento/adicionarCarga/submit" >{% csrf_token%}
             <div class="row add">
                 <H3 class="addcargah3indus">Industria :</H3>
-                <input id="industria" name="industria"  class="form-control addcarga" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Industria'" placeholder="Industria" >
+                <input id="industria" name="industria"  class="form-control addcarga" type="text" minlength="1" maxlength="40" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Industria'" placeholder="Industria" >
                 <H3 class="addcargah3nf">Nota Fiscal :</H3>
-                <input id="NF" name="NF"  class="form-control addcarga" type="text" maxlength="44" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nota Fiscal'" placeholder="Nota Fiscal" >
+                <input id="NF" name="NF"  class="form-control addcarga" type="text" minlength="44" maxlength="44" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nota Fiscal'" placeholder="Nota Fiscal" >
             </div>
             <div class="row add" style="padding-top: 10px;">
                 <h3 style="padding-right: 35px;">Valor da Carga:</h3>
