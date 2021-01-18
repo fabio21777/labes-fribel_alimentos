@@ -3,7 +3,6 @@ $(document).ready(function(){
     var ordenador = $('#ordenador');
     var btnSearch = $('#btnSearch');
     var campoBusca = $('#campoBusca');
-    var inputBusca = $('#search_field')
     var baseUrl = window.location.href;
     bt_add_carga=document.getElementById("bt_add_carga")
     h3_add_carga=document.getElementById("h3_add_carga")
@@ -52,6 +51,28 @@ $(document).ready(function(){
         campoBusca.submit();
     });
 });
+
+//Notificação de cargas previstas
+/*$(document).ready(function (){
+    var data = new Date();
+    
+    //A variável hora deve ser configurada para a hora que dever ocorrer a notificação
+    var hora = 17; 
+
+    if(data.getHours() == hora){ 
+        window.alert('Funciounou!')
+    }
+});*/
+
+function notificar_cargas_previstas(lista_cargas, qtde_cargas){
+    let lista_dia_descarga = [];
+    
+    console.log(lista_cargas);
+
+    /*for(i=0; i<qtde_cargas; i++){
+        console.log(lista_cargas[i].industria);
+    }*/
+}
 
 function validar_add_carga(){
 
@@ -105,13 +126,14 @@ function validar_add_carga(){
     }
 }
 
-function checar_conflito_cargas(lista_cargas, qtde_cargas){
+function checar_descarga_cargas(lista_cargas, qtde_cargas){
+    //CHECAR CONFLITO DE DIA DE DESCARGA
     var conflito = 0;
     let lista_dia_descarga = [];
     var counts = {};
     //Configurar limite_descargas para alterar o limite de descargas por dia 
-    var limite_descargas = 1; 
-
+    var limite_descargas = 1;
+    
     for(i=0; i<qtde_cargas; i++){
         lista_dia_descarga.push(lista_cargas[i].dia_descarga);
     }
@@ -125,6 +147,17 @@ function checar_conflito_cargas(lista_cargas, qtde_cargas){
         if(counts[lista_cargas[i].dia_descarga] > limite_descargas){
             window.alert("Existe conflito de dia de descarga!");
             break;
+        }
+    }
+
+    //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
+    var data = new Date();
+    var hora = 20; 
+
+    //A checagem acontece em um horário específico
+    if(data.getHours() == hora){
+        for(i=0; i<qtde_cargas; i++){
+            console.log(lista_cargas[i].dia_descarga);
         }
     }
 }
