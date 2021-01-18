@@ -4,7 +4,6 @@
 
 {% block content %}
 <div class="conteiner">
-  
   <div id = "conjuntoOpcoes" class="row pand1">
     <span>Filtrar por:</span>
     <select name="filter" id="filter" class="form-control">
@@ -85,7 +84,9 @@
             <tr style="background-color: #65ff89;">
           {% endif %}
             <th scope="row" class="coluna_func">
-              <button type="button" class="btn bt-table ">Editar</button>
+              <!--<button type="button" class="btn bt-table ">Editar</button>-->
+              <!--Versão mais discreta do botão editar, se não gostarem pode tirar :)-->
+              <a class="btnEditar " href="#void"><i class="fa fa-edit"></i></a>
               <a class="btnExcluir" href="{% url 'excluir_carga' carga.id %}"><i class="fa fa-trash"></i></a>
             </th>
             <td>{{carga.numero_nf}}</td>

@@ -49,7 +49,6 @@ $(document).ready(function(){
     });
 
     $(btnSearch).on('click', function(){
-        inputBusca = inputBusca.trim();
         campoBusca.submit();
     });
 });
