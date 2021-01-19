@@ -38,7 +38,7 @@
     {% endif %}
   </div>
   <div id="table">
-    <table class="table table-hover">
+    <table id="tabela_cargas" class="table table-hover">
       <thead>
         <tr id="tr-color">
           <th scope="col">#</th>
@@ -62,7 +62,7 @@
           window.onpageshow = function() {
             var qtde_cargas = {{tamanho}};
             var lista_cargas = [
-              {% for carga in cargas%}
+              {% for carga in cargas %}
                 {% if not forloop.first %}, {% endif %}
                 {
                   numero_nf: "{{carga.numero_nf}}",
@@ -73,7 +73,7 @@
               {% endfor %}
             ]
 
-            checar_conflito_cargas(lista_cargas, qtde_cargas);
+            checar_descarga_cargas(lista_cargas, qtde_cargas);
           }
         </script>
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
