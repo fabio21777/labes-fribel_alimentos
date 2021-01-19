@@ -151,13 +151,14 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 
     //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
     var data = new Date();
-    var hora = 9;
+    var hora = 10;
+    var minuto = 19;
     var data_posterior = (data.getDate()+1).toString();
-    var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+data.getMonth()+"/"+data.getFullYear()+")!<br><br>";
+    var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+(data.getMonth()+1).toString()+"/"+data.getFullYear()+")!<br><br>";
     var controle = false;
 
     //A checagem acontece em um horário específico
-    if(data.getHours() == hora){
+    if(data.getHours() == hora && data.getMinutes() == minuto){
         for(i=0; i<qtde_cargas; i++){
             if((lista_cargas[i].dia_descarga.substring(2, -5).trim()) == data_posterior){
                 texto_email = texto_email + (i+1).toString() + ' - Indústria: ' + 
@@ -168,11 +169,12 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
         }
         texto_email = texto_email + "<br><br>Este email é automático, por favor não responda."
         if(controle == true){
-            notificar_cargas_previstas(texto_email);
+            //notificar_cargas_previstas(texto_email);
+            window.alert('funcionou caralhoo!');
         }
     }
     
-    console.log(texto_email);
+    //console.log(texto_email);
 }
 
 function msgCargaExcluida(){
