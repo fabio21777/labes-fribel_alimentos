@@ -5,7 +5,7 @@
 {% block content %}
 <div class="conteiner">
   
-  <div class="row pand1">
+  <div id = "conjuntoOpcoes" class="row pand1">
     <span>Filtrar por:</span>
     <select name="filter" id="filter" class="form-control">
       <option value="" selected disabled>Selecione um filtro</option>
@@ -15,15 +15,27 @@
     <span>Ordenar por:</span>
     <select name="ordenador" id="ordenador" class="form-control">
       <option value="" selected disabled>Selecione uma coluna</option>
-      <option value="dia_descarga">Dia da descarga</option>
-      <option value="numero_nf">Número NF</option>
-      <option value="industria">Indústria</option>
-      <option value="status">Status</option>
+      <option value="dia_descarga">Dia da descarga (ordem crescente)</option>
+      <option value="-dia_descarga">Dia da descarga (ordem decrescente)</option>
+      <option value="numero_nf">Número NF (ordem crescente)</option>
+      <option value="-numero_nf">Número NF (ordem decrescente)</option>
+      <option value="industria">Indústria (ordem crescente)</option>
+      <option value="-industria">Indústria (ordem decrescente)</option>
+      <option value="status">Status (ordem crescente)</option>
+      <option value="-status">Status (ordem decrescente)</option>
     </select>
-    <!--<a href=""><button type="button" class="btn bt1" >ORDENAR POR</button></a>-->
+    <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self">
+        <div class="form-group">
+          <label for="search-field">
+            <i class="fa fa-search"></i>
+          </label>
+          <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
+          <button id="btnSearch" class="btn btnSearch" type="submit">Pesquisar</button>
+        </div>
+    </form>
     <!--Laço if controla o acesso a função de cadastrar novas cargas-->
-    {% if usuario == "centro-dist" %}
-      <a href="adicionarCarga/"><button type="button" class="btn bt1" >ADICIONAR CARGA</button></a>
+    {% if tipo_user.tipo_user == 'CD' %}
+      <a class="btnaddcarga" href="adicionarCarga/"><button type="button" class="btn bt1">ADICIONAR CARGA</button></a>
     {% endif %}
   </div>
   <div id="table">
@@ -36,30 +48,55 @@
           <th scope="col">Dia da Descarga</th>
           <th scope="col">Status</th>
           <th scope="col">Usuário</th>
+          {% if tipo_user.tipo_user == 'Diretoria' %}
+            <th scope="col"><a href="\acompanhamento/editar-carga/"></a>Liberar</th>
+          {% else %}
+            <th> </th>
+          
+          {% endif %}
         </tr>
       </thead>
       <tbody>
-        <!--
+        <!--Este script converte uma lista django para um dict javascript e chama a função 
+        para checar conflito de data de descarga-->
         <script>
-          let lista = [];
-          lista = cargas;
+          window.onpageshow = function() {
+            var qtde_cargas = {{tamanho}};
+            var lista_cargas = [
+              {% for carga in cargas%}
+                {% if not forloop.first %}, {% endif %}
+                {
+                  numero_nf: "{{carga.numero_nf}}",
+                  industria: "{{carga.industria}}",
+                  dia_descarga: "{{carga.dia_descarga}}",
+                  status: "{{carga.status}}"
+                }
+              {% endfor %}
+            ]
 
-          alert(lista);
-        </script>-->
+            checar_conflito_cargas(lista_cargas, qtde_cargas);
+          }
+        </script>
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
         {% for carga in cargas %}
-          <tr>
+          {% if carga.status == 'aguardando'  %}
+            <tr style="background-color:#ff9da5 ;">
+          {% else %}
+            <tr style="background-color: #65ff89;">
+          {% endif %}
             <th scope="row"><button type="button" class="btn bt-table ">Editar</button></th>
             <td>{{carga.numero_nf}}</td>
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
-            <td>{{carga.user}}</td>
+            <td>{{carga.user}}
+            {% if tipo_user.tipo_user == 'Diretoria' and carga.status == 'aguardando'  %}
+              <th scope="row"><a href="liberarCarga/{{carga.id}}"><button type="button" class="btn bt2 ">Liberar</button></a></th>
+            {% else %}
+            <td>                </td>
+            {% endif %}
           </tr>
         {% endfor %}
-        <!--<script>
-          alert(lista[0]);
-        </script>-->
       </tbody>
     </table>
   </div>
