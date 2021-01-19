@@ -14,7 +14,10 @@
                 <button type="submit" id="btn-libCarga" class="btn btn-libCarga"  formaction= "{% url 'reservar-box' id=carga.id %}" >Confirmar</button>                                                           
             </form> 
         {% endfor %}
-        </div> 
+            {% for carga in boxr %}
+            {{carga.industria}}
+        {% endfor %}
+    </div> 
     </div>
 {% endblock %}
 

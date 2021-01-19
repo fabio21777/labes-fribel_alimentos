@@ -197,24 +197,25 @@ def liberarCarga(request, id):
 
 
 @login_required(login_url='/')
-def liberar_carga_box(request):
+def liberar_para_box(request):
     cargas_liberadas = Carga.objects.filter(status='liberado', box='')
     box = BoxForm
+    cargar_reservada_box = Carga.objects.filter(status='liberado').exclude(box='')
     user = return_usuario(request)
     return render(request, 'core/liberar_carga_box.html',
-                  {'boxs': box, 'cargas': cargas_liberadas,'user':user})
+                  {'boxs': box, 'cargas': cargas_liberadas, 'user': user, 'boxr': cargar_reservada_box})
 
 
 def reservar_box(request, id):
     carga = Carga.objects.get(id=id)
     if request.method == 'POST':
-        box_escolhido = BoxForm(request.POST)
-        if box_escolhido.is_valid():
-            box_escolhido = box_escolhido.cleaned_data['box']
-            box = Box.objects.get(id=box_escolhido)
-            carga.box = box.name
-            carga.save()
-    return redirect('liberar-carga-box')
+        box_escolhido = request.POST.get('box')
+        box = Box.objects.get(id=box_escolhido)
+        box.is_free = False
+        carga.box = box.name
+        carga.save()
+        box.save()
+    return redirect('liberar-para-box')
 
 
 def login_pag(request):

@@ -11,7 +11,7 @@ urlpatterns = [
     path('acompanhamento/adicionarCarga/submit', views.set_carga,
          name='set-carga'),
     path('acompanhamento/liberarCarga/<str:id>/', views.liberarCarga),
-    path('liberar', views.liberar_carga_box, name='liberar-carga-box'),
+    path('liberar-para-box', views.liberar_para_box, name='liberar-para-box'),
     path('liberar/<str:id>/', views.reservar_box, name='reservar-box'),
     path('login/submit', views.login_autentificacao),
     path('', views.login_pag, name='login'), # Tela home
