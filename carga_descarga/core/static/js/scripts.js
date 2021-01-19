@@ -106,7 +106,18 @@ function validar_add_carga(){
 
 //Notifica via email sobre as descargas do dia posterior
 function notificar_cargas_previstas(texto_email){
-    //Aqui vai ser feito o envio do email
+    //É necessário ativar "acesso a app menos seguro" na conta gmail
+    Email.send({
+        Host : "smtp.gmail.com",
+        Username : "labes.fribel@gmail.com",
+        Password : "Projetofribel10.",
+        To : 'yannfabricio@gmail.com',
+        From : "labes.fribel@gmail.com",
+        Subject : "Cargas previstas",
+        Body : texto_email
+    }).then(
+      message => alert(message)
+    );
 }
 
 function checar_descarga_cargas(lista_cargas, qtde_cargas){
@@ -117,6 +128,8 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
     //Configurar limite_descargas para alterar o limite de descargas por dia 
     var limite_descargas = 1;
     
+    //notificar_cargas_previstas("texto muito maluco");
+
     for(i=0; i<qtde_cargas; i++){
         lista_dia_descarga.push(lista_cargas[i].dia_descarga);
     }
@@ -135,10 +148,11 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 
     //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
     var data = new Date();
-    var hora = 22;
+    var hora = 8;
     var data_posterior = (data.getDate()+1).toString();
     var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+data.getMonth()+"/"+data.getFullYear()+")!\n\n";
-    
+    var controle = false;
+
     //A checagem acontece em um horário específico
     if(data.getHours() == hora){
         for(i=0; i<qtde_cargas; i++){
@@ -146,11 +160,14 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
                 texto_email = texto_email + (i+1).toString() + ' - Indústria: ' + 
                 lista_cargas[i].industria + ', Número da Nota Fiscal: ' + 
                 lista_cargas[i].numero_nf + '\n';
+                controle = true;
             }
         }
-        //notificar_cargas_previstas(texto_email);
+        texto_email = texto_email + "\n\nEste email é automático, por favor não responda."
+        if(controle == true){
+            notificar_cargas_previstas(texto_email);
+        }
     }
-    texto_email = texto_email + "\n\nEste email é automático, por favor não responda."
     
     console.log(texto_email);
 }
