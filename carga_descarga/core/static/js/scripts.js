@@ -107,6 +107,9 @@ function validar_add_carga(){
 //Notifica via email sobre as descargas do dia posterior
 function notificar_cargas_previstas(texto_email){
     //É necessário ativar "acesso a app menos seguro" na conta gmail
+    var a = "oi";
+    var b = "fdp";
+    var msg = a + "<br><br>" + b;
     Email.send({
         Host : "smtp.gmail.com",
         Username : "labes.fribel@gmail.com",
@@ -148,9 +151,9 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 
     //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
     var data = new Date();
-    var hora = 8;
+    var hora = 9;
     var data_posterior = (data.getDate()+1).toString();
-    var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+data.getMonth()+"/"+data.getFullYear()+")!\n\n";
+    var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+data.getMonth()+"/"+data.getFullYear()+")!<br><br>";
     var controle = false;
 
     //A checagem acontece em um horário específico
@@ -159,11 +162,11 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
             if((lista_cargas[i].dia_descarga.substring(2, -5).trim()) == data_posterior){
                 texto_email = texto_email + (i+1).toString() + ' - Indústria: ' + 
                 lista_cargas[i].industria + ', Número da Nota Fiscal: ' + 
-                lista_cargas[i].numero_nf + '\n';
+                lista_cargas[i].numero_nf + '<br>';
                 controle = true;
             }
         }
-        texto_email = texto_email + "\n\nEste email é automático, por favor não responda."
+        texto_email = texto_email + "<br><br>Este email é automático, por favor não responda."
         if(controle == true){
             notificar_cargas_previstas(texto_email);
         }
