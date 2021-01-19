@@ -105,14 +105,8 @@ function validar_add_carga(){
 }
 
 //Notifica via email sobre as descargas do dia posterior
-function notificar_cargas_previstas(lista_cargas, qtde_cargas){
-    let lista_dia_descarga = [];
-    
-    //console.log(lista_cargas);
-    
-    /*for(i=0; i<qtde_cargas; i++){
-        console.log(lista_cargas[i].industria);
-    }*/
+function notificar_cargas_previstas(texto_email){
+    //Aqui vai ser feito o envio do email
 }
 
 function checar_descarga_cargas(lista_cargas, qtde_cargas){
@@ -154,6 +148,7 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
                 lista_cargas[i].numero_nf + '\n';
             }
         }
+        //notificar_cargas_previstas(texto_email);
     }
     texto_email = texto_email + "\n\nEste email é automático, por favor não responda."
     
