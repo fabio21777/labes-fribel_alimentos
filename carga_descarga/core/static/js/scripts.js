@@ -52,28 +52,6 @@ $(document).ready(function(){
     });
 });
 
-//Notificação de cargas previstas
-/*$(document).ready(function (){
-    var data = new Date();
-    
-    //A variável hora deve ser configurada para a hora que dever ocorrer a notificação
-    var hora = 17; 
-
-    if(data.getHours() == hora){ 
-        window.alert('Funciounou!')
-    }
-});*/
-
-function notificar_cargas_previstas(lista_cargas, qtde_cargas){
-    let lista_dia_descarga = [];
-    
-    console.log(lista_cargas);
-
-    /*for(i=0; i<qtde_cargas; i++){
-        console.log(lista_cargas[i].industria);
-    }*/
-}
-
 function validar_add_carga(){
 
     NotaFiscal=document.getElementById("NF")
@@ -126,6 +104,17 @@ function validar_add_carga(){
     }
 }
 
+//Notifica via email sobre as descargas do dia posterior
+function notificar_cargas_previstas(lista_cargas, qtde_cargas){
+    let lista_dia_descarga = [];
+    
+    //console.log(lista_cargas);
+    
+    /*for(i=0; i<qtde_cargas; i++){
+        console.log(lista_cargas[i].industria);
+    }*/
+}
+
 function checar_descarga_cargas(lista_cargas, qtde_cargas){
     //CHECAR CONFLITO DE DIA DE DESCARGA
     var conflito = 0;
@@ -152,14 +141,23 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 
     //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
     var data = new Date();
-    var hora = 20; 
-
+    var hora = 22;
+    var data_posterior = (data.getDate()+1).toString();
+    var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+data.getMonth()+"/"+data.getFullYear()+")!\n\n";
+    
     //A checagem acontece em um horário específico
     if(data.getHours() == hora){
         for(i=0; i<qtde_cargas; i++){
-            console.log(lista_cargas[i].dia_descarga);
+            if((lista_cargas[i].dia_descarga.substring(2, -5).trim()) == data_posterior){
+                texto_email = texto_email + (i+1).toString() + ' - Indústria: ' + 
+                lista_cargas[i].industria + ', Número da Nota Fiscal: ' + 
+                lista_cargas[i].numero_nf + '\n';
+            }
         }
     }
+    texto_email = texto_email + "\n\nEste email é automático, por favor não responda."
+    
+    console.log(texto_email);
 }
 
 function msgCargaExcluida(){
