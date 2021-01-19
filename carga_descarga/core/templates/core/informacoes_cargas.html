@@ -4,12 +4,14 @@
 
 {% block content %}
     <div class="container col-6">
+        <div><h2>Informações Carga</h2></div>
             <h5 class= "inf_carga">Industria :{{carga.industria}}</h5>
             <h5 class= "inf_carga">NF  :{{numero_nf}}</h5>
-            <h5 class= "inf_carga">Industria  : {{carga.industria}}</h5>
             <h5 class= "inf_carga">Dia dia_descarga    : {{carga.dia_descarga}}</h5>
+            <h5 class= "inf_carga">Dia dia da chegada  : {{carga.dia_chegada}}</h5>
             <h5 class= "inf_carga">Valor Carga  :{{carga.valor_carga}} </h5> 
-            <h5 class= "inf_carga">Usuario  :{{carga.user}} </h5>
+            <h5 class= "inf_carga">Usuario:{{carga.user}} </h5>
+            <h5 class= "inf_carga">Usuario Winthor: {{carga.user_ERP}}</h5>
             <h5 class= "inf_carga">Status  :{{carga.status}} </h5>
             <h5 class= "inf_carga">Tipo de Entrada  :{{carga.tipo_entrada}} </h5>
             <h5 class= "inf_carga">Produto {{carga.Produto}} </h5>
@@ -20,4 +22,25 @@
             <h5 class= "inf_carga">Observação  :{{carga.observacao}}</h5>
             <h5 class= "inf_carga">BOX  :{{carga.box}}</h5>
     </div>
+        <div style="text-align: center;"><h2>Itens cargas</h2></div>
+        {% for item in itens_carga%}
+        <div class="container  col-8" >
+        <h3>item {{ forloop.counter }}</h3>
+        <div class="row" style="background-color: white; ">
+            <h6>Número do pedido : <b> {{item.numero_pedido}}</b>&nbsp;&nbsp;&nbsp;&nbsp; </h6>
+            <h6>código do produto :<b>{{item.cod_prod}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>Descrição :<b>{{item.descricao}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>Tipo embalagem: <b>{{item.tipo_embalagem}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>Embalagem : <b>{{item.embalagem}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>Unidade :<b>{{item.unidade}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>Departamento : <b>{{item.departamento}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>QTD unitaria:<b>{{item.QTD_unitaria}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>QTD itens Caixa:<b>{{item.QTD_caixa}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>QTD pedida: <b>{{item.QTD_pedida}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>QTD reservada: <b>{{item.QTD_reservada}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>QTD ultima entrada: <b>{{item.QTD_ult_entrada}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6>Data ultima entrada <b>{{item.data_ultima_entrada}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+        </div>
+    </div>
+    {% endfor %}
 {% endblock %}

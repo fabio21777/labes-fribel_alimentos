@@ -17,6 +17,7 @@ from .conection_bd import conexao_bd
 from .conection_bd import inf_carga_erp
 import cx_Oracle
 from datetime import datetime, timedelta
+import re
 # Importar a classe que contém as funções e aplicar um alias
 
 def return_usuario(request):
@@ -26,9 +27,8 @@ def return_usuario(request):
     return(usuario)
 
 def get_inf_carga_erp(request,carga):
-   
+    ids=[]
     if carga.is_ERP == True and len(Itens_carga.objects.filter(carga__numero_transacao=carga.numero_transacao))==0 :
-        print('------------>eu executo')
         inf_cargas = inf_carga_erp(carga.numero_nf)
         for inf_carga in inf_cargas:
             numero_pedido = inf_carga['NUMPED']
@@ -45,7 +45,7 @@ def get_inf_carga_erp(request,carga):
             QTD_ult_entrada = inf_carga['QTULTENT']
             data_ultima_entrada = inf_carga['DTULTENT']
             carga = carga
-            Itens_carga.objects.create(numero_pedido=numero_pedido,
+            item_carga = Itens_carga.objects.create(numero_pedido=numero_pedido,
                                     cod_prod=cod_prod,
                                     descricao=descricao,
                                     tipo_embalagem=tipo_embalagem,
@@ -59,8 +59,14 @@ def get_inf_carga_erp(request,carga):
                                     QTD_ult_entrada=QTD_ult_entrada,
                                     data_ultima_entrada=data_ultima_entrada,
                                     carga=carga )
+    else:
+        itens_carga=Itens_carga.objects.filter(carga__numero_transacao=carga.numero_transacao)
+        for item in itens_carga:
+            ids.append(int(re.sub('[^0-9]','',str(item))))
+            print('------------->',int(re.sub('[^0-9]','',str(item))))
+        return(ids)
 
-
+ 
 def cargas_erp(usuario):
     try:
         cargas = consulta_bd_cargas_em_aberto()
@@ -69,7 +75,7 @@ def cargas_erp(usuario):
             industria = carga['FORNECEDOR']
             numero_nf = carga['NUMNOTA']
             valor_carga = carga['VLTOTAL']
-            dia_descarga = carga['DTACHEGADA']
+            dia_chegada = carga['DTACHEGADA']
             user = usuario
             user_ERP = carga['FUNCLANC']
             if  carga['STATUS'] == 'L':
@@ -142,10 +148,15 @@ def add_Carga(request):
 
 
 def informacoes_cargas(request,id):
+    itens_carga=[]
     carga=Carga.objects.get(pk=id)
-    get_inf_carga_erp(request,carga)
+    ids=get_inf_carga_erp(request,carga)
+    print(ids)
+    for i in ids:
+        itens_carga.append(Itens_carga.objects.get(id=i))
+    print(itens_carga[0].id)
     user = return_usuario(request)
-    return render(request, 'core/informacoes_cargas.html',{'carga':carga,'user':user})
+    return render(request, 'core/informacoes_cargas.html',{'carga':carga,'user':user,'itens_carga':itens_carga})
 
 def set_carga(request):
     industria = request.POST.get('industria')

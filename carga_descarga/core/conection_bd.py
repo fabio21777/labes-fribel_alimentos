@@ -72,7 +72,6 @@ def consulta_bd_cargas_em_aberto():
 
 
 def inf_carga_erp(nf):
-  print('------------>eu executo arquivo bd')
   data=[]
   cursor = conexao_bd().cursor()
   cursor.execute("""SELECT PCITEM.NUMPED
@@ -130,10 +129,9 @@ def inf_carga_erp(nf):
    and pcmovpreent.numnota = '"""+nf+"'" )
   columns = [col[0] for col in cursor.description]
   cursor.rowfactory = lambda *args: dict(zip(columns, args))
-  data=cursor.fetchone()
-  for i in data:
+  #cursor.fetchone()
+  for i in cursor:
     data.append(i)
-    print('-------->',i)
   cursor.close()
   return(data)
 #select inf carga saida

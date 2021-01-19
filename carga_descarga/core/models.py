@@ -24,7 +24,7 @@ class Carga(models.Model):
         ('liberado', 'Liberado'),
         ('aguardando', 'Aguardando')
     )
-
+    dia_chegada = models.DateField('Dia da chegada',blank=True)
     numero_nf = models.CharField('Numero NF', max_length=45)
     industria = models.CharField('Industria', max_length=40)
     dia_descarga = models.DateField('Dia da descarga')
@@ -95,3 +95,4 @@ class Itens_carga(models.Model):
     QTD_ult_entrada = models.CharField(max_length=10, blank=True)
     data_ultima_entrada = models.DateField('Dia da descarga')
     carga = models.ForeignKey(Carga, on_delete = models.CASCADE)
+    numero_transacao = models.CharField(max_length=10, blank=True)
