@@ -2,7 +2,6 @@ $(document).ready(function(){
     var filter = $('#filter');
     var ordenador = $('#ordenador');
     var btnSearch = $('#btnSearch');
-    var campoBusca = $('#campoBusca');
     var baseUrl = window.location.href;
     bt_add_carga=document.getElementById("bt_add_carga")
     h3_add_carga=document.getElementById("h3_add_carga")
@@ -26,12 +25,6 @@ $(document).ready(function(){
         bt_list_carga.style.backgroundColor ="#004b97"
         h3_list_carga.style.color="#89b348"
     }
-    /*if(path== '/'){
-        navmod.innerHTML=''
-    }*/
-    
-    /*var listaFilter = document.getElementById("filter");
-    var listaOrdenador = document.getElementById("ordenador");*/
 
     Url = baseUrl.split('?');
     baseUrl = Url[0];
@@ -43,7 +36,7 @@ $(document).ready(function(){
 
     (ordenador).change(function() {
         var ordenador = $(this).val();
-        //window.onload(ordenador.val($("#ordenador option").eq(ordenador.val).val()));
+        
         window.location.href = baseUrl + '?ordenador=' + ordenador;
     });
 
@@ -107,9 +100,6 @@ function validar_add_carga(){
 //Notifica via email sobre as descargas do dia posterior
 function notificar_cargas_previstas(texto_email){
     //É necessário ativar "acesso a app menos seguro" na conta gmail
-    var a = "oi";
-    var b = "fdp";
-    var msg = a + "<br><br>" + b;
     Email.send({
         Host : "smtp.gmail.com",
         Username : "labes.fribel@gmail.com",
@@ -130,8 +120,6 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
     var counts = {};
     //Configurar limite_descargas para alterar o limite de descargas por dia 
     var limite_descargas = 1;
-    
-    //notificar_cargas_previstas("texto muito maluco");
 
     for(i=0; i<qtde_cargas; i++){
         lista_dia_descarga.push(lista_cargas[i].dia_descarga);
@@ -168,13 +156,11 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
             }
         }
         texto_email = texto_email + "<br><br>Este email é automático, por favor não responda."
+        
         if(controle == true){
-            //notificar_cargas_previstas(texto_email);
-            window.alert('funcionou caralhoo!');
+            notificar_cargas_previstas(texto_email);
         }
     }
-    
-    //console.log(texto_email);
 }
 
 function msgCargaExcluida(){
