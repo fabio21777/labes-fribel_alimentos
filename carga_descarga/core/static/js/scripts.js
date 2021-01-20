@@ -108,9 +108,7 @@ function notificar_cargas_previstas(texto_email){
         From : "labes.fribel@gmail.com",
         Subject : "Cargas previstas",
         Body : texto_email
-    }).then(
-      message => alert(message)
-    );
+    });
 }
 
 function checar_descarga_cargas(lista_cargas, qtde_cargas){
@@ -139,8 +137,8 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 
     //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
     var data = new Date();
-    var hora = 14;
-    var minuto = 56;
+    var hora = 16;
+    var minuto = 27;
     var data_posterior = (data.getDate()+1).toString();
     var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+(data.getMonth()+1).toString()+"/"+data.getFullYear()+")!<br><br>";
     var controle = false;
