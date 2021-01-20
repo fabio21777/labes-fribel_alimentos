@@ -166,3 +166,16 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 function msgCargaExcluida(){
     window.alert("Carga excluída com sucesso!");
 }
+function adiconar_itens(){
+
+			var html = "";
+			html += "<div style='margin-top: 8px;' class='input-group' id='teste'>";
+			html += "<input type='text' id='teste' class='form-control novoCampo' placeholder='Insira um teste'/>";
+			html += "<span class='input-group-btn'>";
+			html += "</span>";
+			html += "</div>";
+			
+			let div_nova = document.createElement("div")
+            div_nova.innerHTML(html);
+            document.body.insertBefore(divNova, divAtual);
+}

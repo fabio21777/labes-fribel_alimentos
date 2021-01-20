@@ -59,6 +59,12 @@ def get_inf_carga_erp(request,carga):
                                     QTD_ult_entrada=QTD_ult_entrada,
                                     data_ultima_entrada=data_ultima_entrada,
                                     carga=carga )
+        itens_carga=Itens_carga.objects.filter(carga__numero_transacao=carga.numero_transacao)
+        for item in itens_carga:
+            print('teste')
+            ids.append(int(re.sub('[^0-9]','',str(item))))
+            print('------------->',int(re.sub('[^0-9]','',str(item))))
+        return(ids)
     else:
         itens_carga=Itens_carga.objects.filter(carga__numero_transacao=carga.numero_transacao)
         for item in itens_carga:
@@ -73,7 +79,7 @@ def cargas_erp(usuario):
         for carga in cargas:
             numero_transacao =  carga['NUMTRANSENT']
             industria = carga['FORNECEDOR']
-            numero_nf = carga['NUMNOTA']
+            numero_nf = str(carga['NUMNOTA'])
             valor_carga = carga['VLTOTAL']
             dia_chegada = carga['DTACHEGADA']
             user = usuario
@@ -94,12 +100,14 @@ def cargas_erp(usuario):
             else:
                 frete ='FOB' 
             observacao = str(carga['OBS'])
+            print('aqui é a nf----------->>>> ',numero_nf)
             if len(Carga.objects.filter(numero_nf=numero_nf)) == 0:
                 Carga.objects.create(numero_nf=numero_nf,
                                  industria=industria,
                                  numero_transacao=numero_transacao,
                                  valor_carga=valor_carga,
-                                 dia_descarga=dia_descarga,
+                                 dia_chegada=dia_chegada,
+                                 dia_descarga=dia_chegada,
                                  user=user,
                                  user_ERP=user_ERP,
                                  status=status,
