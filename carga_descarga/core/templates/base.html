@@ -35,7 +35,7 @@
         <div class="conteiner justify-content-center row basefri" id="navmod">
             <a href="\acompanhamento/{{user.username}}"><button class="btn btnbase" id="bt_list_carga" value="{{acomp}}"><h3 class="base" id="h3_list_carga">Lista Das Cargas</h3></button></a><!--temporario-->
             <a href="\acompanhamento/adicionarCarga/"><button class="btn btnbase" id="bt_add_carga"><h3 class="base" id="h3_add_carga">Adicionar Carga</h3></button></a>
-            <a href="\liberar"><button class="btn btnbase" id="bt_liberar"><h3 id="h3_liberar" class="base" >Liberar Para Box</h3></button></a>
+            <a href="\liberar-para-box"><button class="btn btnbase" id="bt_liberar"><h3 id="h3_liberar" class="base" >Liberar Para Box</h3></button></a>
             <a href="\acompanhamento/historico/"><button class="btn btnbase"><h3 class="base">Histórico de cargas liberadas</h3></button></a>
             <a href="#"><button class="btn btnbase"><h3 class="base">Editar Carga</h3></button></a>
         </div>
@@ -67,6 +67,7 @@
     src="https://code.jquery.com/jquery-3.4.0.min.js"
     integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
     crossorigin="anonymous"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>

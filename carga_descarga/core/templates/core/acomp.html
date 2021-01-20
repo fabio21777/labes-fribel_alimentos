@@ -4,7 +4,6 @@
 
 {% block content %}
 <div class="conteiner">
-  
   <div id = "conjuntoOpcoes" class="row pand1">
     <span>Filtrar por:</span>
     <select name="filter" id="filter" class="form-control">
@@ -29,7 +28,7 @@
           <label for="search-field">
             <i class="fa fa-search"></i>
           </label>
-          <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
+          <input class="form-control search-field" type="text" name="search" id="search_field" placeholder="Pesquise uma indústria">
           <button id="btnSearch" class="btn btnSearch" type="submit">Pesquisar</button>
         </div>
     </form>
@@ -39,7 +38,7 @@
     {% endif %}
   </div>
   <div id="table">
-    <table class="table table-hover">
+    <table id="tabela_cargas" class="table table-hover">
       <thead>
         <tr id="tr-color">
           <th scope="col">#</th>
@@ -63,7 +62,7 @@
           window.onpageshow = function() {
             var qtde_cargas = {{tamanho}};
             var lista_cargas = [
-              {% for carga in cargas%}
+              {% for carga in cargas %}
                 {% if not forloop.first %}, {% endif %}
                 {
                   numero_nf: "{{carga.numero_nf}}",
@@ -74,7 +73,7 @@
               {% endfor %}
             ]
 
-            checar_conflito_cargas(lista_cargas, qtde_cargas);
+            checar_descarga_cargas(lista_cargas, qtde_cargas);
           }
         </script>
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
@@ -85,7 +84,9 @@
             <tr style="background-color: #65ff89;">
           {% endif %}
             <th scope="row" class="coluna_func">
-              <button type="button" class="btn bt-table ">Editar</button>
+              <!--<button type="button" class="btn bt-table ">Editar</button>-->
+              <!--Versão mais discreta do botão editar, se não gostarem pode tirar :)-->
+              <a class="btnEditar " href="#void"><i class="fa fa-edit"></i></a>
               <a class="btnExcluir" href="{% url 'excluir_carga' carga.id %}"><i class="fa fa-trash"></i></a>
             </th>
             <td>{{carga.numero_nf}}</td>

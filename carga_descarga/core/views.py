@@ -129,7 +129,7 @@ def acompanhamento_carga(request, usuario):
     elif ordenador:
         cargas = Carga.objects.all().order_by(ordenador)
     elif search:
-        cargas = Carga.objects.filter(industria__icontains=search)
+        cargas = Carga.objects.filter(industria__icontains=search.strip())
     else:
         cargas = Carga.objects.all().order_by('-created_at')
 
@@ -170,14 +170,14 @@ def set_carga(request):
     movimentacao = request.POST.get('movimentacao')
     frete = request.POST.get('frete')
     observacao = request.POST.get('observacao')
-    carga = Carga.objects.create(numero_nf=numero_nf,
-                                 industria=industria,
-                                 valor_carga=valor_carga,
+    carga = Carga.objects.create(numero_nf=numero_nf.strip(),
+                                 industria=industria.strip(),
+                                 valor_carga=valor_carga.strip(),
                                  dia_descarga=dia_descarga,
                                  user=user,
                                  status='aguardando',
                                  tipo_entrada=tipo_entrada,
-                                 Produto=Produto, QTD=QTD, UN=UN,
+                                 Produto=Produto.strip(), QTD=QTD.strip(), UN=UN,
                                  movimentacao=movimentacao,
                                  frete=frete, observacao=observacao)
     return redirect('/acompanhamento/'+user.username)
@@ -196,24 +196,25 @@ def liberarCarga(request, id):
 
 
 @login_required(login_url='/')
-def liberar_carga_box(request):
+def liberar_para_box(request):
     cargas_liberadas = Carga.objects.filter(status='liberado', box='')
     box = BoxForm
+    cargar_reservada_box = Carga.objects.filter(status='liberado').exclude(box='')
     user = return_usuario(request)
     return render(request, 'core/liberar_carga_box.html',
-                  {'boxs': box, 'cargas': cargas_liberadas,'user':user})
+                  {'boxs': box, 'cargas': cargas_liberadas, 'user': user, 'boxr': cargar_reservada_box})
 
 
 def reservar_box(request, id):
     carga = Carga.objects.get(id=id)
     if request.method == 'POST':
-        box_escolhido = BoxForm(request.POST)
-        if box_escolhido.is_valid():
-            box_escolhido = box_escolhido.cleaned_data['box']
-            box = Box.objects.get(id=box_escolhido)
-            carga.box = box.name
-            carga.save()
-    return redirect('liberar-carga-box')
+        box_escolhido = request.POST.get('box')
+        box = Box.objects.get(id=box_escolhido)
+        box.is_free = False
+        carga.box = box.name
+        carga.save()
+        box.save()
+    return redirect('liberar-para-box')
 
 
 def login_pag(request):
@@ -276,7 +277,7 @@ def historico_cargas_liberadas(request):
     if ordenador:
         cargas = Carga_Liberada.objects.all().order_by(ordenador)
     elif search:
-        cargas = Carga_Liberada.objects.filter(industria__icontains=search)
+        cargas = Carga_Liberada.objects.filter(industria__icontains=search.strip())
     else:
         cargas = Carga_Liberada.objects.all().order_by('-created_at')
 
@@ -285,7 +286,7 @@ def historico_cargas_liberadas(request):
 
 #ADIÇÃO, EXCLUSÃO E EDIÇÃO DE CARGAS
 @login_required(login_url='/')
-def excluir_carga(request, id, pagina):
+def excluir_carga(request, id):
     user = return_usuario(request)
     carga = get_object_or_404(Carga, pk = id)
 

@@ -2,7 +2,6 @@ $(document).ready(function(){
     var filter = $('#filter');
     var ordenador = $('#ordenador');
     var btnSearch = $('#btnSearch');
-    var campoBusca = $('#campoBusca');
     var baseUrl = window.location.href;
     bt_add_carga=document.getElementById("bt_add_carga")
     h3_add_carga=document.getElementById("h3_add_carga")
@@ -26,12 +25,6 @@ $(document).ready(function(){
         bt_list_carga.style.backgroundColor ="#004b97"
         h3_list_carga.style.color="#89b348"
     }
-    /*if(path== '/'){
-        navmod.innerHTML=''
-    }*/
-    
-    /*var listaFilter = document.getElementById("filter");
-    var listaOrdenador = document.getElementById("ordenador");*/
 
     Url = baseUrl.split('?');
     baseUrl = Url[0];
@@ -43,7 +36,7 @@ $(document).ready(function(){
 
     (ordenador).change(function() {
         var ordenador = $(this).val();
-        //window.onload(ordenador.val($("#ordenador option").eq(ordenador.val).val()));
+        
         window.location.href = baseUrl + '?ordenador=' + ordenador;
     });
 
@@ -104,12 +97,29 @@ function validar_add_carga(){
     }
 }
 
-function checar_conflito_cargas(lista_cargas, qtde_cargas){
+//Notifica via email sobre as descargas do dia posterior
+function notificar_cargas_previstas(texto_email){
+    //É necessário ativar "acesso a app menos seguro" na conta gmail
+    Email.send({
+        Host : "smtp.gmail.com",
+        Username : "labes.fribel@gmail.com",
+        Password : "Projetofribel10.",
+        To : 'yannfabricio@gmail.com',
+        From : "labes.fribel@gmail.com",
+        Subject : "Cargas previstas",
+        Body : texto_email
+    }).then(
+      message => alert(message)
+    );
+}
+
+function checar_descarga_cargas(lista_cargas, qtde_cargas){
+    //CHECAR CONFLITO DE DIA DE DESCARGA
     var conflito = 0;
     let lista_dia_descarga = [];
     var counts = {};
     //Configurar limite_descargas para alterar o limite de descargas por dia 
-    var limite_descargas = 1; 
+    var limite_descargas = 1;
 
     for(i=0; i<qtde_cargas; i++){
         lista_dia_descarga.push(lista_cargas[i].dia_descarga);
@@ -124,6 +134,31 @@ function checar_conflito_cargas(lista_cargas, qtde_cargas){
         if(counts[lista_cargas[i].dia_descarga] > limite_descargas){
             window.alert("Existe conflito de dia de descarga!");
             break;
+        }
+    }
+
+    //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
+    var data = new Date();
+    var hora = 10;
+    var minuto = 19;
+    var data_posterior = (data.getDate()+1).toString();
+    var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+(data.getMonth()+1).toString()+"/"+data.getFullYear()+")!<br><br>";
+    var controle = false;
+
+    //A checagem acontece em um horário específico
+    if(data.getHours() == hora && data.getMinutes() == minuto){
+        for(i=0; i<qtde_cargas; i++){
+            if((lista_cargas[i].dia_descarga.substring(2, -5).trim()) == data_posterior){
+                texto_email = texto_email + (i+1).toString() + ' - Indústria: ' + 
+                lista_cargas[i].industria + ', Número da Nota Fiscal: ' + 
+                lista_cargas[i].numero_nf + '<br>';
+                controle = true;
+            }
+        }
+        texto_email = texto_email + "<br><br>Este email é automático, por favor não responda."
+        
+        if(controle == true){
+            notificar_cargas_previstas(texto_email);
         }
     }
 }
