@@ -129,8 +129,10 @@ def inf_carga_erp(nf):
    and pcmovpreent.numnota = '"""+nf+"'" )
   columns = [col[0] for col in cursor.description]
   cursor.rowfactory = lambda *args: dict(zip(columns, args))
-  #cursor.fetchone()
-  for i in cursor:
+  datas=cursor.fetchall()
+  print(datas)
+  for i in datas:
+    print('------>teste curso',i)
     data.append(i)
   cursor.close()
   return(data)

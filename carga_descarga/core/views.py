@@ -151,10 +151,9 @@ def informacoes_cargas(request,id):
     itens_carga=[]
     carga=Carga.objects.get(pk=id)
     ids=get_inf_carga_erp(request,carga)
-    print(ids)
+    print('------>id',ids)
     for i in ids:
         itens_carga.append(Itens_carga.objects.get(id=i))
-    print(itens_carga[0].id)
     user = return_usuario(request)
     return render(request, 'core/informacoes_cargas.html',{'carga':carga,'user':user,'itens_carga':itens_carga})
 
