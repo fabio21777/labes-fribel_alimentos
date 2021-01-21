@@ -181,3 +181,7 @@ function adiconar_itens(){
             div_nova.innerHTML(html);
             document.body.insertBefore(divNova, divAtual);
 }
+
+function atualizarCargas(){
+    window.location.reload();
+}

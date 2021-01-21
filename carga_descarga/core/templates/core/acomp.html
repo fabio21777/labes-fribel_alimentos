@@ -32,10 +32,7 @@
           <button id="btnSearch" class="btn btnSearch" type="submit">Pesquisar</button>
         </div>
     </form>
-    <!--Laço if controla o acesso a função de cadastrar novas cargas-->
-    {% if tipo_user.tipo_user == 'CD' %}
-      <a class="btnaddcarga" href="adicionarCarga/"><button type="button" class="btn bt1">ADICIONAR CARGA</button></a>
-    {% endif %}
+    <a class="btnaddcarga" href=""><button type="button" id="btn_refresh" onclick="atualizarCargas()" class="btn bt1">ATUALIZAR CARGAS</button></a>
   </div>
   <div id="table">
     <table id="tabela_cargas" class="table table-hover">
