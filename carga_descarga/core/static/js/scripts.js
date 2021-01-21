@@ -109,6 +109,7 @@ function notificar_cargas_previstas(texto_email){
         Subject : "Cargas previstas",
         Body : texto_email
     });
+    console.log('Email de notificação enviado!');
 }
 
 function checar_descarga_cargas(lista_cargas, qtde_cargas){
@@ -137,8 +138,8 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 
     //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
     var data = new Date();
-    var hora = 16;
-    var minuto = 27;
+    var hora = 10;
+    var minuto = 26;
     var data_posterior = (data.getDate()+1).toString();
     var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+(data.getMonth()+1).toString()+"/"+data.getFullYear()+")!<br><br>";
     var controle = false;
@@ -166,6 +167,7 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 function msgCargaExcluida(){
     window.alert("Carga excluída com sucesso!");
 }
+
 function adiconar_itens(){
 
 			var html = "";
@@ -178,4 +180,8 @@ function adiconar_itens(){
 			let div_nova = document.createElement("div")
             div_nova.innerHTML(html);
             document.body.insertBefore(divNova, divAtual);
+}
+
+function atualizarCargas(){
+    window.location.reload();
 }
