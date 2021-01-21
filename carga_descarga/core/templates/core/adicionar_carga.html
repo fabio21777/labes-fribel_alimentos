@@ -5,6 +5,7 @@
 
 {% block content %}
 <div class="container" id="principal_addcarga">
+    
     <div  id="titulo"><h1 > <b> CADASTRO DE CARGA </b></h1></div><!--*/-->
     <form class="form-contact contact_form"  method="post" id="formulario" action="\acompanhamento/adicionarCarga/submit" >{% csrf_token%}
             <div class="row add">
@@ -25,7 +26,7 @@
                     <option>Entrada Bonificada</option>
                 </select> 
                 <H3 id="previsao_h3" class="addcargah3prev">Previsão*:</H3>
-                <input id="previsao" name="previsao" class="form-control addcarga" type="date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Previsão'" placeholder="Previsão" >
+                <input id="previsao" min="" name="previsao" class="form-control addcarga" type="date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Previsão'" placeholder="Previsão" >
             </div>
             <div class="row pand">
                 <h3 class="prod">Produto:</h3>
@@ -69,5 +70,28 @@
             <button type="button" id="btadd" class="btn bt1"  onclick="validar_add_carga()">ENVIAR</button>
         </div>
     </form>
+    <!--Script para definir a data atual como limite inferior do campo previsão-->
+    <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; 
+        var yyyy = (today.getFullYear()).toString();
+
+        if(dd < 10){
+            dd = '0' + dd.toString();
+        }else{
+            dd = dd.toString();
+        }
+
+        if(mm < 10){
+            mm = '0' + mm.toString();
+        }else{
+            mm = mm.toString();
+        }
+
+        var dia_atual = yyyy + '-' + mm + '-' + dd;
+
+        document.getElementById("previsao").setAttribute("min", dia_atual);
+    </script>
 </div>
 {% endblock %}
