@@ -108,9 +108,7 @@ function notificar_cargas_previstas(texto_email){
         From : "labes.fribel@gmail.com",
         Subject : "Cargas previstas",
         Body : texto_email
-    }).then(
-      message => alert(message)
-    );
+    });
 }
 
 function checar_descarga_cargas(lista_cargas, qtde_cargas){
@@ -139,20 +137,22 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 
     //CHECAR DIA DE DESCARGA PARA NOTIFICAR POR EMAIL
     var data = new Date();
-    var hora = 10;
-    var minuto = 19;
+    var hora = 16;
+    var minuto = 27;
     var data_posterior = (data.getDate()+1).toString();
     var texto_email = "As cargas abaixo estão previstas para serem descarregadas amanhã ("+data_posterior+"/"+(data.getMonth()+1).toString()+"/"+data.getFullYear()+")!<br><br>";
     var controle = false;
+    var indice_carga = 1;
 
     //A checagem acontece em um horário específico
     if(data.getHours() == hora && data.getMinutes() == minuto){
         for(i=0; i<qtde_cargas; i++){
             if((lista_cargas[i].dia_descarga.substring(2, -5).trim()) == data_posterior){
-                texto_email = texto_email + (i+1).toString() + ' - Indústria: ' + 
+                texto_email = texto_email + (indice_carga).toString() + ' - Indústria: ' + 
                 lista_cargas[i].industria + ', Número da Nota Fiscal: ' + 
                 lista_cargas[i].numero_nf + '<br>';
                 controle = true;
+                indice_carga ++;
             }
         }
         texto_email = texto_email + "<br><br>Este email é automático, por favor não responda."

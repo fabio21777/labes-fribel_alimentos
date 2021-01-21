@@ -56,6 +56,19 @@
         </tr>
       </thead>
       <tbody>
+        <script type="text/javascript">
+            //Função que fará o refresh na página
+            function recarregarPagina(){
+                var date = new Date();
+                if(date.getHours() == 16 && date.getMinutes() == 27 && date.getSeconds() == 10){
+                    //Recarrega a URL atual
+                    location.reload();
+                }
+            }
+            //A cada 1 segundo a função é chamada
+            setInterval( function(){ recarregarPagina(); } , 1000*1);
+            recarregarPagina();
+        </script>
         <!--Este script converte uma lista django para um dict javascript e chama a função 
         para checar conflito de data de descarga-->
         <script>
@@ -91,7 +104,7 @@
             </th>
             <td>{{carga.numero_nf}}</td>
             <td>{{carga.industria}}</td>
-            <td>{{carga.dia_chegada}}</td>
+            <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
             <td>{{carga.user}}
             {% if tipo_user.tipo_user == 'Diretoria' and carga.status == 'aguardando'  %}
