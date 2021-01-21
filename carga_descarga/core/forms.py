@@ -1,6 +1,6 @@
 from django import forms
-from .models import Box
+from .models import Carga
 
 
 class BoxForm(forms.Form):
-    box = forms.ModelChoiceField(queryset=Box.objects.filter(is_free=True))
+    Carga = forms.ModelChoiceField(queryset=Carga.objects.filter(status='liberado'), to_field_name="box")
