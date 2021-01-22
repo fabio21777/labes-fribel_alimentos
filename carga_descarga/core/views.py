@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from .models import Carga, Carga_Liberada, Box, Tipo_user,Itens_carga
 from django.contrib.auth.models import User
 from datetime import datetime,date
-from .forms import BoxForm
+from .forms import libera_box_Form
 from django import forms
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
@@ -205,19 +205,18 @@ def liberarCarga(request, id):
 
 @login_required(login_url='/')
 def liberar_para_box(request):
-    cargas_liberadas = Carga.objects.filter(status='liberado', box='')
-    box = BoxForm
-    cargar_reservada_box = Carga.objects.filter(status='liberado').exclude(box='')
+    box = Box.objects.all()
+    cargas_liberadas = libera_box_Form
     user = return_usuario(request)
     return render(request, 'core/liberar_carga_box.html',
-                  {'boxs': box, 'cargas': cargas_liberadas, 'user': user, 'boxr': cargar_reservada_box})
+                  {'boxs': box, 'cargas': cargas_liberadas, 'user': user})
 
 
 def reservar_box(request, id):
-    carga = Carga.objects.get(id=id)
+    box = Box.objects.get(id=id)
     if request.method == 'POST':
-        box_escolhido = request.POST.get('box')
-        box = Box.objects.get(id=box_escolhido)
+        carga_escolhida = request.POST.get('carga')
+        carga = Carga.objects.get(id=carga_escolhida)
         box.is_free = False
         carga.box = box.name
         carga.save()
