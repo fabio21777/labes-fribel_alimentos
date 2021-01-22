@@ -170,18 +170,14 @@ function msgCargaExcluida(){
 
 function adiconar_itens(){
 
-			var html = "";
-			html += "<div style='margin-top: 8px;' class='input-group' id='teste'>";
-			html += "<input type='text' id='teste' class='form-control novoCampo' placeholder='Insira um teste'/>";
-			html += "<span class='input-group-btn'>";
-			html += "</span>";
-			html += "</div>";
-			
-			let div_nova = document.createElement("div")
-            div_nova.innerHTML(html);
-            document.body.insertBefore(divNova, divAtual);
-}
+	var html = "";
+    html += "<div style='margin-top: 8px;' class='row' >";
+    html += "<h3 style='padding-right: 30px;'>numero_pedido:</h3>"
+	html += "<input id='numero_pedido' name='numero_pedido' class='form-control'>";
+	html += "</div>";
+    document.getElementById("adiciona_itens").innerHTML=html
 
+}
 function atualizarCargas(){
     window.location.reload();
 }
