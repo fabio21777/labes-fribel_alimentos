@@ -326,4 +326,20 @@ def excluir_carga_historico(request, id):
 def zap():
     print(teste)
     
+    #Editar Cargas
+# função que abre uma pagia para editar a carga 
+@login_required(login_url='/')
+def editar_cargas(request, id, template_name='core\editar-carga.html'):
+    user = return_usuario(request)
+    carga = get_object_or_404(Carga, pk = id)
+
+    if request.method == 'POST':
+        try:
+            carga.update()
+        except:
+            print('Erro ao editar a carga!')
+
+        return redirect('/acompanhamento/'+user.username)
+    
+    return render(request, template_name, {'carga': carga})
     

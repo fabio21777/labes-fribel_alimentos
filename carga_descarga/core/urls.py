@@ -21,4 +21,5 @@ urlpatterns = [
     path('logout_user',views.logout_user),
     path('excluirCarga/<str:id>', views.excluir_carga, name="excluir_carga"),
     path('excluirCargaLiberada/<str:id>', views.excluir_carga_historico, name="excluir_carga_historico")
+    path('acompanhamento/editar-carga/<str:id>', views.editar_cargas, name='editar-carga'),
 ]
