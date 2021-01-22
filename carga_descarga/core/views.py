@@ -171,6 +171,7 @@ def set_carga(request):
     numero_nf = request.POST.get('NF')
     valor_carga = request.POST.get('valor')
     dia_descarga = datetime.fromisoformat(request.POST.get('previsao'))
+    dia_chegada = datetime.fromisoformat(request.POST.get('previsao'))
     user = return_usuario(request)
     tipo_entrada = request.POST.get('tipo_entrada')
     Produto = request.POST.get('Produto')
@@ -179,10 +180,13 @@ def set_carga(request):
     movimentacao = request.POST.get('movimentacao')
     frete = request.POST.get('frete')
     observacao = request.POST.get('observacao')
+    cont=request.POST.get('cont')
+    print('----------->>',cont)
     carga = Carga.objects.create(numero_nf=numero_nf.strip(),
                                  industria=industria.strip(),
                                  valor_carga=valor_carga.strip(),
                                  dia_descarga=dia_descarga,
+                                 dia_chegada=dia_chegada,
                                  user=user,
                                  status='aguardando',
                                  tipo_entrada=tipo_entrada,

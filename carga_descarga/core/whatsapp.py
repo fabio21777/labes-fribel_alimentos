@@ -38,22 +38,27 @@ class newbot:
             self.erro()
 	
     def EnviarMensagens_grupo(self,grupos_ou_pessoas,mensagem):
-        print('--->',grupos_ou_pessoas,mensagem)
-        self.driver.get('https://web.whatsapp.com')
-        time.sleep(5)
-        for grupo_ou_pessoa in grupos_ou_pessoas:
-            campo_grupo = self.driver.find_element_by_xpath(f"//span[@title='Teste']")
-            time.sleep(3)
-            campo_grupo.click()
-            chat_box = self.driver.find_element_by_class_name('DuUXI')
-            time.sleep(3)
-            chat_box.click()
-            chat_box.send_keys(mensagem+'teste')
-            botao_enviar = self.driver.find_element_by_xpath(
-                "//span[@data-icon='send']")
-            time.sleep(3)
-            botao_enviar.click()
+        try:
+            print('--->',grupos_ou_pessoas,mensagem)
+            self.driver.get('https://web.whatsapp.com')
             time.sleep(5)
+            for grupo_ou_pessoa in grupos_ou_pessoas:
+                campo_grupo = self.driver.find_element_by_xpath(f"//span[@title='Teste']")
+                time.sleep(3)
+                campo_grupo.click()
+                chat_box = self.driver.find_element_by_class_name('DuUXI')
+                time.sleep(3)
+                chat_box.click()
+                chat_box.send_keys(mensagem+'teste')
+                botao_enviar = self.driver.find_element_by_xpath(
+                    "//span[@data-icon='send']")
+                time.sleep(3)
+                botao_enviar.click()
+                time.sleep(5)
+                self.driver.close()
+        except:
+            print('errro no selenium zap')
             self.driver.close()
-bott = newbot()
-bott.EnviarMensagens_grupo('Teste','teste')
+        
+#bott = newbot()
+#bott.EnviarMensagens_grupo('Teste','teste')

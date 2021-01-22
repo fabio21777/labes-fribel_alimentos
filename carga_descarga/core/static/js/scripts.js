@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     var filter = $('#filter');
     var ordenador = $('#ordenador');
@@ -167,15 +168,44 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
 function msgCargaExcluida(){
     window.alert("Carga excluída com sucesso!");
 }
-
+var cont=0;
 function adiconar_itens(){
-
-	var html = "";
+    conthtml=cont+1
+    var html = "";
+    html+="<h3 style='text-align: center;'>item  "+conthtml +"</h3>"
     html += "<div style='margin-top: 8px;' class='row' >";
-    html += "<h3 style='padding-right: 30px;'>numero_pedido:</h3>"
-	html += "<input id='numero_pedido' name='numero_pedido' class='form-control'>";
-	html += "</div>";
-    document.getElementById("adiciona_itens").innerHTML=html
+    html += "<h5 style='padding-right:5px; padding-left: 5px;'>numero_pedido:</h5>"
+    html += "<input id='numero_pedido"+cont+"' name='numero_pedido' class='itenadd'>";
+    html += "<h5 style='padding-right:5px; padding-left: 5px;'>Codigo do produto:</h5>"
+    html += "<input id='cod_prod"+cont+"' name='cod_prod' class='itenadd'>";
+    html += "<h5 style='padding-right:11px; padding-left: 5px;'>Descrição:</h5>"
+    html += "<input id='descricao"+cont+"' name='descricao' class='itenadd'>";
+    html += "<h5 style='padding-right:10px; padding-left: 5px;'>Embalagem:</h5>"
+    html += "<input id='embalagem"+cont+"' name='embalagem' class='itenadd'>";
+    html += "<h5 style='padding-right:16px; padding-left: 5px;'>Departamento:</h5>"
+    html += "<input id='departamento"+cont+"' name='departamento' class='itenadd'>";
+    html += "<h5 style='padding-right:64px; padding-left: 5px;'>QTD Unitaria:</h5>"
+    html += "<input id='QTD_unitaria"+cont+"' name='QTD_unitaria' class='itenadd'>";
+    html += "<h5 style='padding-right:5px; padding-left: 5px;'>QTD Caixa:</h5>"
+    html += "<input id='QTD_caixa"+cont+"' name='QTD_caixa' class='itenadd'>";
+    html += "<h5 style='padding-right:5px; padding-left: 5px;'>QTD_pedida:</h5>"
+    html += "<input id='QTD_pedida"+cont+"' name='QTD_pedida' class='itenadd'>";
+    html += "</div>";
+    html+="<div id='adiciona_itens"+cont+"' style='padding-top: 10px;'> "
+    html +="</div>"
+    if (cont > 0){
+        cont_id=cont-1
+        id="adiciona_itens"+cont_id
+        document.getElementById(id).innerHTML=html
+        cont=cont+1
+    }
+    else{
+        document.getElementById("adiciona_itens").innerHTML=html
+        cont=cont+1
+    }
+    htmlcont=""
+    htmlcont+="<input id='cont' name='cont' type='hidden' value='"+cont+"'>"
+    document.getElementById("cont").innerHTML=htmlcont
 
 }
 function atualizarCargas(){

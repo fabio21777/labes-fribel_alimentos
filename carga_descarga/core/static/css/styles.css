@@ -160,7 +160,10 @@ body{
 /*Histórico styles*/
 
 /**/
-
+input.itenadd{
+  width: 100px;
+  border-radius: 5px;
+}
 input.form-control {
     width: 300px;
 }

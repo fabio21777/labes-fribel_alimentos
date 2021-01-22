@@ -63,8 +63,11 @@
                 <H3  id="observacaoh3" class="addcargah3obs">Observação:</H3>
                 <textarea class="form-control addcarga" id="observacao" name="observacao" rows="4"></textarea>
             </div>
+            <div>
+                <input id="cont" name="cont" type="hidden" value="0">
+                <button type="button" class="fa fa-plus" id="add_itens" onclick="adiconar_itens()">Adiciona Item</button>
+            </div>
             <div id="adiciona_itens" style="padding-top: 10px;">
-                <button type="button" class="fa fa-plus" id="add_itens" onclick="adiconar_itens()">Adiciona Itens</button>
             </div>
         <div class="btadd botao" >
             <button type="button" id="btadd" class="btn bt1"  onclick="validar_add_carga()">ENVIAR</button>
