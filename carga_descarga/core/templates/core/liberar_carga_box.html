@@ -7,16 +7,14 @@
     <div class="liberar_carga"> 
         <div class="container libcarga">
             <h1>Cargas Liberadas para o box</h1>
-            {% for carga in cargas%}
-            <h1 class="libCarga">{{carga.industria}} </h1>   
+            {% for box in boxs%}
+            <h1 class="libCarga">Box :{{box.name}} </h1>   
             <form method="post" class="post-form form-libcarga">{% csrf_token %}
-                {{ boxs.as_table }}
-                <button type="submit" id="btn-libCarga" class="btn btn-libCarga"  formaction= "{% url 'reservar-box' id=carga.id %}" >Confirmar</button>                                                           
+                {{ cargas.as_table }}
+                <button type="submit" id="btn-libCarga" class="btn btn-libCarga" formaction= "{% url 'reservar-box' id=box.id %}"  >Confirmar</button>                                                           
             </form> 
         {% endfor %}
-            {% for carga in boxr %}
-            {{carga.industria}}
-        {% endfor %}
+           
     </div> 
     </div>
 {% endblock %}
