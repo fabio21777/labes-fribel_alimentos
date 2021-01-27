@@ -88,18 +88,13 @@
         </script>
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
         {% for carga in cargas %}
-          {% if carga.status == 'aguardando'  %}
-            <tr style="background-color:#ff9da5 ;">
-          {% else %}
-            <tr style="background-color: #65ff89;">
-          {% endif %}
             <th scope="row" class="coluna_func">
               <!--<button type="button" class="btn bt-table ">Editar</button>-->
               <!--Versão mais discreta do botão editar, se não gostarem pode tirar :)-->
               <a class="btnEditar " href="#void"><i class="fa fa-edit"></i></a>
               <a class="btnExcluir" href="{% url 'excluir_carga' carga.id %}"><i class="fa fa-trash"></i></a>
             </th>
-            <td>{{carga.numero_nf}}</td>
+            <td><a href="\acompanhamento/informacoes_cargas/{{carga.id}}">{{carga.numero_nf}}</a></td>
             <td>{{carga.industria}}</td>
             <td>{{carga.dia_descarga}}</td>
             <td>{{carga.status}}</td>
