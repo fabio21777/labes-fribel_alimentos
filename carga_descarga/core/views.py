@@ -226,6 +226,8 @@ def reservar_box(request, id):
         carga.box = box.name
         carga.save()
         box.save()
+        bott = newbot()
+        bott.EnviarMensagens_grupo('Teste',str(carga.industria)+'Liberada')
     return redirect('liberar-para-box')
 
 

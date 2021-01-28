@@ -55,10 +55,10 @@ class newbot:
                 time.sleep(3)
                 botao_enviar.click()
                 time.sleep(5)
-                self.driver.close()
+                #self.driver.close()
         except:
             print('errro no selenium zap')
-            self.driver.close()
+            #self.driver.close()
         
 #bott = newbot()
 #bott.EnviarMensagens_grupo('Teste','teste')
