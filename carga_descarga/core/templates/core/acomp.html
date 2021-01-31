@@ -91,7 +91,7 @@
             <th scope="row" class="coluna_func">
               <!--<button type="button" class="btn bt-table ">Editar</button>-->
               <!--Versão mais discreta do botão editar, se não gostarem pode tirar :)-->
-              <a class="btnEditar " href="#void"><i class="fa fa-edit"></i></a>
+              <a class="btnEditar " href="{% url 'editar-carga' carga.id %}"><i class="fa fa-edit"></i></a>
               <a class="btnExcluir" href="{% url 'excluir_carga' carga.id %}"><i class="fa fa-trash"></i></a>
             </th>
             <td><a href="\acompanhamento/informacoes_cargas/{{carga.id}}">{{carga.numero_nf}}</a></td>

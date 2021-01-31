@@ -179,6 +179,12 @@ div.botao{
     padding-top: 30px; 
     padding-left: 90px;
 }
+
+/*Editar Carga*/
+input.editcarga{
+  width: 260px;
+}
+
 /* addcarga style*/
 input.addcarga{
     width: 260px;

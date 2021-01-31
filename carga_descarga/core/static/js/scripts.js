@@ -211,3 +211,57 @@ function adiconar_itens(){
 function atualizarCargas(){
     window.location.reload();
 }
+
+// Validar a Edição da Carga
+
+function validar_edit_carga(){
+
+    NotaFiscal=document.getElementById("NF")
+    industria=document.getElementById("industria")
+    Produto=document.getElementById("Produto")
+    observacao=document.getElementById("observacao")
+    previsao=document.getElementById("previsao")
+    var controle=true
+    const ast="*"
+    const alerta=document.getElementById("previsao_h3")
+    if (!previsao.value){
+        alerta.style.color="red"
+        controle=false
+    }
+    if (industria.value.length > 40 ){
+        window.alert("O tamanho máximo do nome da indústria é 40 caracteres!")
+        controle = false
+    }
+    if(industria.value.length>0 && industria.value[0]==' '){
+        window.alert("O campo industria tem um espaço em branco no inicio por favor remove-lo")
+        controle = false
+    }
+    if (industria.value.length==0){
+        window.alert("Campo industria está vazio")
+        controle = false
+    }
+
+    if (NotaFiscal.value.length > 45){
+        controle = false
+        window.alert("O tamanho máximo da NF é 40 caracteres!")
+    }
+    if (NotaFiscal.value.length==0 && controle != false){
+        if (window.confirm("Campo nota fiscal está  vazio deseja confirmar? ")){
+        }
+        else{
+            controle = false
+        }
+    }
+    if(Produto.value.length > 40){
+        controle = false
+        window.alert("O tamanho máximo do produto é 40 cararacteres!")
+    }
+    if (observacao.value.length > 200){
+        controle = false
+        window.alert("Foi excedido o tamanho do campo observação!")
+    }
+    
+    if (controle == true && window.confirm("Deseja confirmar a edição da carga?") ) {
+        document.getElementById("formulario").submit();
+    }
+}
