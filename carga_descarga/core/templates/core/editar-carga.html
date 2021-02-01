@@ -5,19 +5,18 @@
 {% block content %}
 <div class="container" id="principal_addcarga" method="POST">
     <div  id="titulo"><h1 > <b>EDITAR CARGA</b></h1></div><!--*/-->
-    <form class="form-contact contact_form"  method="post" id="formulario" action="acompanhamento/editar-carga/<str:id>" >
+    <form class="form-contact contact_form"  method="post" id="formulario" action="acompanhamento/editar-carga/{{carga.id}}" >
         {% csrf_token %}
         <div class="row add">
                 <H3 class="addcargah3indus">Industria :</H3>
-                {{ form.carga }}
-                <input id="industria" name="carga.id"  class="form-control editcarga" type="text" onfocus="carga.industria = ''" onblur="carga.industria = '{{ carga.industria }}'" placeholder="{{ carga.industria }}" >
+                <input id="industria" value="{{carga.industria}}" required="required" name="carga.id"  class="form-control editcarga" type="text" onfocus="carga.industria = ''" onblur="carga.industria = '{{ carga.industria }}'" placeholder="{{ carga.industria }}" >
                 <H3 class="addcargah3nf">Nota Fiscal :</H3>
-                <input id="NF" name="NF"  class="form-control editcarga" type="text" onfocus="carga.numero_nf = ''" onblur="this.placeholder = '{{ carga.numero_nf }}'" placeholder="{{ carga.numero_nf }}" >
+                <input id="NF" name="NF" value="{{carga.numero_nf}}" class="form-control editcarga" type="text" onfocus="carga.numero_nf = ''" onblur="this.placeholder = '{{ carga.numero_nf }}'" placeholder="{{ carga.numero_nf }}" >
             </div>
 
             <div class="row add" style="padding-top: 10px;">
                 <h3 style="padding-right: 35px;">Valor da Carga:</h3>
-                <input valueid="valor" name="valor" style="width: 265px;" class="form-control" type="number"  min="0" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Valor'" placeholder="{{ carga.valor_carga }}" >  
+                <input valueid="valor" value="{{carga.valor_carga}}" required="required" name="valor" style="width: 265px;" class="form-control" type="number"  min="0" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Valor'" placeholder="{{ carga.valor_carga }}" >  
             </div>
 
             <div class="row pand">
@@ -28,15 +27,14 @@
                     <option>Entrada Bonificada</option>
                 </select> 
                 <H3 id="previsao_h3" class="addcargah3prev">Previsão*:</H3>
-                <input id="previsao" name="previsao"  class="form-control editcarga" type="date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Previsão'" placeholder="Previsão" >
+                <input id="previsao" value="{{carga.previsao}}" required="required" name="previsao"  class="form-control editcarga" type="date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Previsão'" placeholder="Previsão" >
             </div>
 
             <div class="row pand">
-                {{ form.carga }}
                 <h3 class="prod">Produto:</h3>
-                <input id="Produto" name="Produto"  class="form-control editcarga" type="text" onfocus="carga.Produto = ''" onblur="this.placeholder = '{{ carga.Produto }}'" placeholder="{{ carga.Produto }}" >
+                <input id="Produto" value="{{carga.Produto}}" required="required" name="Produto"  class="form-control editcarga" type="text" onfocus="carga.Produto = ''" onblur="this.placeholder = '{{ carga.Produto }}'" placeholder="{{ carga.Produto }}" >
                 <H3 class="QTD">QTD:</H3>
-                <input id="QTD" name="QTD"  class="form-control editcarga QTD" type="number"  min="0" onfocus="this.placeholder = ''" onblur="this.placeholder = 'QTD'" placeholder="{{ carga.QTD }}" >
+                <input id="QTD" value="{{carga.QTD}}" required="required" name="QTD"  class="form-control editcarga QTD" type="number"  min="0" onfocus="this.placeholder = ''" onblur="this.placeholder = 'QTD'" placeholder="{{ carga.QTD }}" >
                 <H3 class="uni">UN:</H3>
                 <select class="form-control un"  id="un" name="un">
                     <option>  </option>
@@ -49,28 +47,29 @@
             </div>
             <div class="row pand">
                 <h3 class="promov">Movimentação:</h3>
-                <select class="form-control select" id="movimentacao" name="movimentacao" >
+                <select class="form-control select" id="movimentacao" value="{{carga.mavimentacao}}" name="movimentacao" >
                     <option>            </option>
                     <option>Carga batida</option>
                     <option>Carga paletizada</option>
                   </select> 
+
                 <h3 class="frete">Frete:</h3>
-                <select class="form-control selectf" style="width: 360px;" id="frete" name="frete" >
+                <select class="form-control selectf" style="width: 360px;" id="frete" value="{{carga.frete}}" name="frete" >
                     <option>            </option>
                     <option>CIF</option>
                     <option>FOB</option>
-                  </select> 
-                              
+                  </select>      
             </div>
 
             <div class="row pand">
                 <H3  id="observacaoh3" class="addcargah3obs">Observação:</H3>
-                <textarea class="form-control editcarga" id="observacao" name="observacao" rows="4"></textarea>
+                <textarea class="form-control editcarga" id="observacao" name="observacao" value="{{carga.observacao}}" rows="4"></textarea>
             </div>
         <div class="btadd botao" >
-            <button type="button" id="btadd" class="btn bt1"  onclick="validar_edit_carga()">EDITAR</button>
+            <button type="submit" id="btadd" class="btn bt1"  onclick="validar_edit_carga()"><span class="glyphicon glyphicon-edit"></span>EDITAR</button>
         </div>
         
     </form>
 </div>
+
 {% endblock %}

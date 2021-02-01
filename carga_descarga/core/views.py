@@ -182,7 +182,7 @@ def set_carga(request):
     observacao = request.POST.get('observacao')
     cont=request.POST.get('cont')
     print('----------->>',cont)
-    carga = Carga.objects.create(numero_nf=numero_nf.strip(),
+    carga = Carga.objects.update_or_create(numero_nf=numero_nf.strip(),
                                  industria=industria.strip(),
                                  valor_carga=valor_carga.strip(),
                                  dia_descarga=dia_descarga,
@@ -331,20 +331,55 @@ def excluir_carga_historico(request, id):
 def zap():
     print(teste)
     
-    #Editar Cargas
-# função que abre uma pagia para editar a carga 
+#Editar Cargas
 @login_required(login_url='/')
-def editar_cargas(request, id, template_name='core\editar-carga.html'):
-    user = return_usuario(request)
-    carga = get_object_or_404(Carga, pk = id)
+def editar_cargas(request, id, template_name='core\editar-carga.html' ):
+    carga = Carga.objects.get(pk=id)
 
-    if request.method == 'POST':
-        try:
-            carga.update()
-        except:
-            print('Erro ao editar a carga!')
+    return render(request,template_name, {'carga':carga})
+
+@login_required(login_url='/')  
+def set_edit(request, id):
+
+    if request.method == "POST":
+        industria = request.POST('industria')
+        numero_nf = request.POST('NF')
+        valor_carga = request.POST('valor')
+        dia_descarga = datetime.fromisoformat(request.POST('previsao'))
+        dia_chegada = datetime.fromisoformat(request.POST('previsao'))
+        user = return_usuario(request)
+        tipo_entrada = request.POST('tipo_entrada')
+        Produto = request.POST('Produto')
+        QTD = request.POST('QTD')
+        UN = request.POST('un')
+        movimentacao = request.POST('movimentacao')
+        frete = request.POST('frete')
+        observacao = request.POST('observacao')
+
+        carga1 = Carga.objects.get(pk=id)
+
+        carga1.industria = industria
+        carga1.numero_nf = NF
+        carga1.valor_carga = valor
+        carga1.dia_descarga = dia_descarga
+        carga1.dia_chegada = dia_chegada
+        carga1.tipo_entrada = tipo_entrada
+        carga1.Produto = Produto
+        carga1.QTD = QTD
+        carga1.UN = un
+        carga1.movimentacao = movimentacao
+        carga1.frete = frete
+        carga1.observacao = observacao
+        carga1.status = 'liberado'
+        carga1.save()
 
         return redirect('/acompanhamento/'+user.username)
-    
-    return render(request, template_name, {'carga': carga})
-    
+        
+    else:
+        try:
+            carga = Carga.objects.get(pk=id)
+
+        except crud.DoesNotExist:
+            carga = None
+        
+        return render(request, '/acompanhamento/'+user.username)
