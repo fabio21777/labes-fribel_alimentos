@@ -74,53 +74,67 @@ def get_inf_carga_erp(request,carga):
         return(ids)
 
  
+def criar_carga_bd(numero_nf, industria, numero_transacao, valor_carga, dia_chegada, user, user_erp, status, tipo_entrada, produto, 
+    QTD, UN, movimentacao, frete, observacao):
+    if len(Carga.objects.filter(numero_nf = numero_nf)) == 0:
+        Carga.objects.create(numero_nf = numero_nf,
+                             industria = industria,
+                             numero_transacao = numero_transacao,
+                             valor_carga = valor_carga,
+                             dia_chegada = dia_chegada,
+                             dia_descarga = dia_chegada,
+                             user = user,
+                             user_ERP = user_erp,
+                             status = status,
+                             tipo_entrada = tipo_entrada,
+                             Produto = produto, QTD = QTD, 
+                             UN = UN,
+                             is_ERP = True,
+                             movimentacao = movimentacao,
+                             frete = frete, 
+                             observacao = observacao)
+
+def definir_valores_variaveis_erp(carga, variavel):
+    if  variavel == 'status':
+        if  carga['STATUS'] == 'L':
+            return 'liberado'
+        else:
+            return 'aguardando'
+    elif variavel == 'tipo_entrada':
+        if carga['TIPODESCARGA']== '1':
+            return 'Entrada Normal'
+        else:
+            return 'Entrada Bonificada'
+    else: 
+        if carga['TIPOFRETE'] == 'C': 
+            return 'CIF'
+        else:
+            return 'FOB'
+
 def cargas_erp(usuario):
     try:
         cargas = consulta_bd_cargas_em_aberto()
         for carga in cargas:
-            numero_transacao =  carga['NUMTRANSENT']
+            numero_transacao = carga['NUMTRANSENT']
             industria = carga['FORNECEDOR']
             numero_nf = str(carga['NUMNOTA'])
             valor_carga = carga['VLTOTAL']
             dia_chegada = carga['DTACHEGADA']
             user = usuario
-            user_ERP = carga['FUNCLANC']
-            if  carga['STATUS'] == 'L':
-                status='liberado'
-            else:
-                status='aguardando'
-            if carga['TIPODESCARGA']== '1':
-                tipo_entrada='Entrada Normal'
-            else:
-                tipo_entrada='Entrada Bonificada'
-            Produto = ' '
+            user_erp = carga['FUNCLANC']
+            status = definir_valores_variaveis_erp(carga, 'status')
+            tipo_entrada = definir_valores_variaveis_erp(carga, 'tipo_entrada')
+            produto = ''
             QTD = carga['QTITENS']
-            movimentacao = '    '
-            if carga['TIPOFRETE'] == 'C': 
-                frete = 'CIF'
-            else:
-                frete ='FOB' 
+            movimentacao = '' 
+            frete = definir_valores_variaveis_erp(carga, 'frete') 
             observacao = str(carga['OBS'])
-            print('aqui é a nf----------->>>> ',numero_nf)
-            if len(Carga.objects.filter(numero_nf=numero_nf)) == 0:
-                Carga.objects.create(numero_nf=numero_nf,
-                                 industria=industria,
-                                 numero_transacao=numero_transacao,
-                                 valor_carga=valor_carga,
-                                 dia_chegada=dia_chegada,
-                                 dia_descarga=dia_chegada,
-                                 user=user,
-                                 user_ERP=user_ERP,
-                                 status=status,
-                                 tipo_entrada=tipo_entrada,
-                                 Produto=Produto, QTD=QTD, 
-                                 UN=' ',
-                                 is_ERP=True,
-                                 movimentacao=movimentacao,
-                                 frete=frete, 
-                                 observacao=observacao)      
+            UN = ''
+            print('Nota Fiscal >>>>>>> ', numero_nf)
+
+            criar_carga_bd(numero_nf, industria, numero_transacao, valor_carga, dia_chegada, user, user_erp, status, tipo_entrada, produto, QTD, UN, movimentacao, frete, observacao)   
     except:
-      print(" ERRO FATAL,-------------->não foi carregada nenhuma carga do ERP é por conta da conexão do banco so é possivel acessa na intranet")
+      print(" ERRO FATAL! Não foi carregada nenhuma carga do ERP por conta da conexão do banco só ser possivel acessar na intranet.")
 
 
 @login_required(login_url='/')
