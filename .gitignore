@@ -1,0 +1,8 @@
+
+*.pyc
+*.pyc
+*.sqlite3
+carga_descarga/carga_descarga/__pycache__
+carga_descarga/core/__pycache__
+*.sqlite3
+*.pyc

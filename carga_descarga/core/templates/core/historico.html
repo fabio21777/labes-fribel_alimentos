@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} HISTÓRICO DE CARGAS LIBERADAS {% endblock %}
+
+{% block content %}
+<div class="conteiner">
+    <div id = "conjuntoOpcoes" class="row pand1">
+        <span>Ordenar por:</span>
+        <select name="ordenador" id="ordenador" class="form-control">
+            <option value="" selected disabled>Selecione uma coluna</option>
+            <option value="dia_descarga">Dia da liberação (ordem crescente)</option>
+            <option value="-dia_descarga">Dia da liberação (ordem decrescente)</option>
+            <option value="numero_nf">Número NF (ordem crescente)</option>
+            <option value="-numero_nf">Número NF (ordem decrescente)</option>
+            <option value="industria">Indústria (ordem crescente)</option>
+            <option value="-industria">Indústria (ordem decrescente)</option>
+            <option value="status">Status (ordem crescente)</option>
+            <option value="-status">Status (ordem decrescente)</option>
+        </select>
+        <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self">
+            <div class="form-group">
+                <label for="search-field">
+                    <i class="fa fa-search"></i>
+                </label>
+                <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
+                <button id="btnSearch" class="btn btnSearch-historico" type="submit">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+    <div id="table">
+        <table class="table table-hover">
+            <thead>
+                <tr id="tr-color">
+                    <th scope="col">#</th>
+                    <th scope="col">Número NF</th>
+                    <th scope="col">Indústria</th>
+                    <th scope="col">Dia da Liberação</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Usuário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Esse laço for carrega todas as cargas liberadas-->
+                {% for carga in cargas %}
+                <tr>
+                    <th scope="row" class="coluna_func">
+                        <a class="btnExcluir" href="{% url 'excluir_carga_historico' carga.id %}"><i class="fa fa-trash"></i></a>
+                    </th>
+                    <td>{{carga.numero_nf}}</td>
+                    <td>{{carga.industria}}</td>
+                    <td>{{carga.dia_descarga}}</td>
+                    <td>{{carga.status}}</td>
+                    <td>{{carga.user}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
