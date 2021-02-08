@@ -15,7 +15,7 @@ from .teste_selenium import *
 from .conection_bd import consulta_bd_cargas_em_aberto
 from .conection_bd import conexao_bd
 from .conection_bd import inf_carga_erp
-from .whatsapp import newbot
+from .whatsapp import zap_grupo
 import cx_Oracle
 from datetime import datetime, timedelta
 import re
@@ -240,7 +240,7 @@ def reservar_box(request, id):
         carga.box = box.name
         carga.save()
         box.save()
-        bott = newbot()
+        bott = zap_grupo()
         bott.EnviarMensagens_grupo('Teste',str(carga.industria)+'Liberada')
     return redirect('liberar-para-box')
 

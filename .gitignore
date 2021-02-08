@@ -4,5 +4,6 @@
 *.sqlite3
 carga_descarga/carga_descarga/__pycache__
 carga_descarga/core/__pycache__
+carga_descarga/.vscode/
 *.sqlite3
 *.pyc
