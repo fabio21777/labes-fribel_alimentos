@@ -21,13 +21,8 @@ class newbot:
             self.chromedriver, chrome_options=self.options)
 
     def zap(self, numero, mensagem):
-        try:
-            part1='https://api.whatsapp.com/send?phone='
-            part2=numero
-            part3='&text='
-            part4=mensagem
-            link=part1+part2+part3+part4
-            site  = link
+        try:            
+            site  = self.gerar_link(numero,mensagem)
             self.driver.get(site)
             self.driver.implicitly_wait(40)
             self.driver.find_element_by_xpath('//*[@id="action-button"]').click()
@@ -38,7 +33,12 @@ class newbot:
         except:
             self.driver.close()
             self.erro()
-
+    def gerar_link(self,numero,mensagem):
+        part1='https://api.whatsapp.com/send?phone='
+        part2=numero
+        part3='&text='
+        part4=mensagem
+        return part1+part2+part3+part4
 #bott = newbot()
 #bott.EnviarMensagens_grupo('Teste','teste')
 
@@ -56,7 +56,7 @@ class zap_grupo:
             self.chromedriver, chrome_options=self.options)
 
 
-    def EnviarMensagens_grupo(self, grupos_ou_pessoas, mensagem):
+    def enviar_mensagens_grupo(self, grupos_ou_pessoas, mensagem):
         try:
             print('--->', grupos_ou_pessoas, mensagem)
             self.driver.get('https://web.whatsapp.com')
@@ -67,7 +67,7 @@ class zap_grupo:
             print('errro no selenium zap')
             #self.driver.close()
     
-    def envia_messagem(self,grupos_ou_pessoas,messagem):
+    def envia_messagem(self,grupos_ou_pessoas,mensagem):
             campo_grupo = self.driver.find_element_by_xpath(f"//span[@title='Teste']")
             time.sleep(3)
             campo_grupo.click()
