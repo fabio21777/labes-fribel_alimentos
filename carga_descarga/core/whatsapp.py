@@ -7,6 +7,8 @@ import unittest, time, re
 from selenium import webdriver
 import re
 import os
+
+
 class newbot:
     dir_path = os.getcwd()
     chromedriver = os.path.join(dir_path, "chromedriver.exe")
@@ -18,7 +20,7 @@ class newbot:
         self.driver = webdriver.Chrome(
             self.chromedriver, chrome_options=self.options)
 
-    def zap(self,numero,mensagem):
+    def zap(self, numero, mensagem):
         try:
             part1='https://api.whatsapp.com/send?phone='
             part2=numero
@@ -36,10 +38,27 @@ class newbot:
         except:
             self.driver.close()
             self.erro()
-	
-    def EnviarMensagens_grupo(self,grupos_ou_pessoas,mensagem):
+
+#bott = newbot()
+#bott.EnviarMensagens_grupo('Teste','teste')
+
+
+class zap_grupo:
+    dir_path = os.getcwd()
+    chromedriver = os.path.join(dir_path, "chromedriver.exe")
+    profile = os.path.join(dir_path, "profile", "wpp")
+
+    def __init__(self):
+        self.options = webdriver.ChromeOptions()
+        self.options.add_argument(
+            r"user-data-dir={}".format(self.profile))
+        self.driver = webdriver.Chrome(
+            self.chromedriver, chrome_options=self.options)
+
+
+    def EnviarMensagens_grupo(self, grupos_ou_pessoas, mensagem):
         try:
-            print('--->',grupos_ou_pessoas,mensagem)
+            print('--->', grupos_ou_pessoas, mensagem)
             self.driver.get('https://web.whatsapp.com')
             time.sleep(5)
             for grupo_ou_pessoa in grupos_ou_pessoas:
@@ -59,6 +78,3 @@ class newbot:
         except:
             print('errro no selenium zap')
             #self.driver.close()
-        
-#bott = newbot()
-#bott.EnviarMensagens_grupo('Teste','teste')
