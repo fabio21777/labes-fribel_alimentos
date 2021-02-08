@@ -62,19 +62,21 @@ class zap_grupo:
             self.driver.get('https://web.whatsapp.com')
             time.sleep(5)
             for grupo_ou_pessoa in grupos_ou_pessoas:
-                campo_grupo = self.driver.find_element_by_xpath(f"//span[@title='Teste']")
-                time.sleep(3)
-                campo_grupo.click()
-                chat_box = self.driver.find_element_by_class_name('DuUXI')
-                time.sleep(3)
-                chat_box.click()
-                chat_box.send_keys(mensagem+'teste')
-                botao_enviar = self.driver.find_element_by_xpath(
-                    "//span[@data-icon='send']")
-                time.sleep(3)
-                botao_enviar.click()
-                time.sleep(5)
-                #self.driver.close()
+                self.envia_messagem(grupo_ou_pessoa,mensagem)
         except:
             print('errro no selenium zap')
             #self.driver.close()
+    
+    def envia_messagem(self,grupos_ou_pessoas,messagem):
+            campo_grupo = self.driver.find_element_by_xpath(f"//span[@title='Teste']")
+            time.sleep(3)
+            campo_grupo.click()
+            chat_box = self.driver.find_element_by_class_name('DuUXI')
+            time.sleep(3)
+            chat_box.click()
+            chat_box.send_keys(mensagem+'teste')
+            botao_enviar = self.driver.find_element_by_xpath(
+                "//span[@data-icon='send']")
+            time.sleep(3)
+            botao_enviar.click()
+            time.sleep(5)
