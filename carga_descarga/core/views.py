@@ -348,12 +348,6 @@ def zap():
 #Editar Cargas
 @login_required(login_url='/')
 def editar_cargas(request, id, template_name='core\editar-carga.html' ):
-    carga = Carga.objects.get(pk=id)
-
-    return render(request,template_name, {'carga':carga})
-
-@login_required(login_url='/')  
-def set_edit(request, id):
 
     if request.method == "POST":
         industria = request.POST('industria')
@@ -388,12 +382,13 @@ def set_edit(request, id):
         carga1.save()
 
         return redirect('/acompanhamento/'+user.username)
-        
+    
     else:
         try:
             carga = Carga.objects.get(pk=id)
-
-        except crud.DoesNotExist:
-            carga = None
         
-        return render(request, '/acompanhamento/'+user.username)
+        except Carga.DoesNotExist:
+            carga = None
+
+        return render(request,template_name, {'carga':carga})
+
