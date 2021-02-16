@@ -206,7 +206,7 @@ h3.addcargah3prev{
 }
 #titulo{
     padding-bottom: 60px;
-    padding-left: 350px;
+    padding-left: 270px;
 }
 div.pand{
     padding-top: 20px;
@@ -224,6 +224,8 @@ textarea.addcarga{
 }
 #principal_addcarga{
   padding-left: 110px;
+  background-color: rgba(241, 234, 234, 0.61);
+  height: 100vh;
 }
 div.btadd{
     padding-left: 510px;
@@ -603,4 +605,33 @@ a.cancelarExclusao div.btn.btn-danger{
 a.cancelarExclusao div.btn.btn-danger:hover{
   background-color: #004b97;
   color: white;
+}
+
+#inputs{
+  font-family: 'Times New Roman', Times, serif;
+  padding-right: 15px;
+  padding-bottom: 10px;
+}
+
+#industria{
+  width: 350px;
+}
+
+#nf{
+  width: 350px;
+}
+
+#valor{
+  width: 150px;
+  padding-top:10px;
+
+}
+
+#principal_login{
+  background-color: rgba(241, 234, 234, 0.61);
+  width: 350px;
+  height: 200px;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-bottom: 230px;
 }
