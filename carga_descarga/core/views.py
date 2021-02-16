@@ -350,31 +350,31 @@ def zap():
 def editar_cargas(request, id, template_name='core\editar-carga.html' ):
 
     if request.method == "POST":
-        industria = request.POST('industria')
-        numero_nf = request.POST('NF')
-        valor_carga = request.POST('valor')
-        dia_descarga = datetime.fromisoformat(request.POST('previsao'))
-        dia_chegada = datetime.fromisoformat(request.POST('previsao'))
+        industria = request.POST.get('industria')
+        numero_nf = request.POST.get('NF')
+        valor_carga = request.POST.get('valor')
+        dia_descarga = datetime.fromisoformat(request.POST.get('previsao'))
+        dia_chegada = datetime.fromisoformat(request.POST.get('previsao'))
         user = return_usuario(request)
-        tipo_entrada = request.POST('tipo_entrada')
-        Produto = request.POST('Produto')
-        QTD = request.POST('QTD')
-        UN = request.POST('un')
-        movimentacao = request.POST('movimentacao')
-        frete = request.POST('frete')
-        observacao = request.POST('observacao')
+        tipo_entrada = request.POST.get('tipo_entrada')
+        Produto = request.POST.get('Produto')
+        QTD = request.POST.get('QTD')
+        UN = request.POST.get('un')
+        movimentacao = request.POST.get('movimentacao')
+        frete = request.POST.get('frete')
+        observacao = request.POST.get('observacao')
 
         carga1 = Carga.objects.get(pk=id)
 
         carga1.industria = industria
-        carga1.numero_nf = NF
-        carga1.valor_carga = valor
-        carga1.dia_descarga = dia_descarga
-        carga1.dia_chegada = dia_chegada
-        carga1.tipo_entrada = tipo_entrada
-        carga1.Produto = Produto
-        carga1.QTD = QTD
-        carga1.UN = un
+        carga1.numero_nf =numero_nf
+        carga1.valor_carga = valor_carga
+        carga1.dia_descarga=dia_descarga
+        carga1.dia_chegada=dia_chegada
+        carga1.tipo_entrada=tipo_entrada
+        carga1.Produto=Produto
+        carga1.QTD=QTD
+        carga1.U =UN
         carga1.movimentacao = movimentacao
         carga1.frete = frete
         carga1.observacao = observacao
