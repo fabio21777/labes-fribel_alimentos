@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
     <link rel="shortcut icon"  href="{% static 'imagens/LOGO-FRIBEL.ico'%}">
     <title>{% block title %}{% endblock %}</title>
@@ -33,11 +34,11 @@
     </div>
     {% if login != 'login' %}
         <div class="conteiner justify-content-center row basefri" id="navmod">
-            <a href="\acompanhamento/{{user.username}}"><button class="btn btnbase" id="bt_list_carga" value="{{acomp}}"><h3 class="base" id="h3_list_carga">Lista Das Cargas</h3></button></a><!--temporario-->
+            <a href="\acompanhamento/{{user.username}}"><button class="btn btnbase" id="bt_list_carga" value="{{acomp}}"><h3 class="base" id="h3_list_carga">Lista das Cargas</h3></button></a><!--temporario-->
             <!--Laço if controla o acesso a função de cadastrar novas cargas-->
                 <a href="\acompanhamento/adicionarCarga/"><button class="btn btnbase" id="bt_add_carga"><h3 class="base" id="h3_add_carga">Adicionar Carga</h3></button></a>
-            <a href="\liberar-para-box"><button class="btn btnbase" id="bt_liberar"><h3 id="h3_liberar" class="base" >Liberar Para Box</h3></button></a>
-            <a href="\acompanhamento/historico/"><button class="btn btnbase"><h3 class="base">Histórico de cargas liberadas</h3></button></a>
+            <a href="\liberar-para-box"><button class="btn btnbase" id="bt_liberar"><h3 id="h3_liberar" class="base" >Liberar para Box</h3></button></a>
+            <a href="\acompanhamento/historico/"><button class="btn btnbase"><h3 class="base">Histórico de Cargas Liberadas</h3></button></a>
         </div>
     {% endif %}
     <div class="padding"></div>

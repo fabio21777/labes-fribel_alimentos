@@ -44,7 +44,7 @@
                 {% for carga in cargas %}
                 <tr>
                     <th scope="row" class="coluna_func">
-                        <a class="btnExcluir" href="{% url 'excluir_carga_historico' carga.id %}"><i class="fa fa-trash"></i></a>
+                        <a class="btnExcluir" href="{% url 'excluir_carga_historico' carga.id %}"><i class="bi bi-trash"></i></a>
                     </th>
                     <td>{{carga.numero_nf}}</td>
                     <td>{{carga.industria}}</td>
