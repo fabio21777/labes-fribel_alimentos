@@ -386,9 +386,10 @@ def editar_cargas(request, id, template_name='core\editar-carga.html' ):
     else:
         try:
             carga = Carga.objects.get(pk=id)
-        
+            print('aqui',str(carga.dia_descarga))
+            previsao=str(carga.dia_descarga)
         except Carga.DoesNotExist:
             carga = None
 
-        return render(request,template_name, {'carga':carga})
+        return render(request,template_name, {'carga':carga,'previsao':previsao})
 
