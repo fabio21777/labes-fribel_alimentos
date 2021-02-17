@@ -7,35 +7,35 @@
     <div  id="titulo"><h1 > <b>EDITAR CARGA</b></h1></div><!--*/-->
     <form class="form-contact contact_form"  method="POST" id="formulario" action="\acompanhamento/editar-carga/{{ carga.id }}" >
         {% csrf_token %}
-        <div class="row add">
-            <H3 class="addcargah3indus">Industria :</H3>
+        <div class="row add" id="inputs_editar_carga">
+            <h4 class="addcargah3indus">Industria :</h4>
             <input id="industria" value="{{carga.industria}}" required="required" name="industria"  class="form-control editcarga" type="text">
-            <H3 class="addcargah3nf">Nota Fiscal :</H3>
+            <h4 class="addcargah3nf" >Nota Fiscal :</h4>
             <input id="NF" name="NF" value="{{carga.numero_nf}}" class="form-control editcarga" type="text">
         </div>
 
-        <div class="row add" style="padding-top: 10px;">
-            <h3 style="padding-right: 35px;">Valor da Carga:</h3>
-            <input valueid="valor" value="{{carga.valor_carga}}" required="required" name="valor" style="width: 265px;" class="form-control" type="number"  min="0">  
+        <div class="row add" id="inputs_editar_carga">
+            <h4 class="addcargavalor">Valor da Carga:</h4>
+            <input valueid="valor" value="{{carga.valor_carga}}" required="required" name="valor" class="form-control" type="number"  min="0">  
         </div>
 
-        <div class="row pand">
-            <h3 class="tipEnt">Tipo de Entrada:</h3>
+        <div class="row pand" id="inputs_editar_carga">
+            <h4 class="tipEnt">Tipo de Entrada:</h4>
             <select class="form-control tipoEntrada" id="tipo_entrada" name="tipo_entrada" >
-                <option>              </option>
+                <option>{{carga.tipo_entrada}}</option>
                 <option>Entrada Normal</option>
                 <option>Entrada Bonificada</option>
             </select> 
-            <H3 id="previsao_h3" class="addcargah3prev">Previsão*:</H3>
-            <input id="previsao" value="{{carga.previsao}}" required="required" name="previsao"  class="form-control editcarga" type="date">
+            <h4 id="previsao_h4" class="addcargah3prev">Previsão*:</h4>
+            <input id="previsao" value="{{carga.dia_descarga}}" required="required" name="previsao"  class="form-control editcarga" type="date">
         </div>
 
-        <div class="row pand">
-            <h3 class="prod">Produto:</h3>
+        <div class="row pand" id="inputs_editar_carga">
+            <h4 class="prod">Produto:</h4>
             <input id="Produto" value="{{carga.Produto}}" required="required" name="Produto"  class="form-control editcarga" type="text">
-            <H3 class="QTD">QTD:</H3>
+            <h4 class="QTD">QTD:</h4>
             <input id="QTD" value="{{carga.QTD}}" required="required" name="QTD"  class="form-control editcarga QTD" type="number"  min="0">
-            <H3 class="uni">UN:</H3>
+            <h4 class="uni">UN:</h4>
             <select class="form-control un"  id="un" name="un">
                 <option>  </option>
                 <option>KG</option>
@@ -44,27 +44,27 @@
                 <option>FDS</option>
             </select> 
         </div>
-        <div class="row pand">
-            <h3 class="promov">Movimentação:</h3>
+        <div class="row pand" id="inputs_editar_carga">
+            <h4 class="promov">Movimentação:</h4>
 
             <select class="form-control select" id="movimentacao" value="{{carga.mavimentacao}}" name="movimentacao" >
-                <option>            </option>
+                <option>{{carga.mavimentacao}}</option>
                 <option>Carga batida</option>
                 <option>Carga paletizada</option>
               </select> 
 
-            <h3 class="frete">Frete:</h3>
+            <h4 class="frete">Frete:</h4>
 
-            <select class="form-control selectf" style="width: 360px;" id="frete" value="{{carga.frete}}" name="frete" >
-                <option>            </option>
+            <select class="form-control selectf" style="width: 300px;" id="frete" value="{{carga.frete}}" name="frete" >
+                <option>{{carga.frete}}</option>
                 <option>CIF</option>
                 <option>FOB</option>
             </select>      
         </div>
 
-        <div class="row pand">
-            <H3  id="observacaoh3" class="addcargah3obs">Observação:</H3>
-            <textarea class="form-control editcarga" id="observacao" name="observacao" value="{{carga.observacao}}" rows="4"></textarea>
+        <div class="row pand" id="inputs_editar_carga">
+            <h4  id="observacaoh4" class="addcargah4obs">Observação:</h4>
+            <textarea class="form-control editcarga" id="observacao" name="observacao" value="{{carga.observacao}}" rows="4">{{carga.observacao}}</textarea>
         </div>
 
         <div class="btadd botao" >

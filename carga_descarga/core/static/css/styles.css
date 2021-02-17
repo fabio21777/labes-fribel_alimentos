@@ -182,36 +182,39 @@ div.botao{
 
 /*Editar Carga*/
 input.editcarga{
-  width: 260px;
+  width: 300px;
 }
 
 /* addcarga style*/
 input.addcarga{
-    width: 260px;
+    width: 300px;
 }
 h1{
     color: #89b348;
 }
-
-h3.addcargah3nf{
-    padding-right: 40px;
-    padding-left: 30px;
+h4.addcargavalor{
+  padding-right: 31px; 
 }
-h3.addcargah3indus{
-    padding-right: 103px;
+h4.addcargah3nf{
+    padding-right: 10px;
+    padding-left: 50px;
 }
-h3.addcargah3prev{
-    padding-right: 73px;
-    padding-left: 30px;
+h4.addcargah3indus{
+    padding-right: 82px;
+    padding-top: 10px;
+}
+h4.addcargah3prev{
+    padding-right: 22px;
+    padding-left: 50px;
 }
 #titulo{
     padding-bottom: 60px;
-    padding-left: 270px;
+    padding-left: 350px;
 }
 div.pand{
     padding-top: 20px;
 }
-h3.addcargah3obs{
+h4.addcargah3obs{
     padding-right: 75px;
 }
 textarea.addcarga{
@@ -230,30 +233,38 @@ textarea.addcarga{
 div.btadd{
     padding-left: 510px;
 }
-h3.tipEnt{
+h4.tipEnt{
     padding-right: 20PX;
 }
-h3.prod{
-    padding-right: 120px;
+h4.prod{
+    padding-right: 97px;
 }
-h3.QTD{
-    padding-left: 30px;
+h4.QTD{
+    padding-left: 52px;
+    padding-right: 68px;
+}
+h4.uni{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+h4.promov{
     padding-right: 30px;
 }
-h3.promov{
-    padding-right: 35px;
+h4.frete{
+  padding-left: 53px;
+  padding-right: 66px;
 }
 select.select{
-    width: 260px;
+    width: 300px;
 }
 select.un{
     width: 100px;
 }
 select.tipoEntrada{
-    width: 260px;
+    width: 300px;
 }
 select.selectf{
-  width: 360px;
+  width: 300px;
 }
 input.QTD{
     width: 100px;
@@ -262,9 +273,9 @@ h3.uni{
     padding-right: 30px;
     padding-left: 30px;
 }
-h3.frete{
-    padding-left: 30px;
-    padding-right: 20px;
+h4.frete{
+    padding-left: 53px;
+    padding-right: 66px;
 }
 
 /* HEADER + NAVBAR*/
@@ -609,20 +620,23 @@ a.cancelarExclusao div.btn.btn-danger:hover{
 
 #inputs{
   font-family: 'Times New Roman', Times, serif;
-  padding-right: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 10px
+}
+#inputs_editar_carga{
+  font-family: 'Times New Roman', Times, serif;
+  padding-bottom: 10px
 }
 
 #industria{
-  width: 350px;
+  width: 300px;
 }
 
 #nf{
-  width: 350px;
+  width: 300px;
 }
 
 #valor{
-  width: 150px;
+  width: 300px;
   padding-top:10px;
 
 }
