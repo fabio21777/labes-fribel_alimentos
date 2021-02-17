@@ -26,7 +26,7 @@
         {% for item in itens_carga%}
         <div class="container  col-8" >
         <h3>item {{ forloop.counter }}</h3>
-        <div class="row" style="background-color: white; ">
+        <div class="row" style="background-color: white; border-radius: 10px; ">
             <h6>Número do pedido : <b> {{item.numero_pedido}}</b>&nbsp;&nbsp;&nbsp;&nbsp; </h6>
             <h6>código do produto :<b>{{item.cod_prod}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>
             <h6>Descrição :<b>{{item.descricao}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</h6>

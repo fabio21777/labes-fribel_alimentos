@@ -51,6 +51,7 @@ button.btn-libCarga:hover{
 }
 h5.inf_carga{
   background-color:white;
+  border-radius: 10px;
 }
 button.btn-libCarga{
   padding: 10px 30px;
