@@ -621,6 +621,7 @@ a.cancelarExclusao div.btn.btn-danger:hover{
 
 #inputs{
   font-family: 'Times New Roman', Times, serif;
+  size: 15px;
   padding-bottom: 10px
 }
 #inputs_editar_carga{

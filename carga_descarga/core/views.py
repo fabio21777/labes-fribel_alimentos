@@ -133,13 +133,17 @@ def cargas_erp(usuario):
             print('Nota Fiscal >>>>>>> ', numero_nf)
 
             criar_carga_bd(numero_nf, industria, numero_transacao, valor_carga, dia_chegada, user, user_erp, status, tipo_entrada, produto, QTD, UN, movimentacao, frete, observacao)   
-    except:
+    except :                    #except ValueError:
       print(" ERRO FATAL! Não foi carregada nenhuma carga do ERP por conta da conexão do banco só ser possivel acessar na intranet.")
 
 
 @login_required(login_url='/')
 def acompanhamento_carga(request, usuario):
     print(usuario)
+    dia_atual=''
+    cor_dia={}
+    index_cores=0
+    cores=['','#C8FC59','#59FC87','#59FCDB','#5AFB87','#5AFBC3','#FE7B8E','#FEE87B','#7BFEA0','#9FFDEA','#8DFB5A','#FEA9D5',"#FEEDA9","#BAFEA9","#A9FEE7",'#A9BFFE','#FEA9C6','#FCFEA9']
     usuario = User.objects.get(username=usuario)
     cargas_erp(usuario)
     acomp = 'acomp'
@@ -154,13 +158,23 @@ def acompanhamento_carga(request, usuario):
     elif search:
         cargas = Carga.objects.filter(industria__icontains=search.strip())
     else:
-        cargas = Carga.objects.all().order_by('-created_at')
+        cargas = Carga.objects.all().order_by('-dia_descarga')
+    for carga in cargas:
+        if dia_atual != str(carga.dia_descarga) and index_cores < 17  :
+            dia_atual=str(carga.dia_descarga)
+            index_cores+=1
+        carga.cor=cores[index_cores]
+
+
+
+
 
     return render(request, 'core/acomp.html', {'usuario': usuario,
                                                'acomp': acomp,
                                                'cargas': cargas,
                                                'tamanho': len(cargas),
-                                               'tipo_user': tipo_user})
+                                               'tipo_user': tipo_user,
+                                               'cores': cores})
 
 @login_required(login_url='/')
 def add_Carga(request):

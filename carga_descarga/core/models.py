@@ -48,6 +48,7 @@ class Carga(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     finalizada = models.BooleanField(default=False)
+    cor = models.CharField('cor', max_length=8)
     is_ERP=models.BooleanField(default=False)
 
     def __str__(self):

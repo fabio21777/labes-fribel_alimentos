@@ -65,7 +65,7 @@ def consulta_bd_cargas_em_aberto():
         #print(i,'\n\n')
       cursor.close()
       return(data)
-    except:
+    except ValueError:
       print("não foi carregada nenhuma carga do ERP")
       cursor.close()
       return(data)
