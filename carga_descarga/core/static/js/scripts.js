@@ -4,16 +4,16 @@ $(document).ready(function(){
     var ordenador = $('#ordenador');
     var btnSearch = $('#btnSearch');
     var baseUrl = window.location.href;
-    bt_add_carga=document.getElementById("bt_add_carga")
-    h3_add_carga=document.getElementById("h3_add_carga")
-    bt_liberar=document.getElementById("bt_liberar")
-    h3_liberar=document.getElementById("h3_liberar")
-    bt_list_carga=document.getElementById("bt_list_carga")
-    h3_list_carga=document.getElementById("h3_list_carga")
-    value_list_carga=document.getElementById("bt_list_carga").value
+    bt_add_carga = document.getElementById("bt_add_carga")
+    h3_add_carga = document.getElementById("h3_add_carga")
+    bt_liberar = document.getElementById("bt_liberar")
+    h3_liberar = document.getElementById("h3_liberar")
+    bt_list_carga = document.getElementById("bt_list_carga")
+    h3_list_carga = document.getElementById("h3_list_carga")
+    value_list_carga = document.getElementById("bt_list_carga").value
+    td_carga_descarga = document.getElementById("td_carga_descarga").value
     navmod=document.getElementById("navmod")
     path=window.location.pathname
-    
     if (path=='/acompanhamento/adicionarCarga/'){
         h3_add_carga.style.color="#89b348"
         bt_add_carga.style.backgroundColor ="#004b97"
@@ -86,11 +86,11 @@ function validar_add_carga(){
     }
     if(Produto.value.length > 40){
         controle = false
-        window.alert("O tamanho máximo do produto é 40 cararacteres!")
+        window.alert("O tamanho máximo do produto é 40 cararacteres! add carga")
     }
-    if (observacao.value.length > 200){
-        controle = false
+    if (observacao.value.length > 5000){
         window.alert("Foi excedido o tamanho do campo observação!")
+        controle = false
     }
     
     if (controle == true && window.confirm("deseja confirmar o cadastro  da carga?") ) {
@@ -256,7 +256,7 @@ function validar_edit_carga(){
         controle = false
         window.alert("O tamanho máximo do produto é 40 cararacteres!")
     }
-    if (observacao.value.length > 200){
+    if (observacao.value.length > 5000){
         controle = false
         window.alert("Foi excedido o tamanho do campo observação!")
     }

@@ -29,7 +29,7 @@ button.bt1{
 }
 button.bt2{
   color: white;
-  background-color:#89b348 ;
+  background-color:#b36148 ;
   padding: 10px 20px;
 }
 #table{
@@ -201,7 +201,7 @@ h4.addcargah3nf{
     padding-left: 50px;
 }
 h4.addcargah3indus{
-    padding-right: 82px;
+    padding-right: 88px;
     padding-top: 10px;
 }
 h4.addcargah3prev{
@@ -485,6 +485,8 @@ h4.frete{
   a.login{
     margin-left: 660px;
   }
+/*libera box style  */
+
 
 /*Footer*/
 .footer-dark {

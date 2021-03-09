@@ -4,16 +4,49 @@
 
 {% block content %}
 
-    <div class="liberar_carga"> 
-        <div class="container libcarga">
-            <h1>Cargas Liberadas para o box</h1>
-            {% for box in boxs%}
+    <div > 
+        <div style="font-family: 'Times New Roman', Times, serif;" >
+            <h1 align = "center" >Cargas Liberadas para o box</h1>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">NF</th>
+                    <th scope="col">INDUSTRIA</th>
+                    <th scope="col">PREVISÃO</th>
+                    <th scope="col">BOX</th>
+                    <th scope="col">CHECK</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for carga in cargas%}
+                  <tr>
+                    <th scope="row"></th>
+                    <td style="background:{{carga.cor}}">{{carga.numero_nf}}</td>
+                    <td style="background:{{carga.cor}}">{{carga.industria}}</td>
+                    <td style="background:{{carga.cor}}">{{carga.dia_descarga}}</td>
+                    <td style="background:{{carga.cor}}"> <select class="form-control " >
+                            <option> </option>
+                        {% for box in boxs%}
+                            <option>{{box.name}} </option>  
+                        {% endfor %} 
+                    </select> </td>
+                    <td style="background:{{carga.cor}}"><button type="button" class="btn btn-default btn-sm" style="background-color:#b36148;padding: 10px; width: 60px;">
+                        <span class="glyphicon glyphicon-check"></span>
+                        </button>
+                    </td>
+            
+                  </tr>
+                {% endfor %} 
+                </tbody>
+              </table>
+            <!--{% for box in boxs%}
             <h1 class="libCarga">Box :{{box.name}} </h1>   
             <form method="post" class="post-form form-libcarga">{% csrf_token %}
                 {{ cargas.as_table }}
                 <button type="submit" id="btn-libCarga" class="btn btn-libCarga" formaction= "{% url 'reservar-box' id=box.id %}"  >Confirmar</button>                                                           
             </form> 
-        {% endfor %}
+        {% endfor %}-->
            
     </div> 
     </div>
