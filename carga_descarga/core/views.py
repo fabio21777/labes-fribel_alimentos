@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
-from .models import Carga, Carga_Liberada, Box, Tipo_user,Itens_carga
+from .models import Carga, Carga_Liberada, Box, Tipo_user,Itens_carga,Check
 from django.contrib.auth.models import User
 from datetime import datetime,date
 from .forms import libera_box_Form
@@ -19,6 +19,7 @@ from .whatsapp import zap_grupo
 import cx_Oracle
 from datetime import datetime, timedelta
 import re
+import time
 # Importar a classe que contém as funções e aplicar um alias
 
 def return_usuario(request):
@@ -62,15 +63,12 @@ def get_inf_carga_erp(request,carga):
                                     carga=carga )
         itens_carga=Itens_carga.objects.filter(carga__numero_transacao=carga.numero_transacao)
         for item in itens_carga:
-            print('teste')
             ids.append(int(re.sub('[^0-9]','',str(item))))
-            print('------------->',int(re.sub('[^0-9]','',str(item))))
         return(ids)
     else:
         itens_carga=Itens_carga.objects.filter(carga__numero_transacao=carga.numero_transacao)
         for item in itens_carga:
             ids.append(int(re.sub('[^0-9]','',str(item))))
-            print('------------->',int(re.sub('[^0-9]','',str(item))))
         return(ids)
 
  
@@ -130,8 +128,6 @@ def cargas_erp(usuario):
             frete = definir_valores_variaveis_erp(carga, 'frete') 
             observacao = str(carga['OBS'])
             UN = ''
-            print('Nota Fiscal >>>>>>> ', numero_nf)
-
             criar_carga_bd(numero_nf, industria, numero_transacao, valor_carga, dia_chegada, user, user_erp, status, tipo_entrada, produto, QTD, UN, movimentacao, frete, observacao)   
     except :
       print(" ERRO FATAL! Não foi carregada nenhuma carga do ERP por conta da conexão do banco só ser possivel acessar na intranet.")
@@ -139,8 +135,9 @@ def cargas_erp(usuario):
 
 @login_required(login_url='/')
 def acompanhamento_carga(request, usuario):
-    print(usuario)
+    
     now = datetime.now()
+    
     #dia_atual=''
     #cor_dia={}
     #index_cores=0
@@ -159,15 +156,25 @@ def acompanhamento_carga(request, usuario):
     elif search:
         cargas = Carga.objects.filter(industria__icontains=search.strip())
     else:
+        incio=time.time()
+        yesterday = datetime.now()
+        dia= yesterday.day
+        mes= yesterday.month
+        ano= yesterday.year
+        dia=dia-1
+        
+        cargas_tirar_cor = Carga.objects.filter(dia_descarga__day=dia,dia_descarga__month=mes,dia_descarga__year=ano).order_by('-dia_descarga')
+        for carga in cargas_tirar_cor:
+            carga.cor=''
+            carga.save()
+        fim=time.time()
+        cargas_do_dia=Carga.objects.filter(dia_descarga=now)
+        for carga in cargas_do_dia:
+            carga.cor='#8aa85a66'
+            carga.save()
         cargas = Carga.objects.all().order_by('-dia_descarga')
     
-
-
-    cargas_do_dia=Carga.objects.filter(dia_descarga=now)
-    for carga in cargas_do_dia:
-        carga.cor='#f1f1f1'
-        carga.save()
-
+    print("tempo total",fim-incio )
     return render(request, 'core/acomp.html', {'usuario': usuario,
                                                'acomp': acomp,
                                                'cargas': cargas,
@@ -187,7 +194,6 @@ def informacoes_cargas(request,id):
     itens_carga=[]
     carga=Carga.objects.get(pk=id)
     ids=get_inf_carga_erp(request,carga)
-    print('------>id',ids)
     for i in ids:
         itens_carga.append(Itens_carga.objects.get(id=i))
     user = return_usuario(request)
@@ -208,7 +214,6 @@ def set_carga(request):
     frete = request.POST.get('frete')
     observacao = request.POST.get('observacao')
     cont=request.POST.get('cont')
-    print('----------->>',cont)
     carga = Carga.objects.update_or_create(numero_nf=numero_nf.strip(),
                                  industria=industria.strip(),
                                  valor_carga=valor_carga.strip(),
@@ -239,14 +244,17 @@ def liberarCarga(request, id):
 def liberar_para_box(request):
     now = datetime.now()
     box = Box.objects.all()
+    
     #cargas_liberadas = libera_box_Form
-    cargas_liberadas = Carga.objects.filter(status='liberado').order_by('-dia_descarga')
+    cargas_liberadas = Carga.objects.filter(checkout_carga=False, status='liberado').order_by('-dia_descarga')
+    for carga in cargas_liberadas:
+        #print(carga.checkout_carga)
+        check=Check.objects.filter(CARGA=carga)
+        if len(check) > 0:
+            carga.check_carga=True
+            carga.save
     user = return_usuario(request)
     #print(cargas_liberadas)
-    cargas_do_dia=Carga.objects.filter(dia_descarga=now)
-    for carga in cargas_do_dia:
-        carga.cor='#f1f1f1'
-        carga.save()
     return render(request, 'core/liberar_carga_box.html',
                   {'boxs': box, 'cargas': cargas_liberadas, 'user': user})
 
@@ -260,8 +268,8 @@ def reservar_box(request, id):
         carga.box = box.name
         carga.save()
         box.save()
-        bott = zap_grupo()
-        bott.EnviarMensagens_grupo('Teste',str(carga.industria)+'Liberada')
+        #bott = zap_grupo()
+        #bott.EnviarMensagens_grupo('Teste',str(carga.industria)+'Liberada')
     return redirect('liberar-para-box')
 
 
@@ -301,36 +309,18 @@ def historico_cargas_liberadas(request):
     #tipo_user = Tipo_user.objects.get(user_tipo=int(usuario.id))
     search = request.GET.get('search')
     ordenador = request.GET.get('ordenador')
-    lista_cargas = Carga.objects.all()
-
-    for carga_liberada in lista_cargas:
-        if carga_liberada.status == 'liberado':
-            try:
-                Carga_Liberada.objects.create(numero_nf=carga_liberada.numero_nf,
-                                    industria=carga_liberada.industria,
-                                    valor_carga=carga_liberada.valor_carga,
-                                    dia_descarga=date.today(),
-                                    user=carga_liberada.user,
-                                    status='liberado',
-                                    tipo_entrada=carga_liberada.tipo_entrada,
-                                    Produto=carga_liberada.Produto, 
-                                    QTD=carga_liberada.QTD, UN=carga_liberada.UN,
-                                    movimentacao=carga_liberada.movimentacao,
-                                    frete=carga_liberada.frete, 
-                                    observacao=carga_liberada.observacao,
-                                    id = carga_liberada.pk)
-            except:
-                print('Carga liberada já adicionada!')
-    
+    lista_cargas = Carga.objects.filter(checkout_carga=True)
     if ordenador:
-        cargas = Carga_Liberada.objects.all().order_by(ordenador)
+        cargas = Carga.objects.filter(checkout_carga=True).order_by(ordenador)
     elif search:
-        cargas = Carga_Liberada.objects.filter(industria__icontains=search.strip())
+        cargas = Carga.objects.filter(industria__icontains=search.strip(),checkout_carga=True)
     else:
-        cargas = Carga_Liberada.objects.all().order_by('-created_at')
+        cargas = Carga.objects.filter(checkout_carga=True).order_by('-created_at')
+    #for carga in cargas:
 
     user = return_usuario(request)
-    return render(request, 'core/historico.html', {'cargas': cargas,'user':user})
+    cheks=Check.objects.all()
+    return render(request, 'core/historico.html', {'cargas': cargas,'user':user,'cheks':cheks})
 
 #ADIÇÃO, EXCLUSÃO E EDIÇÃO DE CARGAS
 @login_required(login_url='/')
@@ -362,8 +352,6 @@ def excluir_carga_historico(request, id):
         return redirect('/acompanhamento/historico/')
     
     return render(request, 'core/confirmar_exclusao.html', {'carga': carga})
-def zap():
-    print(teste)
     
 #Editar Cargas
 @login_required(login_url='/')
@@ -406,10 +394,50 @@ def editar_cargas(request, id, template_name='core\editar-carga.html' ):
     else:
         try:
             carga = Carga.objects.get(pk=id)
-            print('aqui',str(carga.dia_descarga))
             previsao=str(carga.dia_descarga)
         except Carga.DoesNotExist:
             carga = None
 
         return render(request,template_name, {'carga':carga,'previsao':previsao})
+def CHECKIN(request, id):
+    try:
+        check=get_object_or_404(Check, pk = id)
+        check.CHECKIN = True
+        check.save()
+    except:
+        now = datetime.now()
+        carga = get_object_or_404(Carga, pk = id)
+        box = request.POST.get('box')
+        print('-------->',box,'<---------box')
+        carga.box = box
+        carga.checkin_carga=True
+        carga.save()
+        Check.objects.create(CARGA=carga,
+                            CHECKIN=True,
+                            CHECKIN_DATE=now,
+                            CHECKOUT_DATE=now)
 
+
+
+    return redirect('/liberar-para-box')
+def CHECKOUT(request, id):
+    now = datetime.now()
+    carga=get_object_or_404(Carga,pk=id)
+    try:
+        check=Check.objects.filter(CARGA=carga)
+        for checkk in check:
+            check=get_object_or_404(Check,pk=checkk.id)
+        check.CHECKOUT_DATE=now
+        check.CHECKOUT=True
+        check.save()
+        carga.checkout_carga=True
+        carga.save()
+        
+    except:
+        print("e necessario primeiro fazer chekin")
+        carga=get_object_or_404(Carga,pk=id)
+        print('aqui e o certo',carga.checkout_carga)
+    return redirect('/liberar-para-box')  
+def visor(request):
+    cargas=Carga.objects.filter(checkin_carga=True,checkout_carga=False)
+    return render(request, 'core/Visor.html',{'cargas':cargas})

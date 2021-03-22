@@ -22,4 +22,7 @@ urlpatterns = [
     path('excluirCarga/<str:id>', views.excluir_carga, name="excluir_carga"),
     path('excluirCargaLiberada/<str:id>', views.excluir_carga_historico, name="excluir_carga_historico"),
     path('acompanhamento/editar-carga/<str:id>', views.editar_cargas, name='editar-carga'),
+    path('liberar-para-box/CHECKIN/<str:id>',views.CHECKIN),
+    path('liberar-para-box/CHECKOUT/<str:id>',views.CHECKOUT),
+    path('visor',views.visor)
 ]

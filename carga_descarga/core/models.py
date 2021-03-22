@@ -30,7 +30,7 @@ class Carga(models.Model):
     dia_chegada = models.DateField('Dia da chegada',blank=True)
     numero_nf = models.CharField('Numero NF', max_length=45)
     industria = models.CharField('Industria', max_length=40)
-    dia_descarga = models.DateField('Dia da descarga')
+    dia_descarga = models.DateField('Dia da descarga',blank=True)
     user_ERP = models.CharField(max_length=30, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField('Status', max_length=15, choices=STATUS)
@@ -47,12 +47,21 @@ class Carga(models.Model):
     # Sempre que um registro for criado essa variável determina a data no BD
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    finalizada = models.BooleanField(default=False)
-    cor = models.CharField('cor', max_length=8)
+    cor = models.CharField('cor', max_length=10)
     is_ERP=models.BooleanField(default=False)
+    checkin_carga=models.BooleanField(default=False)
+    checkout_carga=models.BooleanField(default=False)
+
+    
 
     def __str__(self):
         return (self.industria)
+class Check(models.Model):
+    CARGA = models.ForeignKey(Carga, on_delete = models.CASCADE)
+    CHECKIN = models.BooleanField(default=False)
+    CHECKIN_DATE = models.DateField('CHECKIN_DATE',blank=True)
+    CHECKOUT = models.BooleanField(default=False)
+    CHECKOUT_DATE = models.DateField('CHECKOUT_DATE',blank=True)
 
 class Carga_Liberada(models.Model):
     STATUS = (

@@ -3,36 +3,39 @@
 {% block title %} ACOMPANHAMENTO {% endblock %}
 
 {% block content %}
-<div class="conteiner" style="font-family: 'Times New Roman', Times, serif;">
-  <div id = "conjuntoOpcoes" class="row pand1">
-    <span>Filtrar por:</span>
-    <select name="filter" id="filter" class="form-control">
-      <option value="" selected disabled>Selecione um filtro</option>
-      <option value="liberado">Cargas liberadas</option>
-      <option value="aguardando">Cargas em espera</option>
-    </select>
-    <span>Ordenar por:</span>
-    <select name="ordenador" id="ordenador" class="form-control">
-      <option value="" selected disabled>Selecione uma coluna</option>
-      <option value="dia_descarga">Dia da descarga (ordem crescente)</option>
-      <option value="-dia_descarga">Dia da descarga (ordem decrescente)</option>
-      <option value="numero_nf">Número NF (ordem crescente)</option>
-      <option value="-numero_nf">Número NF (ordem decrescente)</option>
-      <option value="industria">Indústria (ordem crescente)</option>
-      <option value="-industria">Indústria (ordem decrescente)</option>
-      <option value="status">Status (ordem crescente)</option>
-      <option value="-status">Status (ordem decrescente)</option>
-    </select>
-    <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self">
+<div class="conteiner" style="font-family: 'Times New Roman', Times, serif; font-size: 15px;">
+  <div id = "conjuntoOpcoes" class="row">
+    <div style="width: 250px; padding-left: 20px;" >
+      <span>Filtrar por:</span>
+      <select name="filter" id="filter" class="form-control">
+        <option value="" selected disabled>Selecione um filtro</option>
+        <option value="liberado">Cargas liberadas</option>
+        <option value="aguardando">Cargas em espera</option>
+      </select>
+    </div>
+    <div style="width: 250px;">
+      <span>Ordenar por:</span>
+      <select name="ordenador" id="ordenador" class="form-control">
+        <option value="" selected disabled>Selecione uma coluna</option>
+        <option value="dia_descarga">Dia da descarga (ordem crescente)</option>
+        <option value="-dia_descarga">Dia da descarga (ordem decrescente)</option>
+        <option value="numero_nf">Número NF (ordem crescente)</option>
+        <option value="-numero_nf">Número NF (ordem decrescente)</option>
+        <option value="industria">Indústria (ordem crescente)</option>
+        <option value="-industria">Indústria (ordem decrescente)</option>
+        <option value="status">Status (ordem crescente)</option>
+        <option value="-status">Status (ordem decrescente)</option>
+      </select>
+    </div>
+    <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self" style="width: 250px;">
         <div class="form-group">
-          <label for="search-field">
-            <i class="fa fa-search"></i>
-          </label>
           <input class="form-control search-field" type="text" name="search" id="search_field" placeholder="Pesquise uma indústria">
-          <button id="btnSearch" class="btn btnSearch" type="submit">Pesquisar</button>
+          <button id="btnSearch" class="btn btnSearch" type="submit" style="padding:10px">Pesquisar</button>
         </div>
     </form>
-    <a class="btnaddcarga" href=""><button type="button" id="btn_refresh" onclick="atualizarCargas()" class="btn bt1">Atualizar Cargas</button></a>
+    <div style="width: 250px;">
+      <a class="btnaddcarga" href=""><button type="button" id="btn_refresh" onclick="atualizarCargas()" class="btn bt1">Atualizar Cargas</button></a>
+    </div>
   </div>
   <div id="table">
     <table id="tabela_cargas" class="table table-hover">
@@ -92,7 +95,7 @@
         <!--Esse laço for carrega  todas as cargas cadastradas no BD-->
         {% for carga in cargas %}
             <td style="background:{{carga.cor}}"> </td>
-            <td style="background:{{carga.cor}};size: 15px; color: black;" ><a href="\acompanhamento/informacoes_cargas/{{carga.id}}">{{carga.numero_nf}}</a></td>
+            <td style="background:{{carga.cor}};size: 15px; color: black; width: 100px;" ><a href="\acompanhamento/informacoes_cargas/{{carga.id}}">{{carga.numero_nf}}</a></td>
             <td style="background:{{carga.cor}}">{{carga.industria}}</td>
             <td style="background:{{carga.cor}}">{{carga.dia_descarga}}</td>
             <td style="background:{{carga.cor}}">{{carga.status}}</td>

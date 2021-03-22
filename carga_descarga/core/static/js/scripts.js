@@ -119,7 +119,7 @@ function checar_descarga_cargas(lista_cargas, qtde_cargas){
     let lista_dia_descarga = [];
     var counts = {};
     //Configurar limite_descargas para alterar o limite de descargas por dia 
-    var limite_descargas = 1;
+    var limite_descargas = 5;
 
     for(i=0; i<qtde_cargas; i++){
         lista_dia_descarga.push(lista_cargas[i].dia_descarga);

@@ -9,31 +9,49 @@
             <h1 align = "center" >Cargas Liberadas para o box</h1>
             <table class="table table-hover">
                 <thead>
-                  <tr>
+                  <tr id="tr-color">
                     <th scope="col">#</th>
                     <th scope="col">NF</th>
                     <th scope="col">INDUSTRIA</th>
+                    <th scope="col">STATUS</th>
                     <th scope="col">PREVISÃO</th>
                     <th scope="col">BOX</th>
-                    <th scope="col">CHECK</th>
+                    <th scope="col">CHECKIN</th>
+                    <th scope="col">CHECKOUT</th>
+                    
                   </tr>
                 </thead>
-                <tbody>
+                <tbody >
                 {% for carga in cargas%}
-                  <tr>
-                    <th scope="row"></th>
+                <form id="cheks" class="form-contact contact_form"  method="POST" action="\liberar-para-box/CHECKIN/{{carga.id}}">{% csrf_token%}
+                  <tr >
+                    <td style="background:{{carga.cor}}" scope="row">{{ forloop.counter }}</th>
                     <td style="background:{{carga.cor}}">{{carga.numero_nf}}</td>
                     <td style="background:{{carga.cor}}">{{carga.industria}}</td>
+                    {% if carga.check_carga %}
+                        <td style="background:{{carga.cor}}">Descarregando </td>
+                    {% else%}
+                        <td style="background:{{carga.cor}}">Em espera </td>
+                    {% endif %}
                     <td style="background:{{carga.cor}}">{{carga.dia_descarga}}</td>
-                    <td style="background:{{carga.cor}}"> <select class="form-control " >
-                            <option> </option>
+                    <td style="background:{{carga.cor}}"> <select class="form-control" id="box" name="box">
+                            <option >{{carga.box}} </option>
                         {% for box in boxs%}
-                            <option>{{box.name}} </option>  
+                            <option >{{box.name}} </option>  
                         {% endfor %} 
                     </select> </td>
-                    <td style="background:{{carga.cor}}"><button type="button" class="btn btn-default btn-sm" style="background-color:#b36148;padding: 10px; width: 60px;">
-                        <span class="glyphicon glyphicon-check"></span>
-                        </button>
+                    <td style="background:{{carga.cor}}">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default btn-sm" style="background-color:#48b35f;padding: 10px; width: 60px;">
+                                    <span class="glyphicon glyphicon-check"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                    <td style="background:{{carga.cor}}">
+                        <a href="\liberar-para-box/CHECKOUT/{{carga.id}}"><button type="button" class="btn btn-default btn-sm" style="background-color:#b34848;padding: 10px; width: 60px;">
+                            <span class="glyphicon glyphicon-check"></span>
+                        </button></a>
                     </td>
             
                   </tr>

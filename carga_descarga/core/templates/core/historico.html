@@ -3,7 +3,7 @@
 {% block title %} HISTÓRICO DE CARGAS LIBERADAS {% endblock %}
 
 {% block content %}
-<div class="conteiner">
+<div class="conteiner-fluid"  >
     <div id = "conjuntoOpcoes" class="row pand1">
         <span>Ordenar por:</span>
         <select name="ordenador" id="ordenador" class="form-control">
@@ -19,12 +19,12 @@
         </select>
         <form method="GET" id="campoBusca" class="form-inline mr-auto" target="_self">
             <div class="form-group">
-                <label for="search-field">
-                    <i class="fa fa-search"></i>
-                </label>
                 <input class="form-control search-field" type="search" name="search" id="search-field" placeholder="Pesquise por uma indústria">
                 <button id="btnSearch" class="btn btnSearch-historico" type="submit">Pesquisar</button>
             </div>
+            <label for="search-field">
+                <i class="fa fa-search"></i>
+            </label>
         </form>
     </div>
     <div id="table">
@@ -48,7 +48,14 @@
                     </th>
                     <td>{{carga.numero_nf}}</td>
                     <td>{{carga.industria}}</td>
-                    <td>{{carga.dia_descarga}}</td>
+                    <td>
+                        {%for chek in cheks  %} 
+                            {% if chek.CARGA == carga %}
+
+                                {{chek.CHECKOUT_DATE}}
+                            {%endif%}
+                        {% endfor %} 
+                    </td>
                     <td>{{carga.status}}</td>
                     <td>{{carga.user}}</td>
                 </tr>

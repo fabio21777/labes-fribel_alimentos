@@ -36,7 +36,7 @@ button.bt2{
     padding-top: 30px;
 }
 #tr-color{
-    background-color: #89b348 ;
+    background-color:  #337ab7 ;
 }
 button.bt-table{
     color: white;
@@ -114,7 +114,8 @@ a.btnExcluir i.fa-fa-trash{
 /*Campo busca*/
 .form-inline .btnSearch{
   position: absolute;
-  left: 930px;
+  background-color: #89b348;
+  margin-left: 80px;
   cursor: pointer;
 }
 
@@ -124,7 +125,8 @@ a.btnExcluir i.fa-fa-trash{
 
 .form-inline .btnSearch-historico{
   position: absolute;
-  margin-left: 280px;
+  margin-left: 80px;
+  background-color: #89b348;
   cursor: pointer;
 }
 
@@ -194,10 +196,10 @@ h1{
     color: #89b348;
 }
 h4.addcargavalor{
-  padding-right: 31px; 
+  padding-right: 45px; 
 }
 h4.addcargah3nf{
-    padding-right: 10px;
+    padding-right: 28px;
     padding-left: 50px;
 }
 h4.addcargah3indus{
@@ -205,7 +207,7 @@ h4.addcargah3indus{
     padding-top: 10px;
 }
 h4.addcargah3prev{
-    padding-right: 22px;
+    padding-right: 37px;
     padding-left: 50px;
 }
 #titulo{
@@ -235,25 +237,25 @@ div.btadd{
     padding-left: 450px;
 }
 h4.tipEnt{
-    padding-right: 20PX;
+    padding-right: 37PX;
 }
 h4.prod{
-    padding-right: 97px;
+    padding-right: 95px;
 }
 h4.QTD{
-    padding-left: 52px;
+    padding-left: 55px;
     padding-right: 68px;
 }
 h4.uni{
-  padding-left: 30px;
+  padding-left: 37px;
   padding-right: 30px;
 }
 h4.promov{
-    padding-right: 30px;
+    padding-right: 45px;
 }
 h4.frete{
   padding-left: 53px;
-  padding-right: 66px;
+  padding-right: 70px;
 }
 select.select{
     width: 300px;
@@ -281,7 +283,6 @@ h4.frete{
 
 /* HEADER + NAVBAR*/
 .header-blue {
-    padding-bottom:80px;
     font-family:'Source Sans Pro', sans-serif;
     height: 80px;
   }
@@ -294,17 +295,16 @@ h4.frete{
   .header-blue .navbar {
     background:#004b97;
     padding-top:.75rem;
-    padding-bottom:.75rem;
+    /*padding-bottom:.75rem;*/
     color:#fff;
     border-radius:0;
     box-shadow:none;
     border:none;
   }
-  
+
   @media (min-width:768px) {
     .header-blue .navbar {
       padding-top:1rem;
-      padding-bottom:1rem;
     }
   }
   
